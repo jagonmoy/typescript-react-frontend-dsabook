@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface IBlogCardProps {
+interface Props {
 }
 
-export function BlogCard (props: IBlogCardProps) : JSX.Element {
+export const BlogCard : React.FC<Props> = () => {
   return (
     <div>
       

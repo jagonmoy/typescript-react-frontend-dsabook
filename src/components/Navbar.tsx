@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface INavbarProps {
+interface Props {
 }
 
-export function Navbar (props: INavbarProps) : JSX.Element {
+export const Navbar : React.FC<Props> = () => {
   return (
     <div>
       

@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface IEditModalProps {
+interface Props {
 }
 
-export function EditModal (props: IEditModalProps) : JSX.Element {
+export const EditModal : React.FC<Props> = () => {
   return (
     <div>
       

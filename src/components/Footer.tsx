@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface IFooterProps {
+interface Props {
 }
 
-export function Footer (props: IFooterProps) : JSX.Element{
+export const Footer : React.FC<Props> = () => {
   return (
     <div>
       

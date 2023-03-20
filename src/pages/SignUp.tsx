@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface ISignUpProps {
+interface Props {
 }
 
-export function SignUp (props: ISignUpProps) {
+export const SignUp : React.FC<Props> = () => {
   return (
-    <h1>This is SignUp page</h1>
+    <div>
+      This is SignUp page. 
+    </div>
   );
 }

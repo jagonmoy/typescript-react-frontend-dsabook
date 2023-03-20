@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface ISignedOutDropdownProps {
+interface Props {
 }
 
-export function SignedOutDropdown (props: ISignedOutDropdownProps) : JSX.Element {
+export const SignedOutDropdown : React.FC<Props> = () => {
   return (
     <div>
       

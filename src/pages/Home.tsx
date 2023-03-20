@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface IHomeProps {
+interface Props {
 }
 
-export function Home (props: IHomeProps) {
+export const Home : React.FC<Props> = () => {
   return (
-    <h1>This is Home page</h1>
+    <div>
+      This is Home Page. 
+    </div>
   );
 }

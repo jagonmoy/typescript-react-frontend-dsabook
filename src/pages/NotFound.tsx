@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface INotFoundProps {
+interface Props {
 }
 
-export function NotFound (props: INotFoundProps) {
+export const NotFound : React.FC<Props> = () => {
   return (
-    <h1>This is NotFound page</h1>
+    <div>
+      This is NotFound Page.
+    </div>
   );
 }

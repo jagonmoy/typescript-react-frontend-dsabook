@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface ICreateBlogProps {
+interface Props {
 }
 
-export function CreateBlog (props: ICreateBlogProps) : JSX.Element {
+export const CreateBlogDetails : React.FC<Props> = () => {
   return (
     <div>
       

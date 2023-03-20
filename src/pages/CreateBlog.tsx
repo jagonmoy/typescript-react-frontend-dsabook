@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface ICreateBlogProps {
+interface Props {
 }
 
-export function CreateBlog (props: ICreateBlogProps) {
+export const CreateBlog : React.FC<Props> = () => {
   return (
-    <h1>This is CreateBlog page</h1>
+    <div>
+      This is CreateBlog Page . 
+    </div>
   );
 }

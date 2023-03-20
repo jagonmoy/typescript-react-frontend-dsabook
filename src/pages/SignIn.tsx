@@ -1,10 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface ISignInProps {
+interface Props {
 }
 
-export function SignIn (props: ISignInProps) {
+export const SignIn : React.FC<Props> = () => {
   return (
-    <h1>This is SignIn page</h1>
+    <div>
+      This is SignIn Page. 
+    </div>
   );
 }

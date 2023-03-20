@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface ISingleBlogDetailsProps {
+interface Props {
 }
 
-export function SingleBlogDetails (props: ISingleBlogDetailsProps): JSX.Element{
+export const SingleBlogDetails : React.FC<Props> = () => {
   return (
     <div>
       

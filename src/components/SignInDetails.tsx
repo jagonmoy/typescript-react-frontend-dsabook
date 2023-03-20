@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface ISignInDetailsProps {
+interface Props {
 }
 
-export function SignInDetails (props: ISignInDetailsProps) : JSX.Element{
+export const SignInDetails : React.FC<Props> = () => {
   return (
     <div>
       

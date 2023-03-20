@@ -1,11 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface IBlogViewProps {
+interface Props {
 }
 
-export function BlogView (props: IBlogViewProps) : JSX.Element {
+export const BlogView : React.FC<Props> = () => {
   return (
-   <h1>This is BlogView Page</h1>
+    <div>
+      This is BlogView Page
+    </div>
   );
 }
- 

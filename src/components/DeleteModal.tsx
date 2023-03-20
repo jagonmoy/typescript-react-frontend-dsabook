@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface IDeleteModalProps {
+interface Props {
 }
 
-export function DeleteModal (props: IDeleteModalProps) : JSX.Element{
+export const DeleteModal : React.FC<Props> = () => {
   return (
     <div>
       
