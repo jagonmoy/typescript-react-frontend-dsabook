@@ -1,12 +1,11 @@
 import React from 'react';
+import Blogs from '../data/blogs.json'
+import {BlogCardList} from '../components/BlogCardList'
 
-interface Props {
-}
-
-export const Home : React.FC<Props> = () => {
+export const Home : React.FC = () => {
   return (
     <div>
-      This is Home Page. 
+      <BlogCardList blogs={Blogs} />
     </div>
   );
 }
