@@ -11,12 +11,10 @@ interface Props {
 
 export const BlogCard : React.FC<Props> = ({id,blogHeadline,author,blogDescription}) => {
   return (
-    <div>
-      <h1>{id}</h1>
+    <div data-testid='blog-card'>
       <h1>{blogHeadline}</h1>
       <h1>{author}</h1>
       <p>{blogDescription}</p>
-      {/* <BlogView /> */}
     </div>
   );
 }

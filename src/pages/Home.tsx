@@ -5,7 +5,7 @@ import {BlogCardList} from '../components/BlogCardList'
 export const Home : React.FC = () => {
   return (
     <div>
-      <BlogCardList blogs={Blogs} />
+      <BlogCardList blogs={Blogs}/>
     </div>
   );
 }

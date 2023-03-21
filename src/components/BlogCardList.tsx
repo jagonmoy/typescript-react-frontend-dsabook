@@ -13,13 +13,16 @@ interface Props {
 
 export const BlogCardList : React.FC<Props> = ({blogs}) => {
   return (
-    <div>
+    <div data-testid='blog-card-list'>
       {
         blogs && blogs.map((blog) => (
           <BlogCard 
-            {...blog}
-          >
-          </BlogCard>
+            key={blog.id}
+            id={blog.id}
+            blogHeadline={blog.blogHeadline}
+            author={blog.author}
+            blogDescription={blog.blogDescription}
+          />
         ))
       }
     </div>
