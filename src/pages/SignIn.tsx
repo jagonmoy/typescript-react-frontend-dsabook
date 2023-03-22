@@ -1,4 +1,7 @@
 import React from 'react';
+import { Navbar } from '../components/Navbar';
+import { CssBaseline } from '@mui/material';
+import {SignInDetails} from '../components/SignInDetails';
 
 interface Props {
 }
@@ -6,7 +9,9 @@ interface Props {
 export const SignIn : React.FC<Props> = () => {
   return (
     <div>
-      This is SignIn Page. 
+      <CssBaseline/>
+      <Navbar/>
+      <SignInDetails/>
     </div>
   );
 }
