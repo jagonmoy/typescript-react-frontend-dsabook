@@ -9,7 +9,7 @@ interface Props {
 
 }
 
-export const Navbar : React.FC<Props> = () => { 
+export const Navbar: React.FC<Props> = () => {
   const navigate = useNavigate();
 
   const routeChange = () => {
@@ -17,14 +17,16 @@ export const Navbar : React.FC<Props> = () => {
     navigate(path);
   };
   return (
-      <AppBar position="static" color = 'primary'>
+    <div data-testid="navbar">
+      <AppBar position="static" color='primary'>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick = {routeChange}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={routeChange} data-testid="DSABook-text">
             DSABook
           </Typography>
-          <SignedOutDropdown/>
+          <SignedOutDropdown />
         </Toolbar>
       </AppBar>
+    </div>
   );
 }
 

@@ -47,7 +47,7 @@ export const SignInDetails: FC<Props> = () => {
   };
 
   return (
-    <div>
+    <div data-testid="sign-in-details">
       <Container component="main" maxWidth="xs">
         <Paper>
           <AvatarWrapper>

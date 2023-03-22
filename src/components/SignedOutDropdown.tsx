@@ -30,7 +30,7 @@ export const SignedOutDropdown: FC<Props> = () => {
   };
 
   return (
-    <div>
+    <div data-testid="signed-out-dropdown">
       <Button
         id="demo-positioned-button"
         aria-controls={open ? 'demo-positioned-menu' : undefined}

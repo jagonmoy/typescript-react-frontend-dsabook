@@ -10,7 +10,7 @@ export const Home : React.FC = () => {
     <div>
       <CssBaseline/>
       <Navbar/>
-      <Box display="flex" justifyContent="center">
+      <Box display="flex" justifyContent="center" >
         <BlogCardList blogs={Blogs} />
       </Box>
     </div>

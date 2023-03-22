@@ -8,7 +8,7 @@ interface Props {
 
 export const SignIn : React.FC<Props> = () => {
   return (
-    <div>
+    <div data-testid = "sign-in-page">
       <CssBaseline/>
       <Navbar/>
       <SignInDetails/>

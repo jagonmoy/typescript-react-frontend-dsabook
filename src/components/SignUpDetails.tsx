@@ -47,7 +47,7 @@ export const SignUpDetails: FC<Props> = () => {
   };
 
   return (
-    <div>
+    <div data-testid="sign-up-details">
       <Container component="main" maxWidth="xs">
         <Paper>
           <AvatarWrapper>

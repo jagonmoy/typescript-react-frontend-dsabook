@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Home } from './Home';
-import Blogs from '../data/blogs.json';
+import { Home } from '../../src/pages/Home';
+import Blogs from '../../src/data/blogs.json';
 
 describe('Home Component', () => {
     test('Check blogCard and blogCardList', () => {

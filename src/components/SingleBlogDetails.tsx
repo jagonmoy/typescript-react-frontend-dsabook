@@ -20,7 +20,7 @@ const BasicGrid = styled(Grid)(({ theme }) => ({
 
 export const SingleBlogDetails: React.FC<SingleBlogInterface> = ({ id }) => {
   return (
-    <div>
+    <div data-testid="single-blog-details">
       <RootContainer>
         <BasicGrid>
           <Typography

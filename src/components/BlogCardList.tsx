@@ -5,7 +5,7 @@ import { BlogsInterface } from '../models/blogModel';
 
 export const BlogCardList : React.FC<BlogsInterface> = ({blogs}) => {
   return (
-    <div data-testid='blog-card-list'>
+    <div data-testid='blog-card-list' >
       <CssBaseline/>
       {
         blogs && blogs.map((blog) => (
