@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { SingleBlogDetails } from '../components/SingleBlogDetails';
 import { CssBaseline } from '@mui/material';
 import { Navbar } from '../components/Navbar';
-import { RouteBlogView } from '../interfaces/routeBlogView';
+import { RouteBlogView } from '../models/blogModel';
 
 export const BlogView : React.FC = () => {
   const { id } = useParams<RouteBlogView>();

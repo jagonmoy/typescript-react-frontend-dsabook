@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import { Container } from "@mui/material";
-import { SingleBlogInterface } from '../interfaces/singleBlogInterface';
+import { SingleBlogInterface } from '../models/blogModel';
 
 const RootContainer = styled(Container)(({ theme }) => ({
   display: "flex",
