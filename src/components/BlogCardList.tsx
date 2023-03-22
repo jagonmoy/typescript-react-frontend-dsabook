@@ -1,18 +1,9 @@
 import React from 'react';
 import { BlogCard } from './BlogCard';
 import { CssBaseline } from '@mui/material';
+import { BlogsInterface } from '../interfaces/blogsInterface';
 
-interface Blog {
-  id : string;
-  blogHeadline: string;
-  author: string; 
-  blogDescription : string ;
-}
-interface Props {
-   blogs : Blog[]
-}
-
-export const BlogCardList : React.FC<Props> = ({blogs}) => {
+export const BlogCardList : React.FC<BlogsInterface> = ({blogs}) => {
   return (
     <div data-testid='blog-card-list'>
       <CssBaseline/>

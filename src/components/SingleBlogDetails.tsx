@@ -4,10 +4,8 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import { Container } from "@mui/material";
+import { SingleBlogInterface } from '../interfaces/singleBlogInterface';
 
-interface Props {
-  id: number
-}
 const RootContainer = styled(Container)(({ theme }) => ({
   display: "flex",
   marginLeft: theme.spacing(10)
@@ -20,7 +18,7 @@ const BasicGrid = styled(Grid)(({ theme }) => ({
   transitionDuration: "0.3s",
 }));
 
-export const SingleBlogDetails: React.FC<Props> = ({ id }) => {
+export const SingleBlogDetails: React.FC<SingleBlogInterface> = ({ id }) => {
   return (
     <div>
       <RootContainer>

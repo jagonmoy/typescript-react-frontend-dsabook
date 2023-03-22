@@ -1,4 +1,4 @@
-import React, { RefCallback } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -6,16 +6,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 // import { BlogView } from '../pages/BlogView';
+import { BlogInterface } from '../interfaces/blogInterface'
 
-
-interface Props {
-  id : string,
-  blogHeadline: string ,
-  author : string ,
-  blogDescription : string
-}
-
-export const BlogCard : React.FC<Props> = ({id,blogHeadline,author,blogDescription}) => {
+export const BlogCard : React.FC<BlogInterface> = ({id,blogHeadline,author,blogDescription}) => {
 
   let navigate  = useNavigate(); 
   const routeChange = () =>{ 
