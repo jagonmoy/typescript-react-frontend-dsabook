@@ -10,8 +10,6 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 
-interface Props {}
-
 const Paper = styled('div')(({ theme }) => ({
   marginTop: theme.spacing(8),
   display: "flex",
@@ -33,7 +31,7 @@ const SubmitButton = styled(Button)(({ theme }) => ({
   margin: theme.spacing(3, 0, 2),
 }));
 
-export const SignInDetails: FC<Props> = () => {
+export const SignInDetails: FC  = () => {
   const navigate = useNavigate();
 
   const routeChange = () => {
@@ -56,19 +54,22 @@ export const SignInDetails: FC<Props> = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Form noValidate onSubmit={submitHandler}>
+          <Form noValidate onSubmit={submitHandler} data-testid = "sign-in-form" aria-label='Sign In'>
             <TextField
+              data-testid='email-testid'
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
+              type="email"
               autoComplete="email"
               autoFocus
             />
             <TextField
+              data-testid="password-testid"
               variant="outlined"
               margin="normal"
               required

@@ -5,8 +5,6 @@ interface Props {
 
 export const DeleteModal : React.FC<Props> = () => {
   return (
-    <div>
-      
-    </div>
+    <div></div>
   );
 }
