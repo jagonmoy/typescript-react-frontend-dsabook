@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/no-node-access */
 import { BrowserRouter } from "react-router-dom";
 import { BlogCardList } from "../../components/BlogCardList";
 import { render, screen } from "@testing-library/react";
