@@ -41,6 +41,7 @@ export const SignInDetails: FC  = () => {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log("Inside Submit Handler of Sign In button")
     // Handle form submission logic here
   };
 
@@ -81,6 +82,7 @@ export const SignInDetails: FC  = () => {
               autoComplete="current-password"
             />
             <SubmitButton
+              data-testid='sign-in-submit'
               type="submit"
               fullWidth
               variant="contained"

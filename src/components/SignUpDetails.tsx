@@ -56,13 +56,14 @@ export const SignUpDetails: FC<Props> = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Form noValidate onSubmit={submitHandler}>
+          <Form noValidate onSubmit={submitHandler} aria-label="Sign Up">
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   required
                   fullWidth
+                  type="text"
                   id="name"
                   label="Name"
                   name="name"
@@ -74,6 +75,7 @@ export const SignUpDetails: FC<Props> = () => {
                   variant="outlined"
                   required
                   fullWidth
+                  type="text"
                   id="username"
                   label="Username"
                   name="username"
@@ -85,6 +87,7 @@ export const SignUpDetails: FC<Props> = () => {
                   variant="outlined"
                   required
                   fullWidth
+                  type="email"
                   id="email"
                   label="Email Address"
                   name="email"

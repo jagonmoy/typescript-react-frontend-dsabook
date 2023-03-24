@@ -23,6 +23,7 @@ export const SignedOutDropdown: FC<Props> = () => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setOpen(true);
+    console.log("Menu opened")
   };
   const handleClose = () => {
     setAnchorEl(null);
