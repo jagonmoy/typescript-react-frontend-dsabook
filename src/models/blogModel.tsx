@@ -1,15 +1,18 @@
 export interface BlogInterface {
-    id: string,
-    blogHeadline: string,
-    author: string,
-    blogDescription: string
+    id: string;
+    blogHeadline: string;
+    author: string;
+    blogDescription: string;
 }
+
 export interface BlogsInterface {
-    blogs: BlogInterface[]
+    blogs: BlogInterface[];
 }
+
 export type RouteBlogView = {
-    id?: string
-}
+    id?: string;
+};
+
 export interface SingleBlogInterface {
-    id: number
+    id: number;
 }
