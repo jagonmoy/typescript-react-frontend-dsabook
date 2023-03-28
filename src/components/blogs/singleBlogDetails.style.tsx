@@ -4,6 +4,7 @@ import { Container } from "@mui/material";
 
 
 export const RootContainer = styled(Container)(({ theme }) => ({
+  
   display: "flex",
   marginLeft: theme.spacing(10)
 }));

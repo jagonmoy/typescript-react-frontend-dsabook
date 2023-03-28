@@ -1,12 +1,14 @@
 import React from 'react';
+import { CreateBlogDetails } from '../../components/blogs/CreateBlogDetails';
+import { CssBaseline } from '@mui/material';
+import { Navbar } from '../../components/common/Navbar';
 
-interface Props {
-}
-
-export const CreateBlog : React.FC<Props> = () => {
+export const CreateBlog : React.FC = () => {
   return (
     <div>
-      This is CreateBlog Page . 
+      <CssBaseline />
+      <Navbar />
+      <CreateBlogDetails/>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useAppSelector } from '../../app/hooks';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { SingleBlogInterface } from '../../models/blogModel';
-import { RootContainer,BasicGrid } from './SingleBlogDetails.style';
+import { RootContainer,BasicGrid } from './singleBlogDetails.style';
 
 export const SingleBlogDetails: React.FC<SingleBlogInterface> = ({ id }) => {
   const Blogs = useAppSelector(state=>state.blogs.blogs)
