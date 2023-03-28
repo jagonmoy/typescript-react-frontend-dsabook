@@ -1,7 +1,7 @@
 import React from 'react';
-import { Navbar } from '../components/Navbar';
+import { Navbar } from '../../components/common/Navbar';
 import { CssBaseline } from '@mui/material';
-import {SignUpDetails} from '../components/SignUpDetails';
+import {SignUpDetails} from '../../components/forms/SignUpDetails';
 
 interface Props {
 }

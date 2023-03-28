@@ -1,6 +1,6 @@
 import { render} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { EditModal } from '../../components/EditModal';
+import { EditModal } from '../../components/modals/EditModal';
 
 describe('<EditModal />', () => {
     const setup = (): void => {

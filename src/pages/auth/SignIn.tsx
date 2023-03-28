@@ -1,7 +1,7 @@
 import React from 'react';
-import { Navbar } from '../components/Navbar';
+import { Navbar } from '../../components/common/Navbar';
 import { CssBaseline } from '@mui/material';
-import {SignInDetails} from '../components/SignInDetails';
+import {SignInDetails} from '../../components/forms/SignInDetails';
 
 
 export const SignIn : React.FC= () => {

@@ -1,6 +1,6 @@
 import { render,screen,fireEvent} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import  {SignedOutDropdown} from '../../components/SignedOutDropdown'
+import  {SignedOutDropdown} from '../../components/dropdown/SignedOutDropdown'
 
 describe('<SignedOutDropdown />', () => {
     const setup = (): void => {
@@ -28,6 +28,5 @@ describe('<SignedOutDropdown />', () => {
         const menu = screen.getByRole('menu')
         expect(menu.textContent).toContain('Sign in')
         expect(menu.textContent).toContain('Sign up')
-            
      })
 });

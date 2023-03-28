@@ -1,5 +1,5 @@
 import { render, screen} from '@testing-library/react';
-import { SignIn } from '../../pages/SignIn';
+import { SignIn } from '../../pages/auth/SignIn';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('<SignIn />', () => {

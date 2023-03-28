@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 // import { BlogView } from '../pages/BlogView';
-import { BlogInterface } from '../models/blogModel'
+import { BlogInterface } from '../../models/blogModel';
 
 export const BlogCard : React.FC<BlogInterface> = ({id,blogHeadline,author,blogDescription}) => {
 

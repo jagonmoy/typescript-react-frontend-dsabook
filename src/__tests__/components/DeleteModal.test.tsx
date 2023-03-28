@@ -1,6 +1,6 @@
 import { render} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { DeleteModal } from '../../components/DeleteModal';
+import { DeleteModal } from '../../components/modals/DeleteModal';
 
 describe('<DeleteModal />', () => {
     const setup = (): void => {

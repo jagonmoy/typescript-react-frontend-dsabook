@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
-import { BlogView } from './pages/BlogView';
-import { CreateBlog } from './pages/CreateBlog';
+import { BlogView } from './pages/blogs/BlogView';
+import { CreateBlog } from './pages/blogs/CreateBlog';
 import { NotFound } from './pages/NotFound';
-import { SignIn } from './pages/SignIn';
-import { SignUp } from './pages/SignUp';
+import { SignIn } from './pages/auth/SignIn';
+import { SignUp } from './pages/auth/SignUp';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 

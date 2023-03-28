@@ -1,22 +1,9 @@
 import React from 'react';
-import Blogs from '../data/blogs.json'
+import Blogs from '../../data/blogs.json'
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
-import { Container } from "@mui/material";
-import { SingleBlogInterface } from '../models/blogModel';
-
-const RootContainer = styled(Container)(({ theme }) => ({
-  display: "flex",
-  marginLeft: theme.spacing(10)
-}));
-
-const BasicGrid = styled(Grid)(({ theme }) => ({
-  marginTop: theme.spacing(4),
-  display: "block",
-  width: "100%",
-  transitionDuration: "0.3s",
-}));
+import { SingleBlogInterface } from '../../models/blogModel';
+import { RootContainer,BasicGrid } from './SingleBlogDetails.style';
 
 export const SingleBlogDetails: React.FC<SingleBlogInterface> = ({ id }) => {
   return (

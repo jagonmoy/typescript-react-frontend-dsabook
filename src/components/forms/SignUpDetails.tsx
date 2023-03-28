@@ -1,6 +1,4 @@
 import React, { FC } from 'react';
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -8,32 +6,10 @@ import Container from "@mui/material/Container";
 import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import { styled } from '@mui/material/styles';
+import { Paper, AvatarWrapper, Form, SubmitButton} from './form.style'
 
-interface Props {}
 
-const Paper = styled('div')(({ theme }) => ({
-  marginTop: theme.spacing(8),
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-}));
-
-const AvatarWrapper = styled(Avatar)(({ theme }) => ({
-  margin: theme.spacing(1),
-  backgroundColor: theme.palette.secondary.main,
-}));
-
-const Form = styled('form')(({ theme }) => ({
-  width: "100%",
-  marginTop: theme.spacing(1),
-}));
-
-const SubmitButton = styled(Button)(({ theme }) => ({
-  margin: theme.spacing(3, 0, 2),
-}));
-
-export const SignUpDetails: FC<Props> = () => {
+export const SignUpDetails: FC = () => {
   const navigate = useNavigate();
 
   const routeChange = () => {

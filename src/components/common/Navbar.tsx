@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { SignedOutDropdown } from './SignedOutDropdown';
+import { SignedOutDropdown } from '../dropdown/SignedOutDropdown';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {

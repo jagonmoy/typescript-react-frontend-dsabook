@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { BlogCard } from "../../components/BlogCard";
+import { BlogCard } from "../../components/blogs/BlogCard";
 import { render, screen, fireEvent } from "@testing-library/react";
 describe('<BlogCard />', () => {
     interface Blog {

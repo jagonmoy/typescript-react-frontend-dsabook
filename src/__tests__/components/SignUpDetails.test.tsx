@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { SignUpDetails } from '../../components/SignUpDetails';
+import { SignUpDetails } from '../../components/forms/SignUpDetails';
 
 describe('<SignUpDetails />', () => {
     const setup = (): void => {

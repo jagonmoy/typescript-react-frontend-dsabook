@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { SignInDetails } from '../../components/SignInDetails';
+import { SignInDetails } from '../../components/forms/SignInDetails';
 
 describe('<SignInDetails />', () => {
     const setup = (): void => {

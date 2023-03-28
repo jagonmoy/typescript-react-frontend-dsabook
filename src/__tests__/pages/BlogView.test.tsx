@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
-import { BlogView } from '../../pages/BlogView';
+import { BlogView } from '../../pages/blogs/BlogView';
 // import { SingleBlogDetails } from '../../components/SingleBlogDetails';
 // import { Navbar } from '../../components/Navbar';
 

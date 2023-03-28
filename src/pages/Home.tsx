@@ -1,7 +1,7 @@
 import React from 'react';
 import Blogs from '../data/blogs.json'
-import {BlogCardList} from '../components/BlogCardList'
-import { Navbar } from '../components/Navbar';
+import {BlogCardList} from '../components/blogs/BlogCardList'
+import { Navbar } from '../components/common/Navbar';
 import { CssBaseline } from '@mui/material';
 import Box from '@mui/material/Box';
 

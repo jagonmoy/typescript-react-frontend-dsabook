@@ -1,9 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { SingleBlogDetails } from '../components/SingleBlogDetails';
+import { SingleBlogDetails } from '../../components/blogs/SingleBlogDetails';
 import { CssBaseline } from '@mui/material';
-import { Navbar } from '../components/Navbar';
-import { RouteBlogView } from '../models/blogModel';
+import { Navbar } from '../../components/common/Navbar';
+import { RouteBlogView } from '../../models/blogModel';
 
 export const BlogView : React.FC = () => {
   const { id } = useParams<RouteBlogView>();
