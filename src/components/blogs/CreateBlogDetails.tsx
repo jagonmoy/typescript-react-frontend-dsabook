@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { RootContainer, HeadlineTypography, HeadlineTextAreaAutosize, DescriptionTypography, DescriptionTextAreaAutosize } from './createBlogDetails.style';
-import {useAppDispatch} from '../../app/hooks'
+import {useAppDispatch,useAppSelector} from '../../app/hooks'
 import { blogAdded } from '../../slices/blogsSlice'
 import { nanoid } from '@reduxjs/toolkit';
 
@@ -13,6 +13,7 @@ export const CreateBlogDetails : React.FC = () => {
     const [blogDescription, setBlogDescription] = useState('');
     
     const dispatch = useAppDispatch();
+    const blogsCount = useAppSelector(state=>state.blogs.blogs.length);
 
     const onBlogHeadlineChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogHeadline(event.target.value)
     const onBlogDescriptionChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogDescription(event.target.value)
@@ -26,7 +27,7 @@ export const CreateBlogDetails : React.FC = () => {
         // console.log("Inside Submit Handler of Sign In button")
         if(blogHeadline && blogDescription) {
             dispatch(blogAdded({
-                id: nanoid(),
+                id: blogsCount.toString(),
                 author: "Jagonmoy",
                 blogHeadline,
                 blogDescription

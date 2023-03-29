@@ -21,6 +21,7 @@ const App: FC = () => {
           <Route path="/sign-up" Component={SignUp} />
           <Route path="/create-blog" Component={CreateBlog} />
           <Route path="/blogs/:id" Component={BlogView} />
+          <Route path="/users" Component={BlogView} />
           <Route path='*' Component={NotFound}></Route>
         </Routes>
       </Router>
