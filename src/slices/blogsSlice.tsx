@@ -3,6 +3,7 @@ import type { RootState } from '../app/store';
 import blogs from '../data/blogs.json';
 import { BlogInterface } from '../models/blogModel';
 
+
 interface BlogsInterface {
   blogs: BlogInterface[];
 }
@@ -25,11 +26,16 @@ const blogsSlice = createSlice({
          existingBlog.blogHeadline = blogHeadline;
          existingBlog.blogDescription = blogDescription;
       }
+    },
+    blogDeleted(state,action: PayloadAction<BlogInterface>) {
+        console.log(action.payload);
+        let index = state.blogs.findIndex(obj => obj.id === action.payload.id);
+        state.blogs.splice(index,1)
     }
   },
 });
 
-export const { blogAdded, blogEdited } = blogsSlice.actions;
+export const { blogAdded, blogEdited, blogDeleted } = blogsSlice.actions;
 
 export const selectPosts = (state: RootState) => state.blogs.blogs;
 

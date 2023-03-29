@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import { BlogIDInterface } from '../../models/blogModel';
 import { RootContainer, BasicGrid } from './singleBlogDetails.style';
 import { EditModal } from '../modals/EditModal';
+import {DeleteModal} from '../modals/DeleteModal'
 
 export const SingleBlogDetails: React.FC<BlogIDInterface> = ({ id }) => {
   const Blogs = useAppSelector(state => state.blogs.blogs)
@@ -40,6 +41,8 @@ export const SingleBlogDetails: React.FC<BlogIDInterface> = ({ id }) => {
           </Grid>
           <div style={{ paddingBottom: 20 }}>
                 <EditModal id={id}/>
+                 &nbsp; &nbsp;
+                <DeleteModal id={id} />
           </div>
         </BasicGrid>
       </RootContainer>
