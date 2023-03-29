@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC,useState } from 'react';
 import TextField from "@mui/material/TextField";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -7,19 +7,33 @@ import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { Paper,AvatarWrapper,Form,SubmitButton } from './form.style';
+import { useAppSelector } from '../../app/hooks';
 
 export const SignInDetails: FC  = () => {
   const navigate = useNavigate();
+  const users = useAppSelector(state=>state.users.users)
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error,setError] = useState(false);
+  
+  const onSetEmailChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setEmail(event.target.value)
+  const onSetPasswordChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setPassword(event.target.value)
 
   const routeChange = () => {
-    let path = `/sign-up`;
+    let path = `/home`;
     navigate(path);
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Inside Submit Handler of Sign In button")
-    // Handle form submission logic here
+    console.log(users);
+    console.log(email,password)
+    if( users.findIndex(obj=>obj.email === email)) {
+      routeChange();
+    }    
+    else setError(true)
   };
 
   return (
@@ -42,6 +56,8 @@ export const SignInDetails: FC  = () => {
               id="email"
               label="Email"
               name="email"
+              value={email}
+              onChange={onSetEmailChanged}
               type="email"
               autoComplete="email"
               autoFocus
@@ -54,6 +70,8 @@ export const SignInDetails: FC  = () => {
               fullWidth
               name="password"
               label="Password"
+              value={password}
+              onChange={onSetPasswordChanged}
               type="password"
               id="password"
               autoComplete="current-password"
@@ -73,6 +91,9 @@ export const SignInDetails: FC  = () => {
               </Link>
             </Grid>
           </Form>
+          {
+            error && <h1>Wrong Email or Password </h1>
+          }
         </Paper>
       </Container>
     </div>
