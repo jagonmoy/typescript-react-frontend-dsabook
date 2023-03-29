@@ -32,9 +32,6 @@ export const BlogCard : React.FC<BlogInterface> = ({id,blogHeadline,author,blogD
         <Typography variant="body2">
          {blogDescription}
         </Typography>
-        <h1>
-          {id}
-        </h1>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={routeChange}>See More</Button>

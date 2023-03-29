@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { RootContainer, HeadlineTypography, HeadlineTextAreaAutosize, DescriptionTypography, DescriptionTextAreaAutosize } from './createBlogDetails.style';
 import {useAppDispatch,useAppSelector} from '../../app/hooks'
 import { blogAdded } from '../../slices/blogsSlice'
-import { nanoid } from '@reduxjs/toolkit';
 
 export const CreateBlogDetails : React.FC = () => {
     const navigate = useNavigate()

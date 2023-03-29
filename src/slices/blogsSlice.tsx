@@ -18,10 +18,18 @@ const blogsSlice = createSlice({
     blogAdded(state, action: PayloadAction<BlogInterface>) {
       state.blogs.push(action.payload);
     },
+    blogEdited(state,action: PayloadAction<BlogInterface>) {
+      const {id,blogHeadline,blogDescription} = action.payload;
+      const existingBlog = state.blogs[Number(id)];
+      if(existingBlog) {
+         existingBlog.blogHeadline = blogHeadline;
+         existingBlog.blogDescription = blogDescription;
+      }
+    }
   },
 });
 
-export const { blogAdded } = blogsSlice.actions;
+export const { blogAdded, blogEdited } = blogsSlice.actions;
 
 export const selectPosts = (state: RootState) => state.blogs.blogs;
 

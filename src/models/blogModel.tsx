@@ -13,6 +13,6 @@ export type RouteBlogView = {
     id?: string;
 };
 
-export interface SingleBlogInterface {
+export interface BlogIDInterface {
     id: number;
 }

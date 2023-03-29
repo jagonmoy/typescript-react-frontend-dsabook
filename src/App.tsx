@@ -6,6 +6,7 @@ import { CreateBlog } from './pages/blogs/CreateBlog';
 import { NotFound } from './pages/NotFound';
 import { SignIn } from './pages/auth/SignIn';
 import { SignUp } from './pages/auth/SignUp';
+import { UserList } from './pages/users/UserList';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 
@@ -21,7 +22,7 @@ const App: FC = () => {
           <Route path="/sign-up" Component={SignUp} />
           <Route path="/create-blog" Component={CreateBlog} />
           <Route path="/blogs/:id" Component={BlogView} />
-          <Route path="/users" Component={BlogView} />
+          <Route path="/users" Component={UserList} />
           <Route path='*' Component={NotFound}></Route>
         </Routes>
       </Router>

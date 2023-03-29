@@ -2,11 +2,12 @@ import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { SingleBlogInterface } from '../../models/blogModel';
-import { RootContainer,BasicGrid } from './singleBlogDetails.style';
+import { BlogIDInterface } from '../../models/blogModel';
+import { RootContainer, BasicGrid } from './singleBlogDetails.style';
+import { EditModal } from '../modals/EditModal';
 
-export const SingleBlogDetails: React.FC<SingleBlogInterface> = ({ id }) => {
-  const Blogs = useAppSelector(state=>state.blogs.blogs)
+export const SingleBlogDetails: React.FC<BlogIDInterface> = ({ id }) => {
+  const Blogs = useAppSelector(state => state.blogs.blogs)
   return (
     <div data-testid="single-blog-details">
       <RootContainer>
@@ -29,7 +30,7 @@ export const SingleBlogDetails: React.FC<SingleBlogInterface> = ({ id }) => {
               variant="overline"
               display="block"
               gutterBottom
-              style={{ paddingRight: 5,paddingLeft: 2}}
+              style={{ paddingRight: 5, paddingLeft: 2 }}
             >
               Authored by
             </Typography>
@@ -37,6 +38,9 @@ export const SingleBlogDetails: React.FC<SingleBlogInterface> = ({ id }) => {
               {Blogs[id].author}
             </Typography>
           </Grid>
+          <div style={{ paddingBottom: 20 }}>
+                <EditModal id={id}/>
+          </div>
         </BasicGrid>
       </RootContainer>
     </div>
