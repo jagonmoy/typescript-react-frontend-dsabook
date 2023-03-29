@@ -2,20 +2,39 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { RootContainer, HeadlineTypography, HeadlineTextAreaAutosize, DescriptionTypography, DescriptionTextAreaAutosize } from './createBlogDetails.style';
+import {useAppDispatch} from '../../app/hooks'
+import { blogAdded } from '../../slices/blogsSlice'
+import { nanoid } from '@reduxjs/toolkit';
 
 export const CreateBlogDetails : React.FC = () => {
     const navigate = useNavigate()
 
     const [blogHeadline, setBlogHeadline] = useState('');
     const [blogDescription, setBlogDescription] = useState('');
+    
+    const dispatch = useAppDispatch();
+
+    const onBlogHeadlineChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogHeadline(event.target.value)
+    const onBlogDescriptionChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogDescription(event.target.value)
+
     const routeHome = () => {
         let path = `/`;
         navigate(path);
     };
     const submitHandler = (event: React.FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        console.log("Inside Submit Handler of Sign In button")
-        // Handle form submission logic here
+        // console.log("Inside Submit Handler of Sign In button")
+        if(blogHeadline && blogDescription) {
+            dispatch(blogAdded({
+                id: nanoid(),
+                author: "Jagonmoy",
+                blogHeadline,
+                blogDescription
+            }))
+        }
+        setBlogHeadline('')
+        setBlogDescription('')
+
         routeHome();
     };
 
@@ -34,7 +53,7 @@ export const CreateBlogDetails : React.FC = () => {
                     id="outlined-multiline-static"
                     style={{ width: '100%' }}
                     value={blogHeadline}
-                    onChange={(e) => setBlogHeadline(e.target.value)}
+                    onChange={onBlogHeadlineChanged}
                 />
                 <DescriptionTypography
                     variant="h6"
@@ -48,7 +67,7 @@ export const CreateBlogDetails : React.FC = () => {
                 <DescriptionTextAreaAutosize
                     id="outlined-multiline-static"
                     value={blogDescription}
-                    onChange={(e) => setBlogDescription(e.target.value)}
+                    onChange={onBlogDescriptionChanged}
 
                 />
                 <br /> <br />
