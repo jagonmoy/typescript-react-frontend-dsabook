@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import TextField from "@mui/material/TextField";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -6,20 +6,54 @@ import Container from "@mui/material/Container";
 import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import { Paper, AvatarWrapper, Form, SubmitButton} from './form.style'
-
+import { Paper, AvatarWrapper, Form, SubmitButton } from './form.style'
+import { useAppDispatch } from '../../app/hooks';
+import { userAdded } from '../../slices/usersSlice';
 
 export const SignUpDetails: FC = () => {
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   const routeChange = () => {
-    let path = `/sign-in`;
+    let path = `/users`;
     navigate(path);
   };
 
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const onSetNameChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setName(event.target.value)
+
+  const onSetUsernameChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setUsername(event.target.value)
+
+  const onSetEmailChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setEmail(event.target.value)
+
+  const onSetPasswordChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setPassword(event.target.value)
+
+  const onSetConfirmPasswordChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setConfirmPassword(event.target.value)
+
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("hi")
     event.preventDefault();
-    // Handle form submission logic here
+    if (name && username && email && password && confirmPassword) {
+      console.log("hlw")
+      dispatch(userAdded({
+        name,
+        username,
+        email,
+        password,
+        confirmPassword
+      }))
+    }
+    //   setEmail('')
+    //   setUsername('')
+    //   setName('')
+    //   setPassword('')
+    //   setConfirmPassword('')
+
+    routeChange()
   };
 
   return (
@@ -42,8 +76,10 @@ export const SignUpDetails: FC = () => {
                   type="text"
                   id="name"
                   label="Name"
+                  value={name}
                   name="name"
                   autoComplete="name"
+                  onChange={onSetNameChanged}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -53,6 +89,8 @@ export const SignUpDetails: FC = () => {
                   fullWidth
                   type="text"
                   id="username"
+                  value={username}
+                  onChange={onSetUsernameChanged}
                   label="Username"
                   name="username"
                   autoComplete="username"
@@ -64,6 +102,8 @@ export const SignUpDetails: FC = () => {
                   required
                   fullWidth
                   type="email"
+                  value={email}
+                  onChange={onSetEmailChanged}
                   id="email"
                   label="Email Address"
                   name="email"
@@ -76,6 +116,8 @@ export const SignUpDetails: FC = () => {
                   required
                   fullWidth
                   name="password"
+                  value={password}
+                  onChange={onSetPasswordChanged}
                   label="Password"
                   type="password"
                   id="password"
@@ -89,6 +131,8 @@ export const SignUpDetails: FC = () => {
                   fullWidth
                   name="confirmPassword"
                   label="Confirm Password"
+                  value={confirmPassword}
+                  onChange={onSetConfirmPasswordChanged}
                   type="password"
                   id="confirmPassword"
                   autoComplete="new-password"
