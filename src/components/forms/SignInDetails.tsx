@@ -7,12 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import { Paper,AvatarWrapper,Form,SubmitButton } from './form.style';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector,useAppDispatch } from '../../app/hooks';
+import { userInterface } from '../../models/userModel';
+import { signedIn } from '../../slices/authSlice';
 
 export const SignInDetails: FC  = () => {
   const navigate = useNavigate();
   const users = useAppSelector(state=>state.users.users)
-
+  const auth = useAppSelector(state=>state.auth)
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error,setError] = useState(false);
@@ -24,13 +27,27 @@ export const SignInDetails: FC  = () => {
     let path = `/home`;
     navigate(path);
   };
+  const checkData = function  (users : userInterface[]) : number {
+    let dataExists : number = - 1 ;
+    for ( let i = 0 ; i < users.length ; i++) {
+      if (users[i].email === email && users[i].password === password) {
+        dataExists = i ;
+        break ;
+      }
+    }
+    return dataExists;
+  }
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Inside Submit Handler of Sign In button")
-    console.log(users);
-    console.log(email,password)
-    if( users.findIndex(obj=>obj.email === email)) {
+    console.log("Inside Submit Handler of Sign In button");
+    const userIndex : number  = checkData(users);
+    if(userIndex !== -1) {
+      dispatch(signedIn({
+        username: users[userIndex].username,
+        signedState: true
+      }))
+      console.log(auth)
       routeChange();
     }    
     else setError(true)
