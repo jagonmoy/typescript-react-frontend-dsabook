@@ -47,18 +47,20 @@ export const EditModal : React.FC<BlogIDInterface> = ({id}) => {
       </Button>
       <Dialog
         open={open}
-         fullScreen
+        style={{width: '100%'}}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+
       >
-        <DialogTitle id="form-dialog-title">EDIT BLOG</DialogTitle>
+        <DialogTitle id="form-dialog-title">EDIT BLOG</DialogTitle >
+        <br/>
         <DialogContent>
             <TextareaAutosize
               id="outlined-multiline-static"
               label="Blog Headline"
               fullWidth
               multiline
-              maxRows={2}
+              maxRows={3}
               value={blogHeadline}
             onChange={(e) => setBlogHeadline(e.target.value)}
             style = {{paddingBottom: 20}}
@@ -67,7 +69,7 @@ export const EditModal : React.FC<BlogIDInterface> = ({id}) => {
               id="outlined-multiline-static"
               label="Blog Description"
               fullWidth
-              minRows={5}
+              minRows={15}
               multiline
               value={blogDescription}
               onChange={(e) => setBlogDescription(e.target.value)}

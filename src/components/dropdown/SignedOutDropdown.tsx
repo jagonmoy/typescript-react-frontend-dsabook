@@ -19,10 +19,6 @@ export const SignedOutDropdown: FC<Props> = () => {
     let signUpPath = `/sign-up`;
     navigate(signUpPath);
   };
-  const routeCreateblog = () => {
-    let createBlogPath = `/create-blog`;
-    navigate(createBlogPath);
-  };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -63,7 +59,6 @@ export const SignedOutDropdown: FC<Props> = () => {
       >
         <MenuItem onClick={routeSignIn}>Sign in</MenuItem>
         <MenuItem onClick={routeSignUp}>Sign up</MenuItem>
-        <MenuItem onClick={routeCreateblog}>Create Blog</MenuItem>
       </Menu>
     </div>
   );

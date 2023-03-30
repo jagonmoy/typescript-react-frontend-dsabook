@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { SignedOutDropdown } from '../dropdown/SignedOutDropdown';
+import {SignedInDropdown} from '../dropdown/SignedInDropdown'
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 interface Props {
@@ -26,7 +27,7 @@ export const Navbar: React.FC<Props> = () => {
           {!auth.signedState && <SignedOutDropdown />
           }
           {
-           auth.signedState && <h3>{auth.username}</h3>
+           auth.signedState && <SignedInDropdown/>
           }
         </Toolbar>
       </AppBar>

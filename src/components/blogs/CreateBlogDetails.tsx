@@ -13,6 +13,7 @@ export const CreateBlogDetails : React.FC = () => {
     
     const dispatch = useAppDispatch();
     const blogsCount = useAppSelector(state=>state.blogs.blogs.length);
+    const auth = useAppSelector(state=>state.auth)
 
     const onBlogHeadlineChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogHeadline(event.target.value)
     const onBlogDescriptionChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogDescription(event.target.value)
@@ -27,7 +28,7 @@ export const CreateBlogDetails : React.FC = () => {
         if(blogHeadline && blogDescription) {
             dispatch(blogAdded({
                 id: blogsCount.toString(),
-                author: "Jagonmoy",
+                author: auth.username,
                 blogHeadline,
                 blogDescription
             }))
@@ -39,7 +40,7 @@ export const CreateBlogDetails : React.FC = () => {
     };
 
     return (
-        <div>
+        <div >
             <RootContainer maxWidth="xs">
                 <HeadlineTypography
                     variant="h6"
@@ -50,6 +51,7 @@ export const CreateBlogDetails : React.FC = () => {
                     BlOG HEADLINE
                 </HeadlineTypography>
                 <HeadlineTextAreaAutosize
+                    minRows={4}
                     id="outlined-multiline-static"
                     style={{ width: '100%' }}
                     value={blogHeadline}
@@ -65,6 +67,7 @@ export const CreateBlogDetails : React.FC = () => {
                     BlOG DESCRIPTION
                 </DescriptionTypography>
                 <DescriptionTextAreaAutosize
+                    minRows={30}
                     id="outlined-multiline-static"
                     value={blogDescription}
                     onChange={onBlogDescriptionChanged}
