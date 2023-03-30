@@ -18,7 +18,7 @@ export const BlogCard : React.FC<BlogInterface> = ({id,blogHeadline,author,blogD
 
   return (
     <div data-testid='blog-card'>
-      <Card sx={{ minWidth: 300,maxWidth: 400,marginTop: 4}}>
+      <Card sx={{ minWidth: 700,maxWidth: 700, maxHeight : 200, minHeight: 200 ,marginTop: 8}}>
       <CardContent>
         <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
           {author}
@@ -30,7 +30,8 @@ export const BlogCard : React.FC<BlogInterface> = ({id,blogHeadline,author,blogD
           adjective
         </Typography> */}
         <Typography variant="body2">
-         {blogDescription}
+         { blogDescription.length > 80 && blogDescription.substring(0,80).concat(' ...')}
+         { blogDescription.length <= 80 && blogDescription}
         </Typography>
       </CardContent>
       <CardActions>
