@@ -1,9 +1,9 @@
 import React from 'react';
-import { BlogCard } from './BlogCard';
+import { BlogCard } from '../blogCard/BlogCard';
 import { CssBaseline } from '@mui/material';
-import { BlogsInterface } from '../../models/blogModel';
+import { BlogsStateInterface } from '../../../models/blogModel';
 
-export const BlogCardList : React.FC<BlogsInterface> = ({blogs}) => {
+export const BlogCardList : React.FC<BlogsStateInterface> = ({blogs}) => {
   return (
     <div data-testid='blog-card-list' >
       <CssBaseline/>

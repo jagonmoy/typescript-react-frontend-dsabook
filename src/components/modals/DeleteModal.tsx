@@ -14,7 +14,8 @@ export const DeleteModal : React.FC<BlogIDInterface> = ({id}) =>{
     const [open, setOpen] = React.useState(false);
     const dispatch = useAppDispatch();
     const blogs = useAppSelector(state => state.blogs.blogs)
-    const blog = blogs[id]
+    const index = Number(id);
+    const blog = blogs[index]
     const navigate = useNavigate()
     const routeHomePage = () => {
       let path = `/blogs`; 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlogCardList} from '../components/blogs/BlogCardList'
+import { BlogCardList} from '../components/blogs/blogCardList/BlogCardList'
 import { Navbar } from '../components/common/Navbar';
 import { CssBaseline } from '@mui/material';
 import { useAppSelector } from '../app/hooks';

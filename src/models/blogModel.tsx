@@ -4,15 +4,9 @@ export interface BlogInterface {
     author: string;
     blogDescription: string;
 }
-
-export interface BlogsInterface {
-    blogs: BlogInterface[];
+export interface BlogsStateInterface {
+    blogs : BlogInterface[]
 }
-
-export type RouteBlogView = {
-    id?: string;
+export type BlogIDInterface = {
+    id : string;
 };
-
-export interface BlogIDInterface {
-    id: number;
-}

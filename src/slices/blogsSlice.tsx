@@ -1,14 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../app/store';
 // import {blogs} from '../data/blogs';
-import { BlogInterface } from '../models/blogModel';
+import { BlogInterface,BlogsStateInterface } from '../models/blogModel';
 
-
-interface BlogsInterface {
-  blogs: BlogInterface[];
-}
-
-const initialState: BlogsInterface = {
+const initialState: BlogsStateInterface = {
   blogs : [],
 };
 

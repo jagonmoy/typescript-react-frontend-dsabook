@@ -12,7 +12,7 @@ interface Props {
 
 export const Navbar: React.FC<Props> = () => {
   const navigate = useNavigate();
-  const auth = useAppSelector(state=>state.auth)
+  const auth = useAppSelector(state=>state.users.auth)
   const routeChange = () => {
     let path = `/`;
     navigate(path);
@@ -24,10 +24,10 @@ export const Navbar: React.FC<Props> = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={routeChange} data-testid="DSABook-text">
             DSABook
           </Typography>
-          {!auth.signedState && <SignedOutDropdown />
+          {!auth.status && <SignedOutDropdown />
           }
           {
-           auth.signedState && <SignedInDropdown/>
+           auth.status && <SignedInDropdown/>
           }
         </Toolbar>
       </AppBar>

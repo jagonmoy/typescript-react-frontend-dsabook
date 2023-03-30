@@ -4,20 +4,20 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector,useAppDispatch } from '../../app/hooks';
-import { signedIn } from '../../slices/authSlice';
+import { userAuth } from '../../slices/usersSlice';
 
 export const SignedInDropdown: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const [open, setOpen] = React.useState<boolean>(false);
 
   const navigate = useNavigate();
-  const auth = useAppSelector(state=>state.auth)
+  const auth = useAppSelector(state=>state.users.auth)
   const dispatch = useAppDispatch()
   const routeSignOut = () => {
     let signInPath = `/sign-in`;
-    dispatch(signedIn({
-      username:'',
-      signedState: false
+    dispatch(userAuth({
+      currentUser:'',
+      status: false
     }))
     navigate(signInPath);
   };
@@ -47,7 +47,7 @@ export const SignedInDropdown: FC = () => {
         onClick={handleClick}
         color = 'inherit'
       >
-        {auth.username}
+        {auth.currentUser}
       </Button>
       <Menu
         id="demo-positioned-menu"

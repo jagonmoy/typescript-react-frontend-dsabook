@@ -13,7 +13,8 @@ import { blogEdited } from '../../slices/blogsSlice';
 
 export const EditModal : React.FC<BlogIDInterface> = ({id}) => {
   const Blogs = useAppSelector(state=>state.blogs.blogs)
-  const blog = Blogs[id]
+  const index = Number(id);
+  const blog = Blogs[index];
   const [open, setOpen] = React.useState(false);
   const [blogHeadline, setBlogHeadline] = useState(blog.blogHeadline);
   const [blogDescription, setBlogDescription] = useState(blog.blogDescription);

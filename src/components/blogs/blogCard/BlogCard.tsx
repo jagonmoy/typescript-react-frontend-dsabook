@@ -1,12 +1,11 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 // import { BlogView } from '../pages/BlogView';
-import { BlogInterface } from '../../models/blogModel';
+import { BlogInterface } from '../../../models/blogModel';
+import { BlogCardContent } from './BlogCardContent';
 
 export const BlogCard : React.FC<BlogInterface> = ({id,blogHeadline,author,blogDescription}) => {
 
@@ -19,21 +18,7 @@ export const BlogCard : React.FC<BlogInterface> = ({id,blogHeadline,author,blogD
   return (
     <div data-testid='blog-card'>
       <Card sx={{ minWidth: 700,maxWidth: 700, maxHeight : 200, minHeight: 200 ,marginTop: 8}}>
-      <CardContent>
-        <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
-          {author}
-        </Typography>
-        <Typography variant="h5" component="div">
-          {blogHeadline}
-        </Typography>
-        {/* <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          adjective
-        </Typography> */}
-        <Typography variant="body2">
-         { blogDescription.length > 80 && blogDescription.substring(0,80).concat(' ...')}
-         { blogDescription.length <= 80 && blogDescription}
-        </Typography>
-      </CardContent>
+      <BlogCardContent author={author} blogDescription ={blogDescription} blogHeadline = {blogHeadline}/>
       <CardActions>
         <Button size="small" onClick={routeChange}>See More</Button>
       </CardActions>

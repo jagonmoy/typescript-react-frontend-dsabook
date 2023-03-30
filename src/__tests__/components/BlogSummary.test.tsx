@@ -1,6 +1,6 @@
 import { render} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { BlogSummary } from '../../components/blogs/BlogSummary';
+import { BlogSummary } from '../../components/blogs/blogSummary/BlogSummary';
 
 describe('<BlogSummary />', () => {
     const setup = (): void => {
