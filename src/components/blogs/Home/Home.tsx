@@ -1,11 +1,15 @@
 import React from 'react';
-import { BlogCard } from '../blogCard/BlogCard';
+import { BlogCard } from './BlogCard';
 import { CssBaseline } from '@mui/material';
-import { BlogsStateInterface } from '../../../models/blogModel';
+import { useAppSelector } from '../../../app/hooks';
+import Box from '@mui/material/Box';
 
-export const BlogCardList : React.FC<BlogsStateInterface> = ({blogs}) => {
+export const Home : React.FC = () => {
+  const blogs = useAppSelector(state=>state.blogs.blogs)
+  console.log(blogs);
   return (
-    <div data-testid='blog-card-list' >
+    <div>
+      <Box display="flex" justifyContent="center" >
       <CssBaseline/>
       {
         blogs && blogs.map((blog) => (
@@ -18,6 +22,7 @@ export const BlogCardList : React.FC<BlogsStateInterface> = ({blogs}) => {
           />
         ))
       }
+      </Box>
     </div>
   );
 }

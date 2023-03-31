@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Navbar } from '../../components/common/Navbar';
+import { Navbar } from '../../components/layout/Navbar/Navbar';
 
 describe('<Navbar />', () => {
     const setup = (): void => {

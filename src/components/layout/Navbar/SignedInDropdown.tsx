@@ -3,8 +3,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector,useAppDispatch } from '../../app/hooks';
-import { userAuth } from '../../slices/usersSlice';
+import { useAppSelector,useAppDispatch } from '../../../app/hooks';
+import { userAuth } from '../../../slices/usersSlice';
 
 export const SignedInDropdown: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);

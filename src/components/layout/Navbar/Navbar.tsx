@@ -2,10 +2,10 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { SignedOutDropdown } from '../dropdown/SignedOutDropdown';
-import {SignedInDropdown} from '../dropdown/SignedInDropdown'
+import { SignedOutDropdown } from './SignedOutDropdown';
+import {SignedInDropdown} from './SignedInDropdown'
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../../app/hooks';
 interface Props {
 
 }

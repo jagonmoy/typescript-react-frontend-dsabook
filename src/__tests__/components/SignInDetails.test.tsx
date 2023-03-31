@@ -1,12 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { SignInDetails } from '../../components/forms/SignInDetails';
+import { SignIn } from '../../components/auth/SignIn/SignIn';
 
 describe('<SignInDetails />', () => {
     const setup = (): void => {
         render(
             <BrowserRouter>
-                <SignInDetails />
+                <SignIn />
             </BrowserRouter >
         )
     }

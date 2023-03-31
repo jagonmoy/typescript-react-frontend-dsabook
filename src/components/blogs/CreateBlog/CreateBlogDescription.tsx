@@ -1,5 +1,5 @@
 import React from 'react';
-import { DescriptionTypography, DescriptionTextAreaAutosize } from './CreateBlogDetails.style';
+import { DescriptionTypography, DescriptionTextAreaAutosize } from './CreateBlog.style';
 
 interface Props {
     blogDescription : string ,

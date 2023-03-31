@@ -6,11 +6,11 @@ import Container from "@mui/material/Container";
 import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import { Paper, AvatarWrapper, Form, SubmitButton } from './form.style'
-import { useAppDispatch } from '../../app/hooks';
-import { userAdded } from '../../slices/usersSlice';
+import { Paper, AvatarWrapper, Form, SubmitButton } from '../form.style'
+import { useAppDispatch } from '../../../app/hooks';
+import { userAdded } from '../../../slices/usersSlice';
 
-export const SignUpDetails: FC = () => {
+export const SignUp: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const routeChange = () => {

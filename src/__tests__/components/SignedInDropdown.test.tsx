@@ -1,6 +1,6 @@
 import { render} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { SignedInDropdown } from '../../components/dropdown/SignedInDropdown';
+import { SignedInDropdown } from '../../components/layout/Navbar/SignedInDropdown';
 
 describe('<SignedInDropdown />', () => {
     const setup = (): void => {

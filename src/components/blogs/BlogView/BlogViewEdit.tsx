@@ -7,11 +7,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
-import { BlogIDInterface } from '../../models/blogModel';
-import { useAppSelector,useAppDispatch } from '../../app/hooks';
-import { blogEdited } from '../../slices/blogsSlice';
+import { BlogIDInterface } from '../../../models/blogModel';
+import { useAppSelector,useAppDispatch } from '../../../app/hooks';
+import { blogEdited } from '../../../slices/blogsSlice';
 
-export const EditModal : React.FC<BlogIDInterface> = ({id}) => {
+export const BlogViewEdit : React.FC<BlogIDInterface> = ({id}) => {
   const Blogs = useAppSelector(state=>state.blogs.blogs)
   const index = Number(id);
   const blog = Blogs[index];

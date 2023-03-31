@@ -8,7 +8,8 @@ interface Props {
     id: string
 }
 
-export const SingleBlogContent: React.FC<Props> = ({ blogs,id }) => {
+export const BlogViewContent: React.FC<Props> = ({ blogs,id }) => {
+  console.log("Inside Content",blogs)
   const index = Number(id);
   return (
     <div >

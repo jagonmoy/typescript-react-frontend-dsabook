@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { RootContainer} from './CreateBlogDetails.style';
+import { RootContainer} from './CreateBlog.style';
 import { CreateBlogHeadline } from './CreateBlogHeadline';
 import { CreateBlogDescription } from './CreateBlogDescription';
 import { CreateBlogButton } from './CreateBlogButton';
 
-export const CreateBlogDetails : React.FC = () => {
+export const CreateBlog : React.FC = () => {
     const [blogHeadline, setBlogHeadline] = useState('');
     const [blogDescription, setBlogDescription] = useState('');
 

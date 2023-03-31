@@ -1,6 +1,6 @@
 import { render,screen,fireEvent} from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import  {SignedOutDropdown} from '../../components/dropdown/SignedOutDropdown'
+import  {SignedOutDropdown} from '../../components/layout/Navbar/SignedOutDropdown'
 
 describe('<SignedOutDropdown />', () => {
     const setup = (): void => {

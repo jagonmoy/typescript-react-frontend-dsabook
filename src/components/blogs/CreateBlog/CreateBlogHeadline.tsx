@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeadlineTypography, HeadlineTextAreaAutosize } from './CreateBlogDetails.style';
+import { HeadlineTypography, HeadlineTextAreaAutosize } from './CreateBlog.style';
 
 interface Props {
     blogHeadline: string,
