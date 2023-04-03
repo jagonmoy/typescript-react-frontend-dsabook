@@ -1,17 +1,10 @@
 import React from 'react';
-import { BlogInterface } from '../../../models/blogModel';
-import { UserAuthInterface } from '../../../models/userModel';
 import { BlogViewEdit } from './BlogViewEdit';
 import { BlogViewDelete } from './BlogViewDelete';
+import { BlogViewActionsInterface } from '../../../models/blogModel';
 
-interface Props {
-    blogs: BlogInterface[],
-    auth: UserAuthInterface,
-    id: string
-}
-
-export const BlogViewActions : React.FC<Props> = ({blogs,auth,id}) => {
-    const index = Number(id);
+export const BlogViewActions : React.FC<BlogViewActionsInterface> = ({blogs,auth,id}) => {
+    const index = blogs.findIndex(blog=>blog.id === id);
     return (
         <div style={{ paddingBottom: 20 }}>
             {auth.currentUser === blogs[index].author && <BlogViewEdit id={id} />}

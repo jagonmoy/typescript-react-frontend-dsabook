@@ -11,7 +11,7 @@ import { Email } from './Email';
 import { Password } from './Password';
 import { ConfirmPassword } from './ConfirmPassword';
 import { Headings } from './Headings';
-import { Button } from '@mui/material';
+import { Button } from './Button';
 import { RedirectToSignIn } from './RedirectToSignIn';
 
 export const SignUp: FC = () => {

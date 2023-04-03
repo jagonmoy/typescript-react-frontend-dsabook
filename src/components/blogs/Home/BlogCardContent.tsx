@@ -1,14 +1,9 @@
 import React from 'react';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { BlogCardContentInterface } from '../../../models/blogModel';
 
-interface Props {
-    author: string ,
-    blogHeadline: string,
-    blogDescription: string
-}
-
-export const BlogCardContent : React.FC<Props> = ({blogHeadline,author,blogDescription}) => {
+export const BlogCardContent : React.FC<BlogCardContentInterface> = ({blogHeadline,author,blogDescription}) => {
 
   return (
     <div >

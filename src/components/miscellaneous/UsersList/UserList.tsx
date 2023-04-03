@@ -1,6 +1,4 @@
-import { CssBaseline } from '@mui/material';
 import React from 'react';
-import { Navbar } from '../../layout/Navbar/Navbar';
 import { useAppSelector } from '../../../app/hooks';
 import { DisplayUser } from './DisplayUser';
 
@@ -10,8 +8,6 @@ export const UserList: React.FC = () => {
 
   return (
     <div>
-      <CssBaseline />
-      <Navbar />
       {
        users && users.map((user) => (
           <DisplayUser 

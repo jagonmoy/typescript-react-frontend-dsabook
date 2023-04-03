@@ -1,10 +1,7 @@
 import React from 'react';
 
-interface Props {
-}
-
-export const NotFound : React.FC<Props> = () => {
+export const NotFound : React.FC= () => {
   return (
-    <div></div>
+    <h1>404 Not Found</h1>
   );
 }

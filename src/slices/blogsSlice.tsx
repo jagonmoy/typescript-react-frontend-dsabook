@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../app/store';
 // import {blogs} from '../data/blogs';
 import { BlogInterface,BlogsStateInterface } from '../models/blogModel';
@@ -11,12 +11,24 @@ const blogsSlice = createSlice({
   name: 'blogs',
   initialState,
   reducers: {
-    blogAdded(state, action: PayloadAction<BlogInterface>) {
+    blogAdded : {
+    reducer(state, action: PayloadAction<BlogInterface>) {
       state.blogs.push(action.payload);
+    },
+    prepare(blogHeadline : string, blogDescription : string, author: string) {
+      return {
+          payload: {
+              id : nanoid(),
+              blogHeadline,
+              blogDescription,
+              author
+          }
+      }
+    }
     },
     blogEdited(state,action: PayloadAction<BlogInterface>) {
       const {id,blogHeadline,blogDescription} = action.payload;
-      const existingBlog = state.blogs[Number(id)];
+      const existingBlog = state.blogs[state.blogs.findIndex(blog=>blog.id === id)];
       if(existingBlog) {
          existingBlog.blogHeadline = blogHeadline;
          existingBlog.blogDescription = blogDescription;

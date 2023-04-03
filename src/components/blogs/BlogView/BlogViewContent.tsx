@@ -1,16 +1,11 @@
 import React from 'react';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { BlogInterface } from '../../../models/blogModel';
+import { BlogViewContentInterface } from '../../../models/blogModel';
 
-interface Props {
-    blogs: BlogInterface[],
-    id: string
-}
-
-export const BlogViewContent: React.FC<Props> = ({ blogs,id }) => {
+export const BlogViewContent: React.FC<BlogViewContentInterface> = ({ blogs,id }) => {
   console.log("Inside Content",blogs)
-  const index = Number(id);
+  const index = blogs.findIndex(blog=>blog.id === id);
   return (
     <div >
           <Typography

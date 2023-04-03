@@ -1,14 +1,9 @@
 import React from 'react';
 import TextField from "@mui/material/TextField";
 import Grid from '@mui/material/Grid';
+import { NameInterface } from '../../../models/userModel';
 
-
-interface Props {
-    name: string,
-    setName: React.Dispatch<React.SetStateAction<string>>
-}
-
-export const Name : React.FC<Props> = ({name,setName}) => {
+export const Name : React.FC<NameInterface> = ({name,setName}) => {
   const onSetNameChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setName(event.target.value)
   return (
       <Grid item xs={12}>

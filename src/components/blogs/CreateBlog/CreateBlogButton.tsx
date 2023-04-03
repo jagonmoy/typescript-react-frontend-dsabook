@@ -3,18 +3,11 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import {useAppDispatch,useAppSelector} from '../../../app/hooks'
 import { blogAdded } from '../../../slices/blogsSlice'
+import { CreateBlogButtonInterface } from '../../../models/blogModel';
 
-interface Props {
-    blogHeadline: string,
-    setBlogHeadline: React.Dispatch<React.SetStateAction<string>>,
-    blogDescription : string ,
-    setBlogDescription: React.Dispatch<React.SetStateAction<string>>
-}
-
-export const CreateBlogButton: React.FC<Props> = ({blogHeadline,blogDescription,setBlogHeadline,setBlogDescription}) => {
+export const CreateBlogButton: React.FC<CreateBlogButtonInterface> = ({blogHeadline,blogDescription,setBlogHeadline,setBlogDescription}) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const blogsCount = useAppSelector(state=>state.blogs.blogs.length);
     const auth = useAppSelector(state=>state.users.auth)
 
     const routeHome = () => {
@@ -24,12 +17,7 @@ export const CreateBlogButton: React.FC<Props> = ({blogHeadline,blogDescription,
     const submitHandler = (event: React.FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
         if(blogHeadline && blogDescription) {
-            dispatch(blogAdded({
-                id: blogsCount.toString(),
-                author: auth.currentUser,
-                blogHeadline,
-                blogDescription
-            }))
+            dispatch(blogAdded(blogHeadline,blogDescription,auth.currentUser))
         }
         setBlogHeadline('')
         setBlogDescription('')

@@ -12,9 +12,9 @@ import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { blogEdited } from '../../../slices/blogsSlice';
 
 export const BlogViewEdit : React.FC<BlogIDInterface> = ({id}) => {
-  const Blogs = useAppSelector(state=>state.blogs.blogs)
-  const index = Number(id);
-  const blog = Blogs[index];
+  const blogs = useAppSelector(state=>state.blogs.blogs)
+  const index = blogs.findIndex(blog=>blog.id === id);
+  const blog = blogs[index];
   const [open, setOpen] = React.useState(false);
   const [blogHeadline, setBlogHeadline] = useState(blog.blogHeadline);
   const [blogDescription, setBlogDescription] = useState(blog.blogDescription);

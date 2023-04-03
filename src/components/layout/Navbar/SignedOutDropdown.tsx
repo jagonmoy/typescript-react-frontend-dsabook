@@ -4,8 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
-interface Props {}
-export const SignedOutDropdown: FC<Props> = () => {
+export const SignedOutDropdown: FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const [open, setOpen] = React.useState<boolean>(false);
 

@@ -6,11 +6,8 @@ import { SignedOutDropdown } from './SignedOutDropdown';
 import {SignedInDropdown} from './SignedInDropdown'
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
-interface Props {
 
-}
-
-export const Navbar: React.FC<Props> = () => {
+export const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const auth = useAppSelector(state=>state.users.auth)
   const routeChange = () => {

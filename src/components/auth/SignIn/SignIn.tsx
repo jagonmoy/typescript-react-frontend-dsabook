@@ -5,7 +5,8 @@ import { Paper,Form} from '../form.style';
 import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { UserInterface } from '../../../models/userModel';
 import { userAuth } from '../../../slices/usersSlice';
-import { EmailPassword } from './EmailPassword';
+import { Password } from './Password';
+import { Email } from './Email';
 import { Heading } from './Heading';
 import { Button } from './Button';
 import { RedirectToSignUp } from './RedirectToSignUp';;
@@ -36,7 +37,6 @@ export const SignIn: FC  = () => {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Inside Submit Handler of Sign In button");
     const userIndex : number  = checkData(users);
     if(userIndex !== -1) {
       dispatch(userAuth({
@@ -54,7 +54,8 @@ export const SignIn: FC  = () => {
         <Paper>
           <Heading />
           <Form noValidate onSubmit={submitHandler} data-testid = "sign-in-form" aria-label='Sign In'>
-            <EmailPassword setEmail={setEmail} setPassword = {setPassword} email ={email} password ={password}/>
+            <Email setEmail={setEmail} email ={email} /> 
+            <Password setPassword = {setPassword}  password ={password}/>
             <Button />
             <RedirectToSignUp />
           </Form>

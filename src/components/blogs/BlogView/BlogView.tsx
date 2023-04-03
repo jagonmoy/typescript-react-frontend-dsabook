@@ -8,6 +8,7 @@ import { BlogViewActions } from './BlogViewActions'
 
 export const BlogView: React.FC = () => {
   const { id } = useParams<BlogIDInterface>();
+  console.log(id);
   const blogs = useAppSelector(state => state.blogs.blogs)
   console.log(blogs)
   const auth = useAppSelector(state => state.users.auth)

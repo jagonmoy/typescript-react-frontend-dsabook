@@ -1,12 +1,8 @@
 import React from 'react';
 import { HeadlineTypography, HeadlineTextAreaAutosize } from './CreateBlog.style';
+import { CreateBlogHeadlineInterface } from '../../../models/blogModel';
 
-interface Props {
-    blogHeadline: string,
-    setBlogHeadline: React.Dispatch<React.SetStateAction<string>>
-}
-
-export const CreateBlogHeadline: React.FC<Props> = ({blogHeadline,setBlogHeadline}) => {
+export const CreateBlogHeadline: React.FC<CreateBlogHeadlineInterface> = ({blogHeadline,setBlogHeadline}) => {
 
     const onBlogHeadlineChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogHeadline(event.target.value)
 

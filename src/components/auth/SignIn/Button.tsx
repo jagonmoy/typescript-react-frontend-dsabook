@@ -1,9 +1,7 @@
 import React from 'react';
 import { SubmitButton } from '../form.style';
-interface Props {
-}
 
-export const Button: React.FC<Props> = () => {
+export const Button: React.FC = () => {
     return (
         <div>
             <SubmitButton

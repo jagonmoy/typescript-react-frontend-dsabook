@@ -1,12 +1,8 @@
 import React from 'react';
 import { DescriptionTypography, DescriptionTextAreaAutosize } from './CreateBlog.style';
+import { CreateBlogDescriptionInterface } from '../../../models/blogModel';
 
-interface Props {
-    blogDescription : string ,
-    setBlogDescription: React.Dispatch<React.SetStateAction<string>>
-}
-
-export const CreateBlogDescription: React.FC<Props> = ({blogDescription,setBlogDescription}) => {
+export const CreateBlogDescription: React.FC<CreateBlogDescriptionInterface> = ({blogDescription,setBlogDescription}) => {
     const onBlogDescriptionChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogDescription(event.target.value)
 
     return (

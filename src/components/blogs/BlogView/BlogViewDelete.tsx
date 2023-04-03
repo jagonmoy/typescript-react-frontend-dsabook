@@ -14,7 +14,7 @@ export const BlogViewDelete : React.FC<BlogIDInterface> = ({id}) =>{
     const [open, setOpen] = React.useState(false);
     const dispatch = useAppDispatch();
     const blogs = useAppSelector(state => state.blogs.blogs)
-    const index = Number(id);
+    const index = blogs.findIndex(blog=>blog.id === id);
     const blog = blogs[index]
     const navigate = useNavigate()
     const routeHomePage = () => {

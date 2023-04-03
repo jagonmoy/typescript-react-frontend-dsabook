@@ -1,13 +1,9 @@
 import React from 'react';
 import TextField from "@mui/material/TextField";
 import Grid from '@mui/material/Grid';
+import { EmailInterface } from '../../../models/userModel';
 
-interface Props {
-    email: string,
-    setEmail: React.Dispatch<React.SetStateAction<string>>
-}
-
-export const Email: React.FC<Props> = ({email,setEmail}) => {
+export const Email: React.FC<EmailInterface> = ({email,setEmail}) => {
 
    const onSetEmailChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setEmail(event.target.value)
 
