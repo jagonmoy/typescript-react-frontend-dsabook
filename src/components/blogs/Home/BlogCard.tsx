@@ -11,8 +11,8 @@ import { BlogCardContent } from './BlogCardContent';
 export const BlogCard: React.FC<BlogInterface> = ({ id, blogHeadline, author, blogDescription }) => {
 
   let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/blogs/${id}`;
+  const routeChange = () : void => {
+    let path : string = `/blogs/${id}`;
     navigate(path);
   }
 

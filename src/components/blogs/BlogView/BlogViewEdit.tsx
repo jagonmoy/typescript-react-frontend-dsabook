@@ -7,32 +7,32 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
-import { BlogIDInterface } from '../../../models/blogModel';
+import { BlogIDInterface, BlogInterface } from '../../../models/blogModel';
 import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { blogEdited } from '../../../slices/blogsSlice';
 
 export const BlogViewEdit : React.FC<BlogIDInterface> = ({id}) => {
-  const blogs = useAppSelector(state=>state.blogs.blogs)
-  const index = blogs.findIndex(blog=>blog.id === id);
-  const blog = blogs[index];
-  const [open, setOpen] = React.useState(false);
-  const [blogHeadline, setBlogHeadline] = useState(blog.blogHeadline);
-  const [blogDescription, setBlogDescription] = useState(blog.blogDescription);
+  const blogs : BlogInterface[] = useAppSelector(state=>state.blogs.blogs)
+  const index : number = blogs.findIndex(blog=>blog.id === id);
+  const blog : BlogInterface = blogs[index];
+  const [open, setOpen] = useState<boolean>(false);
+  const [blogHeadline, setBlogHeadline] = useState<string>(blog.blogHeadline);
+  const [blogDescription, setBlogDescription] = useState<string>(blog.blogDescription);
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const handleClickOpen = () => {
+  const handleClickOpen = () : void => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = () : void => {
     setOpen(false);
   };
-  const routeCurrentPage = () => {
-    let path = `/blogs/${id}`; 
+  const routeCurrentPage = () : void => {
+    let path : string = `/blogs/${id}`; 
     navigate(path);
   }
 
-  const handleUpdateClose = (event : React.MouseEvent<HTMLElement>) => {
+  const handleUpdateClose = (event : React.MouseEvent<HTMLElement>) : void => {
       event.preventDefault()
       if(blogHeadline && blogDescription) {
         dispatch(blogEdited({id : id.toString(),author : blog.author,blogHeadline,blogDescription}))

@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 export const RedirectToSignUp: React.FC = () => {
     const navigate = useNavigate();
-    const routeSignUp = () => {
-        let path = `/sign-up`;
+    const routeSignUp = () : void => {
+        let path : string = `/sign-up`;
         navigate(path);
     };
     return (

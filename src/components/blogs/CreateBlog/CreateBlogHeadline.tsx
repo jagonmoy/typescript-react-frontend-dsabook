@@ -4,7 +4,7 @@ import { CreateBlogHeadlineInterface } from '../../../models/blogModel';
 
 export const CreateBlogHeadline: React.FC<CreateBlogHeadlineInterface> = ({blogHeadline,setBlogHeadline}) => {
 
-    const onBlogHeadlineChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setBlogHeadline(event.target.value)
+    const onBlogHeadlineChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) : void => setBlogHeadline(event.target.value)
 
     return (
         <div>

@@ -4,17 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import {useAppDispatch,useAppSelector} from '../../../app/hooks'
 import { blogAdded } from '../../../slices/blogsSlice'
 import { CreateBlogButtonInterface } from '../../../models/blogModel';
+import { UserAuthInterface } from '../../../models/userModel';
 
 export const CreateBlogButton: React.FC<CreateBlogButtonInterface> = ({blogHeadline,blogDescription,setBlogHeadline,setBlogDescription}) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const auth = useAppSelector(state=>state.users.auth)
+    const auth : UserAuthInterface = useAppSelector(state=>state.users.auth)
 
-    const routeHome = () => {
-        let path = `/`;
+    const routeHome = () : void => {
+        let path : string = `/`;
         navigate(path);
     };
-    const submitHandler = (event: React.FormEvent<HTMLButtonElement>) => {
+    const submitHandler = (event: React.FormEvent<HTMLButtonElement>) : void => {
         event.preventDefault();
         if(blogHeadline && blogDescription) {
             dispatch(blogAdded(blogHeadline,blogDescription,auth.currentUser))

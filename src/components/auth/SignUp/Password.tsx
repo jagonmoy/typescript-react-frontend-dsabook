@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import { PasswordInterface } from '../../../models/userModel';
 
 export const Password: React.FC<PasswordInterface> = ({password,setPassword}) => {
-    const onSetPasswordChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setPassword(event.target.value)
+    const onSetPasswordChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) : void => setPassword(event.target.value)
     return (
         <Grid item xs={12}>
             <TextField

@@ -5,8 +5,8 @@ import { CreateBlogDescription } from './CreateBlogDescription';
 import { CreateBlogButton } from './CreateBlogButton';
 
 export const CreateBlog : React.FC = () => {
-    const [blogHeadline, setBlogHeadline] = useState('');
-    const [blogDescription, setBlogDescription] = useState('');
+    const [blogHeadline, setBlogHeadline] = useState<string>('');
+    const [blogDescription, setBlogDescription] = useState<string>('');
 
     return (
         <div >

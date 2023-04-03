@@ -4,8 +4,7 @@ import Grid from "@mui/material/Grid";
 import { BlogViewContentInterface } from '../../../models/blogModel';
 
 export const BlogViewContent: React.FC<BlogViewContentInterface> = ({ blogs,id }) => {
-  console.log("Inside Content",blogs)
-  const index = blogs.findIndex(blog=>blog.id === id);
+  const index : number = blogs.findIndex(blog=>blog.id === id);
   return (
     <div >
           <Typography

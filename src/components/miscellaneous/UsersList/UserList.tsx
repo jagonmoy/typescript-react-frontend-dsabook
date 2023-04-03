@@ -1,10 +1,11 @@
 import React from 'react';
 import { useAppSelector } from '../../../app/hooks';
+import { UserInterface } from '../../../models/userModel';
 import { DisplayUser } from './DisplayUser';
 
 export const UserList: React.FC = () => {
 
-  const users = useAppSelector(state => state.users.users)
+  const users : UserInterface[] = useAppSelector(state => state.users.users);
 
   return (
     <div>

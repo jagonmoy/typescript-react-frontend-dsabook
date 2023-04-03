@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import { UsernameInterface } from '../../../models/userModel';
 
 export const Username: React.FC<UsernameInterface> = ({ username, setUsername }) => {
-    const onSetUsernameChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setUsername(event.target.value)
+    const onSetUsernameChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) : void => setUsername(event.target.value)
     return (
         <Grid item xs={12}>
             <TextField

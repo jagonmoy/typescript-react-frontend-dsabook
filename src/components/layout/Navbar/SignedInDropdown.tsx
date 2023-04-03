@@ -1,20 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { userAuth } from '../../../slices/usersSlice';
+import { UserAuthInterface } from '../../../models/userModel';
 
 export const SignedInDropdown: FC = () => {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [open, setOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const auth = useAppSelector(state=>state.users.auth)
+  const auth : UserAuthInterface = useAppSelector(state=>state.users.auth)
   const dispatch = useAppDispatch()
-  const routeSignOut = () => {
-    let signInPath = `/sign-in`;
+  const routeSignOut = () : void => {
+    let signInPath : string = `/sign-in`;
     dispatch(userAuth({
       currentUser:'',
       status: false
@@ -22,7 +23,7 @@ export const SignedInDropdown: FC = () => {
     navigate(signInPath);
   };
   const routeCreateblog = () => {
-    let createBlogPath = `/create-blog`;
+    let createBlogPath : string = `/create-blog`;
     navigate(createBlogPath);
   };
 
@@ -30,7 +31,7 @@ export const SignedInDropdown: FC = () => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setOpen(true);
-    console.log("Menu opened")
+    
   };
   const handleClose = () => {
     setAnchorEl(null);

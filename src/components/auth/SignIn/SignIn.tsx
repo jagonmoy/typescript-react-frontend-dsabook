@@ -15,12 +15,13 @@ export const SignIn: FC  = () => {
   const navigate = useNavigate();
   const users = useAppSelector(state=>state.users.users)
   const dispatch = useAppDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error,setError] = useState(false);
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error,setError] = useState<boolean>(false);
   
-  const routeHome = () => {
-    let path = `/home`;
+  const routeHome = () : void => {
+    let path : string = `/home`;
     navigate(path);
   };
 
@@ -35,7 +36,7 @@ export const SignIn: FC  = () => {
     return dataExists;
   }
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) : void => {
     event.preventDefault();
     const userIndex : number  = checkData(users);
     if(userIndex !== -1) {

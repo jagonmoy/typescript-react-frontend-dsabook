@@ -1,35 +1,35 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { BlogIDInterface } from '../../../models/blogModel';
+import { BlogIDInterface, BlogInterface } from '../../../models/blogModel';
 import { useAppDispatch,useAppSelector } from '../../../app/hooks';
 import { blogDeleted } from '../../../slices/blogsSlice';
 
 
 export const BlogViewDelete : React.FC<BlogIDInterface> = ({id}) =>{
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
-    const blogs = useAppSelector(state => state.blogs.blogs)
-    const index = blogs.findIndex(blog=>blog.id === id);
-    const blog = blogs[index]
+    const blogs : BlogInterface[] = useAppSelector(state => state.blogs.blogs)
+    const index : number = blogs.findIndex(blog=>blog.id === id);
+    const blog : BlogInterface = blogs[index]
     const navigate = useNavigate()
-    const routeHomePage = () => {
-      let path = `/blogs`; 
+    const routeHomePage = () : void => {
+      let path : string = `/blogs`; 
       navigate(path);
     }
 
-    const handleClickOpen = () => {
+    const handleClickOpen = () : void => {
       setOpen(true);
     };
 
-    const handleClose = () => {
+    const handleClose = () : void => {
       setOpen(false);
     };
-    const handleYesClose = (event : React.MouseEvent<HTMLElement>) => {
+    const handleYesClose = (event : React.MouseEvent<HTMLElement>) : void => {
       event.preventDefault();
       dispatch(blogDeleted(blog))
       routeHomePage();

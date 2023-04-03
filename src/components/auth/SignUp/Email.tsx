@@ -5,7 +5,7 @@ import { EmailInterface } from '../../../models/userModel';
 
 export const Email: React.FC<EmailInterface> = ({email,setEmail}) => {
 
-   const onSetEmailChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setEmail(event.target.value)
+   const onSetEmailChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) : void => setEmail(event.target.value)
 
     return (
         <Grid item xs={12}>

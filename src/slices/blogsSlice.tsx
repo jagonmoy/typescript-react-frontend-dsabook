@@ -28,15 +28,15 @@ const blogsSlice = createSlice({
     },
     blogEdited(state,action: PayloadAction<BlogInterface>) {
       const {id,blogHeadline,blogDescription} = action.payload;
-      const existingBlog = state.blogs[state.blogs.findIndex(blog=>blog.id === id)];
+      const existingBlog : BlogInterface = state.blogs[state.blogs.findIndex(blog=>blog.id === id)];
       if(existingBlog) {
          existingBlog.blogHeadline = blogHeadline;
          existingBlog.blogDescription = blogDescription;
       }
     },
     blogDeleted(state,action: PayloadAction<BlogInterface>) {
-        console.log(action.payload);
-        let index = state.blogs.findIndex(obj => obj.id === action.payload.id);
+       
+        let index : number = state.blogs.findIndex(obj => obj.id === action.payload.id);
         state.blogs.splice(index,1)
     }
   },

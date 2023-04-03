@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { PasswordInterface } from '../../../models/userModel';
 
 export const Password : React.FC<PasswordInterface> = ({setPassword,password}) => {
-  const onSetPasswordChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) => setPassword(event.target.value)
+  const onSetPasswordChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) : void => setPassword(event.target.value)
   return (
     <div>
             <TextField

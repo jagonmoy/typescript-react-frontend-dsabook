@@ -6,12 +6,13 @@ import { SignedOutDropdown } from './SignedOutDropdown';
 import {SignedInDropdown} from './SignedInDropdown'
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
+import { UserAuthInterface } from '../../../models/userModel';
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const auth = useAppSelector(state=>state.users.auth)
-  const routeChange = () => {
-    let path = `/`;
+  const auth : UserAuthInterface = useAppSelector(state=>state.users.auth)
+  const routeChange = () : void => {
+    let path : string = `/`;
     navigate(path);
   };
   return (

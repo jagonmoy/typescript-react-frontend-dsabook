@@ -17,18 +17,18 @@ import { RedirectToSignIn } from './RedirectToSignIn';
 export const SignUp: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const routeChange = () => {
-    let path = `/users`;
+  const routeChange = () : void => {
+    let path : string = `/users`;
     navigate(path);
   };
 
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>) : void => {
     event.preventDefault();
     if (name && username && email && password && confirmPassword) {
       dispatch(userAdded({

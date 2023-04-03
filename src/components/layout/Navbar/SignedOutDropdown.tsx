@@ -1,30 +1,30 @@
-import React, { FC } from 'react';
+import React, { FC,useState } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
 export const SignedOutDropdown: FC = () => {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
-  const [open, setOpen] = React.useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [open, setOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
-  const routeSignIn = () => {
-    let signInPath = `/sign-in`;
+  const routeSignIn = () : void => {
+    let signInPath : string = `/sign-in`;
     navigate(signInPath);
   };
-  const routeSignUp = () => {
-    let signUpPath = `/sign-up`;
+  const routeSignUp = () : void => {
+    let signUpPath : string = `/sign-up`;
     navigate(signUpPath);
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) : void => {
     setAnchorEl(event.currentTarget);
     setOpen(true);
-    console.log("Menu opened")
+    
   };
-  const handleClose = () => {
+  const handleClose = () : void => {
     setAnchorEl(null);
     setOpen(false);
   };
