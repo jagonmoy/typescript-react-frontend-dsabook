@@ -17,7 +17,6 @@ export const ConfirmPassword: React.FC<ConfirmPasswordInterface> = ({confirmPass
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="new-password"
             />
         </Grid>
     );

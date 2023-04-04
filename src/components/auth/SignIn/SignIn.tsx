@@ -5,11 +5,10 @@ import { Paper,Form} from '../form.style';
 import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { UserInterface } from '../../../models/userModel';
 import { userAuth } from '../../../slices/usersSlice';
-import { Password } from './Password';
-import { Email } from './Email';
 import { Heading } from './Heading';
 import { Button } from './Button';
-import { RedirectToSignUp } from './RedirectToSignUp';;
+import { RedirectToSignUp } from './RedirectToSignUp';
+import { TextFieldComponent } from '../generic/TextFieldComponent';
 
 export const SignIn: FC  = () => {
   const navigate = useNavigate();
@@ -55,8 +54,8 @@ export const SignIn: FC  = () => {
         <Paper>
           <Heading />
           <Form noValidate onSubmit={submitHandler} data-testid = "sign-in-form" aria-label='Sign In'>
-            <Email setEmail={setEmail} email ={email} /> 
-            <Password setPassword = {setPassword}  password ={password}/>
+            <TextFieldComponent value={email} onSetFieldChanged={(e)=>setEmail(e.target.value)} label='Email' field='email' /> 
+            <TextFieldComponent value={password} onSetFieldChanged={(e)=>setPassword(e.target.value)} field='password' label='Password'/>
             <Button />
             <RedirectToSignUp />
           </Form>
