@@ -1,7 +1,5 @@
-import { UserAuthInterface } from "./userModel";
-
 export interface BlogInterface {
-    id: string;
+    id?: string;
     blogHeadline: string;
     author: string;
     blogDescription: string;
@@ -10,18 +8,18 @@ export interface BlogsStateInterface {
     blogs : BlogInterface[]
 }
 export type BlogIDInterface = {
-    id : string;
+    id ?: string;
 };
 
-export interface BlogViewActionsInterface {
-    blogs: BlogInterface[],
-    auth: UserAuthInterface,
-    id: string
+export interface BlogEditInterface {
+    author: string
+    id?: string,
+    blogHeadline: string,
+    blogDescription: string,
+    setBlogHeadline: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
+    setBlogDescription: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 }
- export interface BlogViewContentInterface {
-    blogs: BlogInterface[],
-    id?: string
- }
+
  export interface CreateBlogButtonInterface {
     blogHeadline: string,
     setBlogHeadline: React.Dispatch<React.SetStateAction<string>>,

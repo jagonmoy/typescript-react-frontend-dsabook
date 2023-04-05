@@ -7,49 +7,35 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
-import { BlogIDInterface, BlogInterface } from '../../../models/blogModel';
-import { useAppSelector,useAppDispatch } from '../../../app/hooks';
+import { BlogEditInterface } from '../../../models/blogModel';
+import { useAppDispatch } from '../../../app/hooks';
 import { blogEdited } from '../../../slices/blogsSlice';
 
-export const BlogViewEdit : React.FC<BlogIDInterface> = ({id}) => {
-  const blogs : BlogInterface[] = useAppSelector(state=>state.blogs.blogs)
-  const index : number = blogs.findIndex(blog=>blog.id === id);
-  const blog : BlogInterface = blogs[index];
+export const BlogViewEdit : React.FC<BlogEditInterface> = ({id,blogHeadline,blogDescription,author,setBlogHeadline,setBlogDescription}) => {
+
   const [open, setOpen] = useState<boolean>(false);
-  const [blogHeadline, setBlogHeadline] = useState<string>(blog.blogHeadline);
-  const [blogDescription, setBlogDescription] = useState<string>(blog.blogDescription);
+ 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const handleClickOpen = () : void => {
-    setOpen(true);
-  };
-
-  const handleClose = () : void => {
-    setOpen(false);
-  };
-  const routeCurrentPage = () : void => {
-    let path : string = `/blogs/${id}`; 
-    navigate(path);
-  }
-
-  const handleUpdateClose = (event : React.MouseEvent<HTMLElement>) : void => {
+  
+  const updateAndClose = (event : React.MouseEvent<HTMLElement>) : void => {
       event.preventDefault()
       if(blogHeadline && blogDescription) {
-        dispatch(blogEdited({id : id.toString(),author : blog.author,blogHeadline,blogDescription}))
+        dispatch(blogEdited({id,author,blogHeadline,blogDescription}))
       }
-      routeCurrentPage();
+      navigate(`/blogs/${id}`);
       setOpen(false);
   };
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleClickOpen} style={{marginLeft : 10}} >
+      <Button variant="contained" color="primary" onClick={()=>setOpen(true)} style={{marginLeft : 10}} >
         <EditIcon/>
       </Button>
       <Dialog
         open={open}
         style={{width: '100%'}}
-        onClose={handleClose}
+        onClose={()=>setOpen(false)}
         aria-labelledby="form-dialog-title"
 
       >
@@ -63,8 +49,8 @@ export const BlogViewEdit : React.FC<BlogIDInterface> = ({id}) => {
               multiline
               maxRows={3}
               value={blogHeadline}
-            onChange={(e) => setBlogHeadline(e.target.value)}
-            style = {{paddingBottom: 20}}
+              onChange={setBlogHeadline}
+              style = {{paddingBottom: 20}}
           />
             <TextareaAutosize
               id="outlined-multiline-static"
@@ -73,14 +59,14 @@ export const BlogViewEdit : React.FC<BlogIDInterface> = ({id}) => {
               minRows={15}
               multiline
               value={blogDescription}
-              onChange={(e) => setBlogDescription(e.target.value)}
+              onChange={setBlogDescription}
             />
           <DialogActions>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={()=>setOpen(false)} color="primary">
               Cancel
             </Button>
             <Button 
-            onClick={handleUpdateClose} color="primary">
+            onClick={updateAndClose} color="primary">
               Update
             </Button>
           </DialogActions>

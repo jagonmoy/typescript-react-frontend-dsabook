@@ -6,7 +6,6 @@ import { CreateBlog } from './components/blogs/CreateBlog/CreateBlog';
 import { NotFound } from './components/miscellaneous/NotFound/NotFound';
 import { SignIn } from './components/auth/SignIn/SignIn';
 import { SignUp } from './components/auth/SignUp/SignUp';
-import { UserList } from './components/miscellaneous/UsersList/UserList';
 import { ThemeProvider } from '@mui/material/styles';
 import { Navbar } from './components/layout/Navbar/Navbar';
 import { CssBaseline } from '@mui/material';
@@ -26,7 +25,6 @@ const App: FC = () => {
           <Route path="/sign-up" Component={SignUp} />
           <Route path="/create-blog" Component={CreateBlog} />
           <Route path="/blogs/:id" Component={BlogView} />
-          <Route path="/users" Component={UserList} />
           <Route path='*' Component={NotFound}></Route>
         </Routes>
       </Router>

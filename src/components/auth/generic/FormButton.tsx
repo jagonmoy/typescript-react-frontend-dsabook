@@ -1,17 +1,22 @@
 import React from 'react';
 import { SubmitButton } from '../form.style';
 
-export const Button: React.FC = () => {
+interface Button {
+    label: string,
+    testId: string
+}
+
+export const FormButton: React.FC <Button> = ({label,testId}) => {
     return (
         <div>
             <SubmitButton
-                data-testid='sign-in-submit'
+                data-testid={`${testId}-testid`}
                 type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
             >
-                Sign In
+                {label}
             </SubmitButton>
         </div>
     );

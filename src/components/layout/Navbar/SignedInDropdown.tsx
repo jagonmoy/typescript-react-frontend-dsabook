@@ -4,30 +4,25 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector,useAppDispatch } from '../../../app/hooks';
-import { userAuth } from '../../../slices/usersSlice';
-import { UserAuthInterface } from '../../../models/userModel';
+import { userAuth } from '../../../slices/userSlice';
+import { selectUsername } from '../../../slices/userSlice';
 
 export const SignedInDropdown: FC = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [open, setOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const auth : UserAuthInterface = useAppSelector(state=>state.users.auth)
+  const currentUsername : string= useAppSelector(selectUsername)
   const dispatch = useAppDispatch()
-  const routeSignOut = () : void => {
-    let signInPath : string = `/sign-in`;
+
+  const actionSignOut = () : void => {
     dispatch(userAuth({
-      currentUser:'',
-      status: false
+      username:'',
+      status: false,
     }))
-    navigate(signInPath);
+    navigate(`/sign-in`);
   };
-  const routeCreateblog = () => {
-    let createBlogPath : string = `/create-blog`;
-    navigate(createBlogPath);
-  };
-
-
+ 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
     setOpen(true);
@@ -48,7 +43,7 @@ export const SignedInDropdown: FC = () => {
         onClick={handleClick}
         color = 'inherit'
       >
-        {auth.currentUser}
+        {currentUsername}
       </Button>
       <Menu
         id="demo-positioned-menu"
@@ -65,8 +60,8 @@ export const SignedInDropdown: FC = () => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={routeSignOut}>Sign out</MenuItem>
-        <MenuItem onClick={routeCreateblog}>Create Blog</MenuItem>
+        <MenuItem onClick={actionSignOut}>Sign out</MenuItem>
+        <MenuItem onClick={()=>navigate(`/create-blog`)}>Create Blog</MenuItem>
       </Menu>
     </div>
   );

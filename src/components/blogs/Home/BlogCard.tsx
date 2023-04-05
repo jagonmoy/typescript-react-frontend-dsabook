@@ -9,19 +9,14 @@ import { BlogInterface } from '../../../models/blogModel';
 import { BlogCardContent } from './BlogCardContent';
 
 export const BlogCard: React.FC<BlogInterface> = ({ id, blogHeadline, author, blogDescription }) => {
-
-  let navigate = useNavigate();
-  const routeChange = () : void => {
-    let path : string = `/blogs/${id}`;
-    navigate(path);
-  }
+  const navigate = useNavigate();
 
   return (
       <Grid item xs={6}>
         <Card sx={{ width: "90%", height: 200, marginTop: 8,marginLeft: 3}}>
           <BlogCardContent author={author} blogDescription={blogDescription} blogHeadline={blogHeadline} />
           <CardActions>
-            <Button size="small" onClick={routeChange}>See More</Button>
+            <Button size="small" onClick={()=>navigate(`/blogs/${id}`)}>See More</Button>
           </CardActions>
         </Card>
       </Grid>

@@ -1,10 +1,9 @@
 import React from 'react';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { BlogViewContentInterface } from '../../../models/blogModel';
+import { BlogInterface } from '../../../models/blogModel';
 
-export const BlogViewContent: React.FC<BlogViewContentInterface> = ({ blogs,id }) => {
-  const index : number = blogs.findIndex(blog=>blog.id === id);
+export const BlogViewContent: React.FC<BlogInterface> = ({blogHeadline,blogDescription,author}) => {
   return (
     <div >
           <Typography
@@ -15,10 +14,10 @@ export const BlogViewContent: React.FC<BlogViewContentInterface> = ({ blogs,id }
             fontWeight="bold"
             style={{ paddingBottom: 15 }}
           >
-            { blogs[index].blogHeadline}
+            {blogHeadline}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            { blogs[index].blogDescription}
+            {blogDescription}
           </Typography>
           <Grid container item xs={12}>
             <Typography
@@ -30,7 +29,7 @@ export const BlogViewContent: React.FC<BlogViewContentInterface> = ({ blogs,id }
               Authored by
             </Typography>
             <Typography variant="overline" display="block" gutterBottom>
-              { blogs[index].author}
+              {author}
             </Typography>
           </Grid>
     </div>

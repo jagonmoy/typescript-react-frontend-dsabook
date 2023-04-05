@@ -4,25 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import {useAppDispatch,useAppSelector} from '../../../app/hooks'
 import { blogAdded } from '../../../slices/blogsSlice'
 import { CreateBlogButtonInterface } from '../../../models/blogModel';
-import { UserAuthInterface } from '../../../models/userModel';
+import { selectUsername } from '../../../slices/userSlice';
 
 export const CreateBlogButton: React.FC<CreateBlogButtonInterface> = ({blogHeadline,blogDescription,setBlogHeadline,setBlogDescription}) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const auth : UserAuthInterface = useAppSelector(state=>state.users.auth)
+    const currentUser : string = useAppSelector(selectUsername)
 
-    const routeHome = () : void => {
-        let path : string = `/`;
-        navigate(path);
-    };
-    const submitHandler = (event: React.FormEvent<HTMLButtonElement>) : void => {
+    const createBlogSubmit = (event: React.FormEvent<HTMLButtonElement>) : void => {
         event.preventDefault();
         if(blogHeadline && blogDescription) {
-            dispatch(blogAdded(blogHeadline,blogDescription,auth.currentUser))
+            dispatch(blogAdded(blogHeadline,blogDescription,currentUser))
         }
         setBlogHeadline('')
         setBlogDescription('')
-        routeHome();
+        navigate(`/`);
     };
     return (
         <div>
@@ -32,7 +28,7 @@ export const CreateBlogButton: React.FC<CreateBlogButtonInterface> = ({blogHeadl
                 fullWidth
                 variant="contained"
                 color="primary"
-                onClick={submitHandler}
+                onClick={createBlogSubmit}
             >
                 POST
             </Button>

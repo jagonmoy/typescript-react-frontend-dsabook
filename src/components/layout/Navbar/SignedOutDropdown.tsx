@@ -10,15 +10,6 @@ export const SignedOutDropdown: FC = () => {
 
   const navigate = useNavigate();
 
-  const routeSignIn = () : void => {
-    let signInPath : string = `/sign-in`;
-    navigate(signInPath);
-  };
-  const routeSignUp = () : void => {
-    let signUpPath : string = `/sign-up`;
-    navigate(signUpPath);
-  };
-
   const handleClick = (event: React.MouseEvent<HTMLElement>) : void => {
     setAnchorEl(event.currentTarget);
     setOpen(true);
@@ -56,8 +47,8 @@ export const SignedOutDropdown: FC = () => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={routeSignIn}>Sign in</MenuItem>
-        <MenuItem onClick={routeSignUp}>Sign up</MenuItem>
+        <MenuItem onClick={()=>navigate(`/sign-in`)}>Sign in</MenuItem>
+        <MenuItem onClick={()=>navigate(`/sign-up`)}>Sign up</MenuItem>
       </Menu>
     </div>
   );

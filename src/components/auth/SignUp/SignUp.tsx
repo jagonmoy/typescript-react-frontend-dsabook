@@ -1,68 +1,59 @@
 import React, { FC, useState } from 'react';
 import Container from "@mui/material/Container";
 import { useNavigate } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
 import { Paper, Form, } from '../form.style'
-import { useAppDispatch } from '../../../app/hooks';
-import { userAdded } from '../../../slices/usersSlice';
-import { Name } from './Name';
-import { Username } from './Username';
-import { Email } from './Email';
-import { Password } from './Password';
-import { ConfirmPassword } from './ConfirmPassword';
-import { Headings } from './Headings';
-import { Button } from './Button';
-import { RedirectToSignIn } from './RedirectToSignIn';
+import { Redirect } from '../generic/Redirect';
+import { FormButton } from '../generic/FormButton';
+import { FormField } from '../generic/FormField';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { AvatarWrapper } from '../form.style'
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const routeChange = () : void => {
-    let path : string = `/users`;
-    navigate(path);
-  };
-
+ 
   const [name, setName] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) : void => {
+  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (name && username && email && password && confirmPassword) {
-      dispatch(userAdded({
-        name,
-        username,
-        email,
-        password,
-        confirmPassword
-      }))
-    }
-      setEmail('')
-      setUsername('')
-      setName('')
-      setPassword('')
-      setConfirmPassword('')
+   
+    setEmail('')
+    setUsername('')
+    setName('')
+    setPassword('')
+    setConfirmPassword('')
 
-    routeChange()
+    navigate('/sign-in');
   };
 
   return (
     <div data-testid="sign-up-details">
       <Container component="main" maxWidth="xs">
         <Paper>
-           <Headings />
+          <AvatarWrapper>
+            <LockOutlinedIcon />
+          </AvatarWrapper>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
           <Form noValidate onSubmit={submitHandler} aria-label="Sign Up">
-            <Grid container spacing={2}>
-              <Name name={name} setName={setName}/>
-              <Username username={username} setUsername={setUsername}/>
-              <Email email={email} setEmail={setEmail} />
-              <Password password={password} setPassword={setPassword}/>
-              <ConfirmPassword confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} />
-            </Grid>
-             <Button />
-             <RedirectToSignIn />
+
+            <FormField value={name} onSetFieldChanged={(e) => setName(e.target.value)} label='Name' field='name' type='text' />
+
+            <FormField value={username} onSetFieldChanged={(e) => setUsername(e.target.value)} label='Username' field='username' type='text' />
+
+            <FormField value={email} onSetFieldChanged={(e) => setEmail(e.target.value)} label='Email' field='email' type='email' />
+
+            <FormField value={password} onSetFieldChanged={(e) => setPassword(e.target.value)} field='password' label='Password' type='password' />
+
+            <FormField value={confirmPassword} onSetFieldChanged={(e) => setConfirmPassword(e.target.value)} field='confirmPassword' label='Confirm Password' type='password' />
+
+            <FormButton label='Sign Up' testId='sign-up' />
+            <Redirect label="Already have an account? Sign in" path="/sign-in" />
           </Form>
         </Paper>
       </Container>

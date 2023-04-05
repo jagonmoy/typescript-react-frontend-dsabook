@@ -1,7 +1,7 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../app/store';
 // import {blogs} from '../data/blogs';
-import { BlogInterface,BlogsStateInterface } from '../models/blogModel';
+import { BlogInterface,BlogsStateInterface} from '../models/blogModel';
 
 const initialState: BlogsStateInterface = {
   blogs : [],
@@ -34,9 +34,8 @@ const blogsSlice = createSlice({
          existingBlog.blogDescription = blogDescription;
       }
     },
-    blogDeleted(state,action: PayloadAction<BlogInterface>) {
-       
-        let index : number = state.blogs.findIndex(obj => obj.id === action.payload.id);
+    blogDeleted(state,action: PayloadAction<string|undefined>) {
+        let index : number = state.blogs.findIndex(obj => obj.id === action.payload);
         state.blogs.splice(index,1)
     }
   },
@@ -44,6 +43,6 @@ const blogsSlice = createSlice({
 
 export const { blogAdded, blogEdited, blogDeleted } = blogsSlice.actions;
 
-export const selectPosts = (state: RootState) => state.blogs.blogs;
+export const selectAllBlogs = (state: RootState) => state.blogs.blogs;
 
 export default blogsSlice.reducer;

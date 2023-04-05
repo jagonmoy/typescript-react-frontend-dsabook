@@ -3,9 +3,6 @@ import { HeadlineTypography, HeadlineTextAreaAutosize } from './CreateBlog.style
 import { CreateBlogHeadlineInterface } from '../../../models/blogModel';
 
 export const CreateBlogHeadline: React.FC<CreateBlogHeadlineInterface> = ({blogHeadline,setBlogHeadline}) => {
-
-    const onBlogHeadlineChanged = (event: React.ChangeEvent<HTMLTextAreaElement>) : void => setBlogHeadline(event.target.value)
-
     return (
         <div>
             <HeadlineTypography
@@ -21,7 +18,7 @@ export const CreateBlogHeadline: React.FC<CreateBlogHeadlineInterface> = ({blogH
                 id="outlined-multiline-static"
                 style={{ width: '100%' }}
                 value={blogHeadline}
-                onChange={onBlogHeadlineChanged}
+                onChange={(event)=>setBlogHeadline(event.target.value)}
             />
         </div>
     );
