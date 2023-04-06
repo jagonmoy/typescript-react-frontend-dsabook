@@ -1,7 +1,20 @@
-export interface userInterface{
-    name: string,
-    username: string,
-    email : string,
-    password: string,
-    confirmPassword: string
+export interface UserInterface{
+    username : string,
+    status : boolean,
+}
+
+export interface Button {
+    label: string,
+    testId: string
+}
+export interface Field {
+    label: string,
+    field: string,
+    value: string,
+    type: string,
+    onSetFieldChanged: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+}
+export interface Redirection {
+    path: string,
+    label: string
 }

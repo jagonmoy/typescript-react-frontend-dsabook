@@ -1,18 +1,43 @@
 export interface BlogInterface {
-    id: string;
+    id?: string;
     blogHeadline: string;
     author: string;
     blogDescription: string;
 }
-
-export interface BlogsInterface {
-    blogs: BlogInterface[];
+export interface BlogsStateInterface {
+    blogs : BlogInterface[]
 }
-
-export type RouteBlogView = {
-    id?: string;
+export type BlogIDInterface = {
+    id ?: string;
 };
 
-export interface BlogIDInterface {
-    id: number;
+export interface BlogEditInterface {
+    author: string
+    id?: string,
+    blogHeadline: string,
+    blogDescription: string,
+    setBlogHeadline: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
+    setBlogDescription: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+}
+
+ export interface CreateBlogButtonInterface {
+    blogHeadline: string,
+    setBlogHeadline: React.Dispatch<React.SetStateAction<string>>,
+    blogDescription : string ,
+    setBlogDescription: React.Dispatch<React.SetStateAction<string>>
+ }
+export interface CreateBlogDescriptionInterface {
+    blogDescription : string ,
+    setBlogDescription: React.Dispatch<React.SetStateAction<string>>
+}
+
+export interface CreateBlogHeadlineInterface {
+    blogHeadline: string,
+    setBlogHeadline: React.Dispatch<React.SetStateAction<string>>
+}
+
+export interface BlogCardContentInterface {
+    author: string ,
+    blogHeadline: string,
+    blogDescription: string
 }
