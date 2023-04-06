@@ -21,6 +21,7 @@ export const SignIn: FC = () => {
 
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+    console.log('hello')
     event.preventDefault();
     if(username && password) {
       dispatch(userAuth({username, status: true}))

@@ -17,6 +17,7 @@ export const CreateBlogDescription: React.FC<CreateBlogDescriptionInterface> = (
             <DescriptionTextAreaAutosize
                 minRows={30}
                 id="outlined-multiline-static"
+                data-testid="blog-description-testid"
                 value={blogDescription}
                 onChange={(event)=>setBlogDescription(event.target.value)}
             />

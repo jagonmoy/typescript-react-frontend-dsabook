@@ -16,6 +16,7 @@ export const CreateBlogHeadline: React.FC<CreateBlogHeadlineInterface> = ({blogH
             <HeadlineTextAreaAutosize
                 minRows={4}
                 id="outlined-multiline-static"
+                data-testid="blog-headline-testid"
                 style={{ width: '100%' }}
                 value={blogHeadline}
                 onChange={(event)=>setBlogHeadline(event.target.value)}

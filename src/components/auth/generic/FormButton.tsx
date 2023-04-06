@@ -10,7 +10,7 @@ export const FormButton: React.FC <Button> = ({label,testId}) => {
     return (
         <div>
             <SubmitButton
-                data-testid={`${testId}-testid`}
+                data-testid={`${testId}-submit`}
                 type="submit"
                 fullWidth
                 variant="contained"

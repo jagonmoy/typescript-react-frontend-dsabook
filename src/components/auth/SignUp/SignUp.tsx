@@ -40,7 +40,7 @@ export const SignUp: FC = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Form noValidate onSubmit={submitHandler} aria-label="Sign Up">
+          <Form noValidate onSubmit={submitHandler} data-testid="sign-up-form" aria-label="Sign Up">
 
             <FormField value={name} onSetFieldChanged={(e) => setName(e.target.value)} label='Name' field='name' type='text' />
 

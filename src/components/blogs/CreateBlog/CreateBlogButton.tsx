@@ -12,13 +12,15 @@ export const CreateBlogButton: React.FC<CreateBlogButtonInterface> = ({blogHeadl
     const currentUser : string = useAppSelector(selectUsername)
 
     const createBlogSubmit = (event: React.FormEvent<HTMLButtonElement>) : void => {
+        // console.log('Inside create Blog Submit')
+        console.log(currentUser)
         event.preventDefault();
         if(blogHeadline && blogDescription) {
             dispatch(blogAdded(blogHeadline,blogDescription,currentUser))
+            setBlogHeadline('')
+            setBlogDescription('')
+            navigate(`/`);
         }
-        setBlogHeadline('')
-        setBlogDescription('')
-        navigate(`/`);
     };
     return (
         <div>
