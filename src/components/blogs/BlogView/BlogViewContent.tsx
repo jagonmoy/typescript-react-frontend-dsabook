@@ -5,7 +5,7 @@ import { BlogInterface } from '../../../models/blogModel';
 
 export const BlogViewContent: React.FC<BlogInterface> = ({blogHeadline,blogDescription,author}) => {
   return (
-    <div >
+    <div data-testid ='blog-view-content-testid'>
           <Typography
             variant="h4"
             gutterBottom

@@ -7,7 +7,7 @@ export const BlogCardContent : React.FC<BlogCardContentInterface> = ({blogHeadli
 
   return (
     <div >
-      <CardContent>
+      <CardContent data-testid="card-content-testid">
         <Typography sx={{ fontSize: 18 }} color="text.secondary" gutterBottom>
           {author}
         </Typography>

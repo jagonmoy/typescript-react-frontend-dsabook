@@ -7,7 +7,6 @@ import { BlogViewContent } from './BlogViewContent';
 import { selectUsername } from '../../../slices/userSlice';
 import { selectAllBlogs } from '../../../slices/blogsSlice';
 import { BlogViewDelete } from './BlogViewDelete';
-import { NotFound } from '../../miscellaneous/NotFound/NotFound';
 import { BlogViewEdit } from './BlogViewEdit';
 
 const useFindCurrentBlog = function(id ?: string ) : BlogInterface {
@@ -19,7 +18,6 @@ const useFindCurrentBlog = function(id ?: string ) : BlogInterface {
 
 export const BlogView: React.FC = () => {
   const { id }  = useParams<BlogIDInterface>();
-
   const currentUser : string = useAppSelector(selectUsername)
   const currentBlog : BlogInterface = useFindCurrentBlog(id)
 
@@ -27,15 +25,12 @@ export const BlogView: React.FC = () => {
   const [headline, setHeadline] = useState<string>(blogHeadline);
   const [description, setDescription] = useState<string>(blogDescription);
 
-
-  if(!currentBlog) return <NotFound/>
-  else {
-    return (
+  return (
     <div data-testid="single-blog-details">
       <RootContainer>
         <BasicGrid>
 
-          {<BlogViewContent blogHeadline={blogHeadline} blogDescription={blogDescription} author={author} id={id} /> }
+          <BlogViewContent blogHeadline={blogHeadline} blogDescription={blogDescription} author={author} id={id} /> 
 
           {currentUser === author && <BlogViewDelete id={id} />} 
           
@@ -54,5 +49,4 @@ export const BlogView: React.FC = () => {
       </RootContainer>
     </div>
    );
-  }
 }

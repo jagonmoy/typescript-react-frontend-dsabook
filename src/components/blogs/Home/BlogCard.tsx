@@ -12,13 +12,13 @@ export const BlogCard: React.FC<BlogInterface> = ({ id, blogHeadline, author, bl
   const navigate = useNavigate();
 
   return (
-      <Grid item xs={6}>
-        <Card sx={{ width: "90%", height: 200, marginTop: 8,marginLeft: 3}}>
-          <BlogCardContent author={author} blogDescription={blogDescription} blogHeadline={blogHeadline} />
-          <CardActions>
-            <Button size="small" onClick={()=>navigate(`/blogs/${id}`)}>See More</Button>
-          </CardActions>
-        </Card>
-      </Grid>
+    <Grid item xs={6} data-testid ="blog-card-testid">
+      <Card sx={{ width: "90%", height: 200, marginTop: 8, marginLeft: 3 }}>
+        <BlogCardContent author={author} blogDescription={blogDescription} blogHeadline={blogHeadline}/>
+        <CardActions>
+          <Button size="small" onClick={() => navigate(`/blogs/${id}`)}>See More</Button>
+        </CardActions>
+      </Card>
+    </Grid>
   );
 }
