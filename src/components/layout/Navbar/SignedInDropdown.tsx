@@ -24,9 +24,9 @@ export const SignedInDropdown: FC = () => {
   };
  
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    console.log('Profile Menu Opened')
     setAnchorEl(event.currentTarget);
     setOpen(true);
-    
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -34,7 +34,7 @@ export const SignedInDropdown: FC = () => {
   };
 
   return (
-    <div data-testid="signed-out-dropdown">
+    <div data-testid="signed-in-dropdown">
       <Button
         id="demo-positioned-button"
         aria-controls={open ? 'demo-positioned-menu' : undefined}
@@ -60,8 +60,8 @@ export const SignedInDropdown: FC = () => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={actionSignOut}>Sign out</MenuItem>
-        <MenuItem onClick={()=>navigate(`/create-blog`)}>Create Blog</MenuItem>
+        <MenuItem onClick={actionSignOut}data-testid='sign-out-item'>Sign out</MenuItem>
+        <MenuItem onClick={()=>navigate(`/create-blog`)} data-testid='create-blog-item'>Create Blog</MenuItem>
       </Menu>
     </div>
   );

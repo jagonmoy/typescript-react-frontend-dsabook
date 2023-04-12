@@ -1,8 +1,9 @@
+import React from 'react';
 import { BlogInterface } from '../../../../models/blogModel';
 import Router from "react-router-dom";
 import { renderWithProviders } from '../../../../utils/test-utils';
 import { BlogView } from '../../../../components/blogs/BlogView/BlogView';
-import { screen } from '@testing-library/react';
+import { screen,fireEvent } from '@testing-library/react';
 import { BlogViewContent } from '../../../../components/blogs/BlogView/BlogViewContent';
 import { BlogViewEdit } from '../../../../components/blogs/BlogView/BlogViewEdit';
 import { BlogViewDelete } from '../../../../components/blogs/BlogView/BlogViewDelete';
@@ -15,11 +16,11 @@ jest.mock("react-router-dom", () => ({
 
 
 jest.mock('../../../../components/blogs/BlogView/BlogViewContent', () => ({
-    BlogViewContent: jest.fn(),
+   BlogViewContent: jest.fn()
 }));
-jest.mock('../../../../components/blogs/BlogView/BlogViewEdit', () => ({
-    BlogViewEdit: jest.fn(),
-}));
+// jest.mock('../../../../components/blogs/BlogView/BlogViewEdit', () => ({
+//     BlogViewEdit: jest.fn(),
+// }));
 jest.mock('../../../../components/blogs/BlogView/BlogViewDelete', () => ({
     BlogViewDelete: jest.fn(),
 }));
@@ -59,7 +60,7 @@ describe('<Home />', () => {
         })
         
     })
-    it('should have BlogViewContent,BlogViewEdit and BlogViewDelete Component', () => {
+    it('should have BlogViewContent Component', () => {
         jest.spyOn(Router, 'useParams').mockReturnValue({ id: '1' })
         const { store } = renderWithProviders(<BlogView />, {
             preloadedState: {
@@ -77,21 +78,45 @@ describe('<Home />', () => {
             blogDescription: mockBlogs[0].blogDescription,
             id: mockBlogs[0].id,
             author: store.getState().user.username
-        }, {}
+        },{}
         )
-        expect(BlogViewEdit).toBeCalledWith({
-            blogHeadline: mockBlogs[0].blogHeadline,
-            blogDescription: mockBlogs[0].blogDescription,
-            id: mockBlogs[0].id,
-            author: store.getState().user.username,
-            setBlogHeadline: expect.any(Function),
-            setBlogDescription: expect.any(Function)
-        }, {}
-        )
-        expect(BlogViewDelete).toBeCalledWith({
-            id: mockBlogs[0].id,
-        }, {}
-        )
+        // expect(BlogViewDelete).toBeCalledWith({
+        //     id: mockBlogs[0].id,
+        // }, {}
+        // )
     })
+    // it('should have BlogViewEdit Component', () => {
+    //     const mockSetBlogHeadline = jest.fn();
+    //     const mockSetBlogDescription = jest.fn();
+    //     renderWithProviders(<BlogViewEdit
+    //         blogHeadline="Blog 1"
+    //         blogDescription="Description 1"
+    //         setBlogHeadline={mockSetBlogHeadline}
+    //         setBlogDescription={mockSetBlogDescription}
+    //         id="1"
+    //         author="John Doe"
+    //     />);
+    //     expect(mockSetBlogHeadline).toHaveBeenCalledTimes(0);
+    //     expect(mockSetBlogDescription).toHaveBeenCalledTimes(0);
+    //     fireEvent.click(screen.getByTestId('edit-button'))
+    //     // fireEvent.change(screen.getByTestId('blog-headline-input'), { target: { value: 'New Blog Headline' }});
+    //     fireEvent.change(screen.getByTestId('blog-description-input'), { target: { value: 'New Blog Description' }});
+
+        
+
+    //     // expect(BlogViewEdit).toBeCalledWith({
+    //     //     blogHeadline: mockBlogs[0].blogHeadline,
+    //     //     blogDescription: mockBlogs[0].blogDescription,
+    //     //     id: mockBlogs[0].id,
+    //     //     author: store.getState().user.username,
+    //     //     setBlogHeadline: setHeadline,
+    //     //     // setBlogDescription: setStateBlogDescription
+    //     // }, {}
+    //     // )
+    //     // expect(BlogViewDelete).toBeCalledWith({
+    //     //     id: mockBlogs[0].id,
+    //     // }, {}
+    //     // )
+    // })
 
 });

@@ -11,11 +11,13 @@ export const SignedOutDropdown: FC = () => {
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) : void => {
+    console.log('AUTH menu opened')
     setAnchorEl(event.currentTarget);
     setOpen(true);
     
   };
   const handleClose = () : void => {
+    console.log('AUTH menu closed')
     setAnchorEl(null);
     setOpen(false);
   };
@@ -47,8 +49,8 @@ export const SignedOutDropdown: FC = () => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={()=>navigate(`/sign-in`)}>Sign in</MenuItem>
-        <MenuItem onClick={()=>navigate(`/sign-up`)}>Sign up</MenuItem>
+        <MenuItem onClick={()=>navigate(`/sign-in`)} data-testid='sign-in-item'>Sign in</MenuItem>
+        <MenuItem onClick={()=>navigate(`/sign-up`)} data-testid='sign-up-item'>Sign up</MenuItem>
       </Menu>
     </div>
   );

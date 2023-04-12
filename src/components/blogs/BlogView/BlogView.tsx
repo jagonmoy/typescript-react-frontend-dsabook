@@ -25,6 +25,8 @@ export const BlogView: React.FC = () => {
   const [headline, setHeadline] = useState<string>(blogHeadline);
   const [description, setDescription] = useState<string>(blogDescription);
 
+  // console.log(setHeadline.arguments);
+
   return (
     <div data-testid="single-blog-details">
       <RootContainer>

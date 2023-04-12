@@ -29,7 +29,7 @@ export const BlogViewEdit : React.FC<BlogEditInterface> = ({id,blogHeadline,blog
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={()=>setOpen(true)} style={{marginLeft : 10}} >
+      <Button variant="contained" color="primary" onClick={()=>setOpen(true)} style={{marginLeft : 10}} data-testid = 'edit-button' >
         <EditIcon/>
       </Button>
       <Dialog
@@ -45,6 +45,7 @@ export const BlogViewEdit : React.FC<BlogEditInterface> = ({id,blogHeadline,blog
             <TextareaAutosize
               id="outlined-multiline-static"
               label="Blog Headline"
+              data-testid = 'blog-headline-input'
               fullWidth
               multiline
               maxRows={3}
@@ -56,6 +57,7 @@ export const BlogViewEdit : React.FC<BlogEditInterface> = ({id,blogHeadline,blog
               id="outlined-multiline-static"
               label="Blog Description"
               fullWidth
+              data-testid = 'blog-description-input'
               minRows={15}
               multiline
               value={blogDescription}
