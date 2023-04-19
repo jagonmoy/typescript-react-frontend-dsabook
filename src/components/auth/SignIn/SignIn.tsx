@@ -1,32 +1,50 @@
 import React, { FC, useState } from 'react';
 import Container from "@mui/material/Container";
 import { useNavigate } from 'react-router-dom';
-import { Paper, Form } from '../form.style';
+import { Paper, Form } from '../../generic/form/form.style';
 import { useAppDispatch } from '../../../app/hooks';
-import { userAuth } from '../../../slices/userSlice';
-import { Redirect } from '../generic/Redirect';
-import { FormField } from '../generic/FormField';
-import { FormButton } from '../generic/FormButton';
+import { selectUserToken, userAuth } from '../../../slices/userSlice';
+import { useAppSelector } from '../../../app/hooks';
+import { Redirect } from '../../generic/Redirect';
+import { FormField } from '../../generic/form/FormField';
+import { FormButton } from '../../generic/form/FormButton';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { AvatarWrapper } from '../form.style';
+import { AvatarWrapper } from '../../generic/form/form.style';
+import { useAuthUserMutation } from '../../../api/apiSlice';
+
 
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const token = useAppSelector(selectUserToken)
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [authUser, { isLoading, isSuccess }] = useAuthUserMutation()
 
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
-    console.log('hello')
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>)=> {
     event.preventDefault();
-    if(username && password) {
-      dispatch(userAuth({username, status: true}))
-      navigate(`/home`);
+    const userbody = {password,username};
+    const request = {
+       token ,
+       userbody
     }
+    try {
+      const response = await authUser(request).unwrap();
+      setUsername('')
+      setPassword('')
+      dispatch(userAuth({
+        username: username,
+        accessToken: response.accessToken
+      }))
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
 
   return (

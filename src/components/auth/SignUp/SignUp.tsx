@@ -1,33 +1,39 @@
 import React, { FC, useState } from 'react';
 import Container from "@mui/material/Container";
 import { useNavigate } from 'react-router-dom';
-import { Paper, Form, } from '../form.style'
-import { Redirect } from '../generic/Redirect';
-import { FormButton } from '../generic/FormButton';
-import { FormField } from '../generic/FormField';
+import { Paper, Form, } from '../../generic/form/form.style'
+import { Redirect } from '../../generic/Redirect';
+import { FormButton } from '../../generic/form/FormButton';
+import { FormField } from '../../generic/form/FormField';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { AvatarWrapper } from '../form.style'
+import { AvatarWrapper } from '../../generic/form/form.style'
+import { useAddNewUserMutation } from '../../../api/apiSlice';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
- 
+
   const [name, setName] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [addNewUser, { isLoading, isSuccess }] = useAddNewUserMutation();
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-   
-    setEmail('')
-    setUsername('')
-    setName('')
-    setPassword('')
-    setConfirmPassword('')
-
-    navigate('/sign-in');
+    const requestBody = {name, email, password, confirmPassword, username};
+    try {
+      await addNewUser(requestBody).unwrap();
+      setEmail('')
+      setUsername('')
+      setName('')
+      setPassword('')
+      setConfirmPassword('')
+      navigate('/sign-in');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

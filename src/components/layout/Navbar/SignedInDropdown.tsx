@@ -18,7 +18,7 @@ export const SignedInDropdown: FC = () => {
   const actionSignOut = () : void => {
     dispatch(userAuth({
       username:'',
-      status: false,
+      accessToken: ''
     }))
     navigate(`/sign-in`);
   };

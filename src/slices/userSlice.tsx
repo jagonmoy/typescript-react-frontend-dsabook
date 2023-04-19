@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../app/store';
-import { UserInterface} from '../models/userModel';
+import { UserState} from '../models/userModel';
 
-const initialState: UserInterface = { 
+const initialState: UserState = { 
   username : '',
-  status : false
+  accessToken: ''
 };
 
 const usersSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    userAuth(state, action: PayloadAction<UserInterface>) {
-      const {username,status} = action.payload;
+    userAuth(state, action: PayloadAction<UserState>) {
+      const {username,accessToken} = action.payload;
       state.username = username ;
-      state.status = status
+      state.accessToken = accessToken ;
     }
   },
 });
@@ -22,7 +22,7 @@ const usersSlice = createSlice({
 export const {userAuth} = usersSlice.actions;
 
 export const selectUsername = (state: RootState) => state.user.username
-export const selectUserStatus = (state: RootState) => state.user.status
+export const selectUserToken = (state: RootState) => state.user.accessToken
 export const selectUser = (state: RootState) => state.user
 
 export default usersSlice.reducer;

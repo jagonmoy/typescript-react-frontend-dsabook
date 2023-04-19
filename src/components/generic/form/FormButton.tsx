@@ -1,5 +1,5 @@
 import React from 'react';
-import { SubmitButton } from '../form.style';
+import { SubmitButton } from './form.style';
 
 interface Button {
     label: string,

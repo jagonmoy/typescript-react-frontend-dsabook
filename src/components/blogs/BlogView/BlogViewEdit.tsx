@@ -8,23 +8,29 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { BlogEditInterface } from '../../../models/blogModel';
-import { useAppDispatch } from '../../../app/hooks';
-import { blogEdited } from '../../../slices/blogsSlice';
+import { useAppSelector } from '../../../app/hooks';
+import { useEditBlogMutation } from '../../../api/apiSlice';
+import { selectUserToken} from '../../../slices/userSlice';
+import { LoadingComponent } from '../../generic/LoadingComponent';
 
 export const BlogViewEdit : React.FC<BlogEditInterface> = ({id,blogHeadline,blogDescription,author,setBlogHeadline,setBlogDescription}) => {
 
   const [open, setOpen] = useState<boolean>(false);
+  const [editBlog,{isLoading,isSuccess}] = useEditBlogMutation();
+  const token : string = useAppSelector(selectUserToken);
  
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
   
-  const updateAndClose = (event : React.MouseEvent<HTMLElement>) : void => {
+  const updateAndClose = async (event : React.MouseEvent<HTMLElement>) => {
       event.preventDefault()
-      if(blogHeadline && blogDescription) {
-        dispatch(blogEdited({id,author,blogHeadline,blogDescription}))
+      const request = {id,blogHeadline,blogDescription,token}
+      try {
+        await editBlog(request).unwrap();
+        navigate(`/blogs/${id}`);
+        setOpen(false);
+      } catch (error) {
+        console.log(error);
       }
-      navigate(`/blogs/${id}`);
-      setOpen(false);
   };
 
   return (
@@ -74,6 +80,6 @@ export const BlogViewEdit : React.FC<BlogEditInterface> = ({id,blogHeadline,blog
           </DialogActions>
         </DialogContent>
       </Dialog> 
-    </>
+      </>
   );
 }

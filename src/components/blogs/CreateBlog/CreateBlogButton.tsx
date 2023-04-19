@@ -2,24 +2,33 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import {useAppDispatch,useAppSelector} from '../../../app/hooks'
-import { blogAdded } from '../../../slices/blogsSlice'
 import { CreateBlogButtonInterface } from '../../../models/blogModel';
-import { selectUsername } from '../../../slices/userSlice';
+import { selectUserToken, selectUsername } from '../../../slices/userSlice';
+import { useCreateBlogMutation } from '../../../api/apiSlice';
+
 
 export const CreateBlogButton: React.FC<CreateBlogButtonInterface> = ({blogHeadline,blogDescription,setBlogHeadline,setBlogDescription}) => {
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     const currentUser : string = useAppSelector(selectUsername)
+    const token = useAppSelector(selectUserToken);
+    const [createBlog,{isLoading,isSuccess}] = useCreateBlogMutation()
 
-    const createBlogSubmit = (event: React.FormEvent<HTMLButtonElement>) : void => {
+    const createBlogSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
         // console.log('Inside create Blog Submit')
         console.log(currentUser)
         event.preventDefault();
-        if(blogHeadline && blogDescription) {
-            dispatch(blogAdded(blogHeadline,blogDescription,currentUser))
+        const request = {
+            token ,
+            blogHeadline,
+            blogDescription
+        }
+        try {
+            await createBlog(request).unwrap()
             setBlogHeadline('')
             setBlogDescription('')
-            navigate(`/`);
+            navigate(`/blogs`);
+        } catch(error) {
+            console.log(error)
         }
     };
     return (

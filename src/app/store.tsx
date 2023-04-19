@@ -1,16 +1,19 @@
 import { configureStore,combineReducers,PreloadedState } from '@reduxjs/toolkit'
 import blogsReducer from '../slices/blogsSlice'
 import userReducer from  '../slices/userSlice'
+import { apiSlice } from '../api/apiSlice'
 
-const rootReducer = combineReducers({
+const rootReducer : any = combineReducers({
   user: userReducer,
-  blogs: blogsReducer
+  blogs: blogsReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer
 })
 
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
-    preloadedState
+    preloadedState,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
   })
 }
 

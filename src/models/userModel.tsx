@@ -1,6 +1,18 @@
-export interface UserInterface{
+export interface NewUser {
+    username: string,
+    name: string, 
+    password: string,
+    email: string,
+    confirmPassword: string
+}
+export interface AuthUser {
+    username: string,
+    password: string
+}
+
+export interface UserState{
     username : string,
-    status : boolean,
+    accessToken : string,
 }
 
 export interface Button {

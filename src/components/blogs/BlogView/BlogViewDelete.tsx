@@ -6,18 +6,32 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BlogIDInterface} from '../../../models/blogModel';
-import { useAppDispatch} from '../../../app/hooks';
+import { useAppDispatch, useAppSelector} from '../../../app/hooks';
 import { blogDeleted } from '../../../slices/blogsSlice';
+import { useDeleteBlogMutation } from '../../../api/apiSlice';
+import { selectUserToken } from '../../../slices/userSlice';
 
 export const BlogViewDelete : React.FC<BlogIDInterface> = ({id}) =>{
     const [open, setOpen] = useState<boolean>(false);
-    const dispatch = useAppDispatch();
+    const [deleteBlog,{isLoading,isSuccess}] = useDeleteBlogMutation()
+    const token = useAppSelector(selectUserToken)
+    console.log(token)
     const navigate = useNavigate()
-    const deleteAndClose = (event : React.MouseEvent<HTMLElement>) : void => {
+    const deleteAndClose = async (event : React.MouseEvent<HTMLElement>) => {
       event.preventDefault();
-      dispatch(blogDeleted(id))
-      navigate(`/blogs`);
-      setOpen(false);
+      console.log('ksksksk')
+      const request = {
+        token,
+        id
+      }
+      // console.log(request)
+      try {
+        await deleteBlog(request).unwrap()
+        navigate(`/blogs`);
+        setOpen(false);
+      }catch(error) {
+        console.log(error)
+      }
     };
 
   return (

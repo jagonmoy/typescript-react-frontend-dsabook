@@ -4,6 +4,14 @@ export interface BlogInterface {
     author: string;
     blogDescription: string;
 }
+export interface BlogAPI {
+    author: string,
+    blogDescription: string,
+    blogHeadline: string,
+    createdAt: string,
+    updatedAt: string,
+    id?: string
+}
 export interface BlogsStateInterface {
     blogs : BlogInterface[]
 }
@@ -14,8 +22,8 @@ export type BlogIDInterface = {
 export interface BlogEditInterface {
     author: string
     id?: string,
-    blogHeadline: string,
-    blogDescription: string,
+    blogHeadline: string | undefined,
+    blogDescription: string | undefined,
     setBlogHeadline: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
     setBlogDescription: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 }

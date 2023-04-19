@@ -6,11 +6,11 @@ import { SignedOutDropdown } from './SignedOutDropdown';
 import {SignedInDropdown} from './SignedInDropdown'
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
-import { selectUserStatus } from '../../../slices/userSlice';
+import { selectUsername} from '../../../slices/userSlice';
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const status: boolean = useAppSelector(selectUserStatus)
+  const username: boolean = useAppSelector(selectUsername)
   return (
     <div data-testid="navbar">
       <AppBar position="static" color='primary'>
@@ -18,8 +18,8 @@ export const Navbar: React.FC = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} onClick={()=> navigate(`/`)}data-testid="DSABook-text">
             DSABook
           </Typography>
-          {!status && <SignedOutDropdown />}
-          {status && <SignedInDropdown/>}
+          {!username && <SignedOutDropdown />}
+          {username && <SignedInDropdown/>}
         </Toolbar>
       </AppBar>
     </div>
