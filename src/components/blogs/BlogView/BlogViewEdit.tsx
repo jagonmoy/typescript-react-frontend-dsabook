@@ -7,16 +7,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
-import { BlogEditInterface } from '../../../models/blogModel';
+import { BlogEdit } from '../../../models/blogModel';
 import { useAppSelector } from '../../../app/hooks';
 import { useEditBlogMutation } from '../../../api/apiSlice';
 import { selectUserToken} from '../../../slices/userSlice';
-import { LoadingComponent } from '../../generic/LoadingComponent';
 
-export const BlogViewEdit : React.FC<BlogEditInterface> = ({id,blogHeadline,blogDescription,author,setBlogHeadline,setBlogDescription}) => {
+export const BlogViewEdit : React.FC<BlogEdit> = ({id,blogHeadline,blogDescription,author,setBlogHeadline,setBlogDescription}) => {
 
   const [open, setOpen] = useState<boolean>(false);
-  const [editBlog,{isLoading,isSuccess}] = useEditBlogMutation();
+  const [editBlog] = useEditBlogMutation();
   const token : string = useAppSelector(selectUserToken);
  
   const navigate = useNavigate()

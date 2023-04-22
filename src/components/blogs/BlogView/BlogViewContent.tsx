@@ -1,9 +1,9 @@
 import React from 'react';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { BlogInterface } from '../../../models/blogModel';
+import { Blog } from '../../../models/blogModel';
 
-export const BlogViewContent: React.FC<BlogInterface> = ({blogHeadline,blogDescription,author}) => {
+export const BlogViewContent: React.FC<Blog> = ({blogHeadline,blogDescription,author}) => {
   return (
     <div data-testid ='blog-view-content-testid'>
           <Typography

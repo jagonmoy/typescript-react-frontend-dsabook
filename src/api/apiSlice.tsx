@@ -1,47 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BlogAPI} from '../models/blogModel'
-import { NewUser, AuthUser } from '../models/userModel'
+import { GetBlogResponse} from '../models/blogModel'
+import { AddNewUserRequest} from '../models/userModel'
+import { SignInRequest,SignInResponse,CreateBlogRequest } from '../models/userModel'
+import { EditBlogRequest,DeleteBlogRequest } from '../models/blogModel'
 
-
-interface SignInRequest {
-  token : string,
-  userbody: AuthUser
-}
-interface SignInResponse {
-  accessToken: string,
-  refreshToken: string,
-}
-interface CreateBlogRequest {
-  token: string,
-  blogHeadline: string,
-  blogDescription: string
-}
-interface EditBlogRequest {
-  id: string | undefined,
-  blogHeadline: string | undefined,
-  blogDescription: string | undefined,
-  token: string
-}
-interface DeleteBlogRequest {
-  id: string | undefined
-  token: string
-}
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://0.0.0.0:3010/api' }),
-  tagTypes: ['Blogs','Blog'],
+  baseQuery: fetchBaseQuery({ baseUrl: `https://dsabook.onrender.com/api` }),
+  tagTypes: ['Blogs'],
   endpoints: builder => ({
   
-    getAllBlogs: builder.query<BlogAPI[],void>({
+    getAllBlogs: builder.query<GetBlogResponse[],void>({
       query: () => '/blogs',
       providesTags: ['Blogs']
     }),
-    getBlog: builder.query<BlogAPI,string | undefined>({
-      query: (id : string) => `/blogs/${id}`,
-      providesTags: ['Blog']
+    getBlog: builder.query<GetBlogResponse,string | undefined>({
+      query: (id) => `/blogs/${id}`,
     }),
-    addNewUser: builder.mutation<unknown,NewUser>({
+   
+    addNewUser: builder.mutation<void,AddNewUserRequest>({
       query: (newUser) => ({
           url: '/auth/sign-up' ,
           method: 'POST' ,
@@ -74,7 +52,7 @@ export const apiSlice = createApi({
         body: {blogHeadline,blogDescription},
         headers: {Authorization : `Bearer ${token}`},
     }),
-    invalidatesTags: ['Blog','Blogs']
+    invalidatesTags: ['Blogs']
     }),
     deleteBlog: builder.mutation<void,DeleteBlogRequest>({
       query: ({token,id}) => ({
@@ -83,7 +61,7 @@ export const apiSlice = createApi({
         body: {},
         headers: {Authorization : `Bearer ${token}`},
     }),
-    invalidatesTags: ['Blog','Blogs']
+    invalidatesTags: ['Blogs']
     }),
   }),
   

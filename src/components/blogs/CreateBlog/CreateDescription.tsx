@@ -1,8 +1,8 @@
 import React from 'react';
 import { DescriptionTypography, DescriptionTextAreaAutosize } from './CreateBlog.style';
-import { CreateBlogDescriptionInterface } from '../../../models/blogModel';
+import { CreateBlogDescription } from '../../../models/blogModel';
 
-export const CreateBlogDescription: React.FC<CreateBlogDescriptionInterface> = ({blogDescription,setBlogDescription}) => {
+export const CreateDescription: React.FC<CreateBlogDescription> = ({blogDescription,setBlogDescription}) => {
     return (
         <div>
             <DescriptionTypography

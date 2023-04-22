@@ -5,15 +5,14 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { BlogIDInterface} from '../../../models/blogModel';
-import { useAppDispatch, useAppSelector} from '../../../app/hooks';
-import { blogDeleted } from '../../../slices/blogsSlice';
+import { BlogID} from '../../../models/blogModel';
+import { useAppSelector} from '../../../app/hooks';
 import { useDeleteBlogMutation } from '../../../api/apiSlice';
 import { selectUserToken } from '../../../slices/userSlice';
 
-export const BlogViewDelete : React.FC<BlogIDInterface> = ({id}) =>{
+export const BlogViewDelete : React.FC<BlogID> = ({id}) =>{
     const [open, setOpen] = useState<boolean>(false);
-    const [deleteBlog,{isLoading,isSuccess}] = useDeleteBlogMutation()
+    const [deleteBlog] = useDeleteBlogMutation()
     const token = useAppSelector(selectUserToken)
     console.log(token)
     const navigate = useNavigate()

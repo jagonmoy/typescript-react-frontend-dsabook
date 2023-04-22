@@ -1,9 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-interface Props {
-}
 
-export const LoadingComponent : React.FC<Props> = () => {
+export const LoadingComponent : React.FC = () => {
   return (
     <Box sx={{ display: 'flex' }} justifyContent={'center'} >
         <h1>Loading ...</h1>

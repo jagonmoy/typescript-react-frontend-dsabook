@@ -1,4 +1,4 @@
-export interface NewUser {
+export interface AddNewUserRequest {
     username: string,
     name: string, 
     password: string,
@@ -30,3 +30,18 @@ export interface Redirection {
     path: string,
     label: string
 }
+export interface SignInRequest {
+    token : string,
+    userbody: AuthUser
+}
+
+export interface SignInResponse {
+    accessToken: string,
+    refreshToken: string,
+}
+  
+export interface CreateBlogRequest {
+    token: string,
+    blogHeadline: string,
+    blogDescription: string
+  }

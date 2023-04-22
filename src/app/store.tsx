@@ -1,11 +1,9 @@
 import { configureStore,combineReducers,PreloadedState } from '@reduxjs/toolkit'
-import blogsReducer from '../slices/blogsSlice'
 import userReducer from  '../slices/userSlice'
 import { apiSlice } from '../api/apiSlice'
 
 const rootReducer : any = combineReducers({
   user: userReducer,
-  blogs: blogsReducer,
   [apiSlice.reducerPath]: apiSlice.reducer
 })
 

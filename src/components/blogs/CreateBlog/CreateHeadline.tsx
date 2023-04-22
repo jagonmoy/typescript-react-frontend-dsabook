@@ -1,8 +1,8 @@
 import React from 'react';
 import { HeadlineTypography, HeadlineTextAreaAutosize } from './CreateBlog.style';
-import { CreateBlogHeadlineInterface } from '../../../models/blogModel';
+import { CreateBlogHeadline } from '../../../models/blogModel';
 
-export const CreateBlogHeadline: React.FC<CreateBlogHeadlineInterface> = ({blogHeadline,setBlogHeadline}) => {
+export const CreateHeadline: React.FC<CreateBlogHeadline> = ({blogHeadline,setBlogHeadline}) => {
     return (
         <div>
             <HeadlineTypography

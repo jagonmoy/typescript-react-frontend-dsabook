@@ -1,10 +1,10 @@
-export interface BlogInterface {
+export interface Blog {
     id?: string;
     blogHeadline: string;
     author: string;
     blogDescription: string;
 }
-export interface BlogAPI {
+export interface GetBlogResponse {
     author: string,
     blogDescription: string,
     blogHeadline: string,
@@ -12,14 +12,15 @@ export interface BlogAPI {
     updatedAt: string,
     id?: string
 }
-export interface BlogsStateInterface {
-    blogs : BlogInterface[]
+export interface GetBlogRequest {
+    id: string | undefined
 }
-export type BlogIDInterface = {
-    id ?: string;
+
+export type BlogID = {
+    id ?: string | undefined;
 };
 
-export interface BlogEditInterface {
+export interface BlogEdit {
     author: string
     id?: string,
     blogHeadline: string | undefined,
@@ -28,24 +29,38 @@ export interface BlogEditInterface {
     setBlogDescription: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 }
 
- export interface CreateBlogButtonInterface {
+ export interface CreateBlogButton {
     blogHeadline: string,
     setBlogHeadline: React.Dispatch<React.SetStateAction<string>>,
     blogDescription : string ,
     setBlogDescription: React.Dispatch<React.SetStateAction<string>>
  }
-export interface CreateBlogDescriptionInterface {
+export interface CreateBlogDescription {
     blogDescription : string ,
     setBlogDescription: React.Dispatch<React.SetStateAction<string>>
 }
 
-export interface CreateBlogHeadlineInterface {
+export interface CreateBlogHeadline {
     blogHeadline: string,
     setBlogHeadline: React.Dispatch<React.SetStateAction<string>>
 }
 
-export interface BlogCardContentInterface {
+export interface BlogContent {
     author: string ,
     blogHeadline: string,
     blogDescription: string
 }
+
+export interface EditBlogRequest {
+    id: string | undefined,
+    blogHeadline: string | undefined,
+    blogDescription: string | undefined,
+    token: string
+}
+
+export interface DeleteBlogRequest {
+    id: string | undefined
+    token: string
+}
+
+  

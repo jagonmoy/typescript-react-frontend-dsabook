@@ -5,10 +5,10 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 // import { BlogView } from '../pages/BlogView';
-import { BlogInterface } from '../../../models/blogModel';
+import { Blog } from '../../../models/blogModel';
 import { BlogCardContent } from './BlogCardContent';
 
-export const BlogCard: React.FC<BlogInterface> = ({ id, blogHeadline, author, blogDescription }) => {
+export const BlogCard: React.FC<Blog> = ({ id, blogHeadline, author, blogDescription }) => {
   const navigate = useNavigate();
 
   return (

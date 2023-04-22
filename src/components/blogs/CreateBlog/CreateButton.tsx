@@ -1,17 +1,17 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import {useAppDispatch,useAppSelector} from '../../../app/hooks'
-import { CreateBlogButtonInterface } from '../../../models/blogModel';
+import { useAppSelector} from '../../../app/hooks'
+import { CreateBlogButton } from '../../../models/blogModel';
 import { selectUserToken, selectUsername } from '../../../slices/userSlice';
 import { useCreateBlogMutation } from '../../../api/apiSlice';
 
 
-export const CreateBlogButton: React.FC<CreateBlogButtonInterface> = ({blogHeadline,blogDescription,setBlogHeadline,setBlogDescription}) => {
+export const CreateButton: React.FC<CreateBlogButton> = ({blogHeadline,blogDescription,setBlogHeadline,setBlogDescription}) => {
     const navigate = useNavigate();
     const currentUser : string = useAppSelector(selectUsername)
     const token = useAppSelector(selectUserToken);
-    const [createBlog,{isLoading,isSuccess}] = useCreateBlogMutation()
+    const [createBlog] = useCreateBlogMutation()
 
     const createBlogSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
         // console.log('Inside create Blog Submit')
