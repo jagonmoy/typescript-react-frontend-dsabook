@@ -7,7 +7,7 @@ import { EditBlogRequest,DeleteBlogRequest } from '../models/blogModel'
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:3010/api` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `https://dsabook.onrender.com/api` }),
   tagTypes: ['Blogs'],
   endpoints: builder => ({
   
