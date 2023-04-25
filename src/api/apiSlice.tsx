@@ -31,9 +31,7 @@ export const apiSlice = createApi({
           url: '/auth/sign-in' ,
           method: 'POST' ,
           body: userbody,
-          prepareHeaders: (headers: { set: (arg0: string, arg1: string) => void }) => {
-            headers.set('Authorization',`Bearer ${token}`)
-          }
+          headers: {Authorization : `Bearer ${token}`},
       })
     }),
     createBlog: builder.mutation<void,CreateBlogRequest>({
