@@ -3,8 +3,8 @@ import type { RootState } from '../app/store';
 import { UserState} from '../models/userModel';
 
 const initialState: UserState = { 
-  username : '',
-  accessToken: ''
+  username : localStorage.getItem('username') ||  '',
+  accessToken: '',
 };
 
 const usersSlice = createSlice({

@@ -45,3 +45,10 @@ export interface CreateBlogRequest {
     blogHeadline: string,
     blogDescription: string
   }
+
+export interface AccessTokenRequest {
+    refreshToken: string | null
+}
+export interface AccessTokenResponse {
+    accessToken: string 
+}

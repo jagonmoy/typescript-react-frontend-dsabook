@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { userAuth } from '../../../slices/userSlice';
 import { selectUsername } from '../../../slices/userSlice';
+import { useSignOutMutation } from '../../../api/apiSlice';
+
 
 export const SignedInDropdown: FC = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -14,12 +16,17 @@ export const SignedInDropdown: FC = () => {
   const navigate = useNavigate();
   const currentUsername : string= useAppSelector(selectUsername)
   const dispatch = useAppDispatch()
+  const [signOut] = useSignOutMutation()
+  const refreshToken = localStorage.getItem('refreshToken')
 
-  const actionSignOut = () : void => {
+  const actionSignOut = async() => {
     dispatch(userAuth({
       username:'',
       accessToken: ''
     }))
+    localStorage.setItem('username','');
+    localStorage.setItem('refreshToken','');
+    await signOut({refreshToken : refreshToken}).unwrap()
     navigate(`/sign-in`);
   };
  

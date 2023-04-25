@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { GetBlogResponse} from '../models/blogModel'
 import { AddNewUserRequest} from '../models/userModel'
-import { SignInRequest,SignInResponse,CreateBlogRequest } from '../models/userModel'
+import { SignInRequest,SignInResponse,CreateBlogRequest,AccessTokenRequest,AccessTokenResponse } from '../models/userModel'
 import { EditBlogRequest,DeleteBlogRequest } from '../models/blogModel'
 
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: `https://dsabook.onrender.com/api` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:3010/api` }),
   tagTypes: ['Blogs'],
   endpoints: builder => ({
   
@@ -63,6 +63,20 @@ export const apiSlice = createApi({
     }),
     invalidatesTags: ['Blogs']
     }),
+    generateAccessToken: builder.mutation<AccessTokenResponse,AccessTokenRequest>({
+      query: (refreshToken)=> ({
+        url: `/auth/access-token-renewal`,
+        method:'POST',
+        body:{refreshToken}
+      })
+    }),
+    signOut: builder.mutation<void,AccessTokenRequest>({
+      query: (refreshToken)=> ({
+        url: `/auth/sign-out`,
+        method:'POST',
+        body:{refreshToken}
+      })
+    })
   }),
   
 })
@@ -74,5 +88,8 @@ export const {
   useAuthUserMutation, 
   useCreateBlogMutation,
   useEditBlogMutation,
-  useDeleteBlogMutation } 
+  useDeleteBlogMutation,
+  useGenerateAccessTokenMutation,
+  useSignOutMutation
+  } 
   = apiSlice

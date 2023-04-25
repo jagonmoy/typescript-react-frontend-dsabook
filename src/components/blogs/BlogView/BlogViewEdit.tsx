@@ -8,15 +8,20 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { BlogEdit } from '../../../models/blogModel';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { useEditBlogMutation } from '../../../api/apiSlice';
-import { selectUserToken} from '../../../slices/userSlice';
+import { selectUserToken, selectUsername} from '../../../slices/userSlice';
+import { useGenerateAccessTokenMutation } from '../../../api/apiSlice';
+import { userAuth } from '../../../slices/userSlice';
 
 export const BlogViewEdit : React.FC<BlogEdit> = ({id,blogHeadline,blogDescription,author,setBlogHeadline,setBlogDescription}) => {
 
   const [open, setOpen] = useState<boolean>(false);
   const [editBlog] = useEditBlogMutation();
   const token : string = useAppSelector(selectUserToken);
+  const username = useAppSelector(selectUsername)
+  const [generateAccessToken] = useGenerateAccessTokenMutation()
+  const dispatch = useAppDispatch()
  
   const navigate = useNavigate()
   
@@ -27,8 +32,22 @@ export const BlogViewEdit : React.FC<BlogEdit> = ({id,blogHeadline,blogDescripti
         await editBlog(request).unwrap();
         navigate(`/blogs/${id}`);
         setOpen(false);
-      } catch (error) {
-        console.log(error);
+      } catch (error : any) {
+        if (error.status === 401 && username.length) {
+          const refreshToken = localStorage.getItem('refreshToken');
+          const { accessToken: newAccessToken } = await generateAccessToken({ refreshToken }).unwrap();
+          dispatch(userAuth({
+            username: username,
+            accessToken: newAccessToken
+          }))
+          const request = {id,blogHeadline,blogDescription,token : newAccessToken}
+          try {
+            await editBlog(request).unwrap();
+            navigate(`/blogs/${id}`);
+            setOpen(false);
+          } catch (error) {
+          }
+        }
       }
   };
 

@@ -14,7 +14,7 @@ export const CreateBlog : React.FC = () => {
                 <CreateHeadline blogHeadline={blogHeadline} setBlogHeadline={setBlogHeadline}/>
                 <CreateDescription blogDescription ={blogDescription} setBlogDescription={setBlogDescription}/>
                 <br /> <br />
-                <CreateButton blogHeadline={blogHeadline}  setBlogHeadline={setBlogHeadline} blogDescription ={blogDescription} setBlogDescription={setBlogDescription} />
+                <CreateButton blogHeadline={blogHeadline} setBlogHeadline={setBlogHeadline} blogDescription ={blogDescription} setBlogDescription={setBlogDescription} />
             </RootContainer>
         </div>
     );
