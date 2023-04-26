@@ -32,7 +32,8 @@ export interface Redirection {
 }
 export interface SignInRequest {
     token : string,
-    userbody: AuthUser
+    username: string,
+    password: string
 }
 
 export interface SignInResponse {

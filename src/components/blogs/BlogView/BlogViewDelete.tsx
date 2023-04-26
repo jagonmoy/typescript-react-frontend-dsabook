@@ -11,11 +11,12 @@ import { useDeleteBlogMutation, useGenerateAccessTokenMutation } from '../../../
 import { selectUser } from '../../../slices/userSlice';
 import { UserState } from '../../../models/userModel';
 import { userAuth } from '../../../slices/userSlice';
+import { LoadingButton } from '@mui/lab';
 
 
 export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [deleteBlog] = useDeleteBlogMutation()
+  const [deleteBlog,{isLoading}] = useDeleteBlogMutation()
   const currentUser: UserState = useAppSelector(selectUser)
   const { accessToken: token, username } = currentUser;
   const [generateAccessToken] = useGenerateAccessTokenMutation()
@@ -71,9 +72,15 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
           <Button onClick={() => setOpen(false)} color="primary">
             No
           </Button>
-          <Button onClick={deleteAndClose} color="primary" autoFocus>
+          {/* <Button onClick={deleteAndClose} color="primary" autoFocus>
             Yes
-          </Button>
+          </Button> */}
+          <LoadingButton
+              onClick={deleteAndClose}
+              loading={isLoading && (token !== '')}
+            >
+              <span>Yes</span>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
     </>

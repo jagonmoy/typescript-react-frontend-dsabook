@@ -4,9 +4,10 @@ import { SubmitButton } from './form.style';
 interface Button {
     label: string,
     testId: string
+    isLoading: boolean
 }
 
-export const FormButton: React.FC <Button> = ({label,testId}) => {
+export const FormButton: React.FC <Button> = ({label,testId,isLoading}) => {
     return (
         <div>
             <SubmitButton
@@ -15,8 +16,11 @@ export const FormButton: React.FC <Button> = ({label,testId}) => {
                 fullWidth
                 variant="contained"
                 color="primary"
+                size="small"
+                loading={isLoading}
+                loadingPosition="end"
             >
-                {label}
+               {label}
             </SubmitButton>
         </div>
     );

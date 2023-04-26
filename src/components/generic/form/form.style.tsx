@@ -1,5 +1,5 @@
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+import { LoadingButton } from "@mui/lab";
 import { styled } from '@mui/material/styles';
 
 export const Paper = styled('div')(({ theme }) => ({
@@ -19,6 +19,6 @@ export const Form = styled('form')(({ theme }) => ({
   marginTop: theme.spacing(0.5),
 }));
 
-export const SubmitButton = styled(Button)(({ theme }) => ({
+export const SubmitButton = styled(LoadingButton)(({ theme }) => ({
   margin: theme.spacing(3, 0, 2),
 }));

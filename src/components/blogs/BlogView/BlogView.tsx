@@ -8,13 +8,13 @@ import { BlogViewEdit } from './BlogViewEdit';
 import { useGetBlogQuery } from '../../../api/apiSlice';
 import { selectUsername } from '../../../slices/userSlice';
 import { useAppSelector } from '../../../app/hooks';
-import { LoadingComponent } from '../../generic/LoadingComponent';
+import { LoadingPage } from '../../generic/LoadingPage';
 
 export const BlogView: React.FC =  () => {
   const { id }  = useParams<BlogID>();
   const currentUser : string = useAppSelector(selectUsername)
 
-  const {data,isSuccess,isLoading} =  useGetBlogQuery(id)
+  const {data,isSuccess,isLoading,refetch} =  useGetBlogQuery(id)
   
   const [headline, setHeadline] = useState('');
   const [description, setDescription] = useState('');
@@ -29,14 +29,16 @@ export const BlogView: React.FC =  () => {
   let content ;
   if(isLoading) {
     console.log('hello fetching')
-    content =  <LoadingComponent/>
+    content =  <LoadingPage/>
   }
   else if(isSuccess) {
+   (async () => await refetch())()
+   const {blogHeadline,blogDescription} = data
    content = ( <div data-testid="single-blog-details">
   <RootContainer>
     <BasicGrid>
 
-    {(<BlogViewContent blogHeadline={headline} blogDescription={description} author={data.author} id={id} />)} 
+    {(<BlogViewContent blogHeadline={blogHeadline} blogDescription={blogDescription} author={data.author} id={id} />)} 
 
       {currentUser === data.author && <BlogViewDelete id={id} />} 
       
@@ -44,8 +46,8 @@ export const BlogView: React.FC =  () => {
           <BlogViewEdit
            blogHeadline={headline} 
            blogDescription={description}
-           setBlogHeadline={(e) => setHeadline(e.target.value)} 
-           setBlogDescription={(e)=>setDescription(e.target.value)}
+           setBlogHeadline={e => setHeadline(e.target.value)} 
+           setBlogDescription={e =>setDescription(e.target.value)}
            id={id}
            author={data.author}
           /> 

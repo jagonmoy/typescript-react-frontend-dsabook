@@ -1,33 +1,30 @@
-import React from 'react';
+import { FC } from 'react';
 import { BlogCard } from './BlogCard';
-import {Grid,Box} from '@mui/material';
-import { LoadingComponent } from '../../generic/LoadingComponent';
+import { Grid, Box } from '@mui/material';
+import { LoadingPage } from '../../generic/LoadingPage';
 import { useGetAllBlogsQuery } from '../../../api/apiSlice';
+import { Blog } from '../../../models/blogModel';
 
-export const Home: React.FC = () => {
+export const Home: FC = () => {
   const {
-    data=[],
-    isSuccess,
-    isFetching
+    data = [],
+    isLoading,
   } = useGetAllBlogsQuery()
-  let content ;
-  if(isFetching) content = <LoadingComponent /> 
-  else if (isSuccess) content = <Box sx={{ width: '100%' }}>  
-  <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-     {
-       data && data.map((blog: any) => (
-         <BlogCard
-           key={blog.id}
-           id={blog.id}
-           blogHeadline={blog.blogHeadline}
-           author={blog.author}
-           blogDescription={blog.blogDescription}
-         />
-       ))
-     }
-   </Grid>
-  </Box>
-  return (
-  <>{content}</>
-  );
+
+  const BlogCardList = () => {
+    return (
+      <Box sx={{ width: '100%' }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          {
+            data && data.map((blog: Blog) => (
+             <BlogCard {...blog} />
+            ))
+          }
+        </Grid>
+      </Box>
+    )
+  }
+
+  if (isLoading) return <LoadingPage />
+  return <BlogCardList />
 }

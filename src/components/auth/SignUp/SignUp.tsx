@@ -9,6 +9,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { AvatarWrapper } from '../../generic/form/form.style'
 import { useAddNewUserMutation } from '../../../api/apiSlice';
+import { ErrorAlert } from '../../generic/ErrorAlert';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -18,21 +19,38 @@ export const SignUp: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [addNewUser, { isLoading, isSuccess }] = useAddNewUserMutation();
+  const [Error, setError] = useState<string>('')
+  const [addNewUser, { isLoading}] = useAddNewUserMutation();
+
+
+  // const signUpActions = async (name: string, email: string, password: string, confirmPassword: string, username: string) => {
+  //   await addNewUser({ name, email, password, confirmPassword, username }).unwrap();
+  //   setEmail('')
+  //   setUsername('')
+  //   setName('')
+  //   setPassword('')
+  //   setConfirmPassword('')
+  //   navigate('/sign-in');
+  // }
+
+  // const setErrorMessage = async (error: any) => {
+  //   setError('');
+  //   if (error.status === 422) setError(error.data[0])
+  // }
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const requestBody = {name, email, password, confirmPassword, username};
     try {
-      await addNewUser(requestBody).unwrap();
+      await addNewUser({ name, email, password, confirmPassword, username }).unwrap();
       setEmail('')
       setUsername('')
       setName('')
       setPassword('')
       setConfirmPassword('')
       navigate('/sign-in');
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setError('');
+      if (error.status === 422) setError(error.data[0])
     }
   };
 
@@ -58,9 +76,10 @@ export const SignUp: FC = () => {
 
             <FormField value={confirmPassword} onSetFieldChanged={(e) => setConfirmPassword(e.target.value)} field='confirmPassword' label='Confirm Password' type='password' />
 
-            <FormButton label='Sign Up' testId='sign-up' />
+            <FormButton label='Sign Up' testId='sign-up' isLoading={isLoading} />
             <Redirect label="Already have an account? Sign in" path="/sign-in" />
           </Form>
+          {Error && <ErrorAlert error={Error} />}
         </Paper>
       </Container>
     </div>

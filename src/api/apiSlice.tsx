@@ -16,7 +16,10 @@ export const apiSlice = createApi({
       providesTags: ['Blogs']
     }),
     getBlog: builder.query<GetBlogResponse,string | undefined>({
-      query: (id) => `/blogs/${id}`,
+      query: (id) => ({
+        url: `/blogs/${id}`,
+        invalidatesTags: ['Blogs']
+      })
     }),
    
     addNewUser: builder.mutation<void,AddNewUserRequest>({
@@ -27,10 +30,10 @@ export const apiSlice = createApi({
       }),
     }),
     authUser: builder.mutation<SignInResponse,SignInRequest >({
-      query: ({token,userbody}) => ({
+      query: ({token,username,password}) => ({
           url: '/auth/sign-in' ,
           method: 'POST' ,
-          body: userbody,
+          body: {username,password},
           headers: {Authorization : `Bearer ${token}`},
       })
     }),
