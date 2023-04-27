@@ -19,6 +19,7 @@ export const FormButton: React.FC <Button> = ({label,testId,isLoading}) => {
                 size="small"
                 loading={isLoading}
                 loadingPosition="end"
+                endIcon={<></>}
             >
                {label}
             </SubmitButton>

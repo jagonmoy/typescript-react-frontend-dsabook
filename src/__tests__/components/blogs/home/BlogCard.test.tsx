@@ -1,10 +1,10 @@
 import { screen, fireEvent } from '@testing-library/react';
 import { BlogCard } from '../../../../components/blogs/Home/BlogCard';
 import { renderWithProviders } from '../../../../utils/test-utils';
-import { BlogInterface } from '../../../../models/blogModel';
+import { Blog } from '../../../../models/blogModel';
 
 describe('<BlogCard />', () => {
-    let mockBlog: BlogInterface;
+    let mockBlog: Blog;
     const setup = () => {
         renderWithProviders(<BlogCard id={mockBlog.id} blogHeadline={mockBlog.blogHeadline} blogDescription={mockBlog.blogDescription} author={mockBlog.author} />)
     }

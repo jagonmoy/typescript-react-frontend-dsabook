@@ -26,44 +26,32 @@ export const SignIn: FC = () => {
   const [Error, setError] = useState<string>('')
 
 
-  // const signInActions = async (token: string, username: string, password: string) => {
-  //   const response = await authUser({ token, username, password }).unwrap();
-  //   setUsername('')
-  //   setPassword('')
-  //   dispatch(userAuth({
-  //     username: username,
-  //     accessToken: response.accessToken
-  //   }))
-  //   localStorage.setItem('refreshToken', response.refreshToken);
-  //   localStorage.setItem('username', username)
-  //   navigate('/');
-  // }
+  const handleAuth = async (token: string, username: string, password: string) => {
+    const response = await authUser({ token, username, password }).unwrap();
+    setUsername('')
+    setPassword('')
+    dispatch(userAuth({
+      username: username,
+      accessToken: response.accessToken
+    }))
+    localStorage.setItem('refreshToken', response.refreshToken);
+    localStorage.setItem('username', username)
+    navigate('/');
+  }
 
-  // const setErrorMessage = (error: any) => {
-  //   setError('');
-  //   if (error.status === 422) {
-  //     setError('Invalid Username or Password')
-  //   }
-  // }
+  const handleError = (error: any) => {
+    setError('');
+    if (error.status === 422) {
+      setError('Invalid Username or Password')
+    }
+  }
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await authUser({ token, username, password }).unwrap();
-      setUsername('')
-      setPassword('')
-      dispatch(userAuth({
-        username: username,
-        accessToken: response.accessToken
-      }))
-      localStorage.setItem('refreshToken', response.refreshToken);
-      localStorage.setItem('username', username)
-      navigate('/');
+       await handleAuth(token,username,password)
     } catch (error: any) {
-      setError('');
-      if (error.status === 422) {
-        setError('Invalid Username or Password')
-      }
+       handleError(error);
     }
   };
   return (

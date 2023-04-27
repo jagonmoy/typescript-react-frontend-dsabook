@@ -68,7 +68,6 @@ export const SignedInDropdown: FC = () => {
         }}
       >
         <MenuItem onClick={actionSignOut}data-testid='sign-out-item'>Sign out</MenuItem>
-        <MenuItem onClick={()=>navigate(`/create-blog`)} data-testid='create-blog-item'>Create Blog</MenuItem>
       </Menu>
     </div>
   );

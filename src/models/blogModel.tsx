@@ -4,6 +4,10 @@ export interface Blog {
     author: string;
     blogDescription: string;
 }
+export interface BlogCardListProps {
+    data: Blog[];
+}
+  
 export interface GetBlogResponse {
     author: string,
     blogDescription: string,

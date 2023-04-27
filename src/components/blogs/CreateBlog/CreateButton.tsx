@@ -81,6 +81,7 @@ export const CreateButton: React.FC<CreateBlogButton> = ({ blogHeadline, blogDes
                 loading={isLoading && token}
                 loadingPosition="end"
                 variant="contained"
+                endIcon={<></>}
             >
                 <span>POST</span>
             </LoadingButton>
