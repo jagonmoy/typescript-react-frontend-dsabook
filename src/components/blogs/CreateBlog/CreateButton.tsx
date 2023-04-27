@@ -20,7 +20,6 @@ export const CreateButton: React.FC<CreateBlogButton> = ({ blogHeadline, blogDes
     const [generateAccessToken] = useGenerateAccessTokenMutation()
     const [Error, setError] = useState<string>('')
 
-
     // const createBlogActions = async (token: string, blogHeadline: string, blogDescription: string) => {
     //     await createBlog({ token, blogHeadline, blogDescription }).unwrap()
     //     setBlogHeadline('')
@@ -36,7 +35,10 @@ export const CreateButton: React.FC<CreateBlogButton> = ({ blogHeadline, blogDes
             setBlogDescription('')
             navigate(`/blogs`);
         } catch (error: any) {
-            
+            if ( error.status === 'FETCH_ERROR') {
+                setError('Error Fetching Data!');
+
+            }
             if (error.status === 422) {
                 setError('');
                 setError(error.data[0]);
@@ -75,10 +77,9 @@ export const CreateButton: React.FC<CreateBlogButton> = ({ blogHeadline, blogDes
     return (
         <div>
             <LoadingButton
-                // size="small"
                 onClick={createBlogSubmit}
                 fullWidth
-                loading={isLoading && token}
+                loading={isLoading && (token !== '')}
                 loadingPosition="end"
                 variant="contained"
                 endIcon={<></>}

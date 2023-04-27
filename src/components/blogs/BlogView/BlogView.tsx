@@ -9,12 +9,13 @@ import { useGetBlogQuery } from '../../../api/apiSlice';
 import { selectUsername } from '../../../slices/userSlice';
 import { useAppSelector } from '../../../app/hooks';
 import { LoadingPage } from '../../generic/LoadingPage';
+import { ErrorPage } from '../../generic/ErrorPage';
 
 export const BlogView: React.FC =  () => {
   const { id }  = useParams<BlogID>();
   const currentUser : string = useAppSelector(selectUsername)
 
-  const {data,isSuccess,isLoading,refetch} =  useGetBlogQuery(id)
+  const {data,isSuccess,isLoading} =  useGetBlogQuery(id)
   
   const [headline, setHeadline] = useState('');
   const [description, setDescription] = useState('');
@@ -26,19 +27,14 @@ export const BlogView: React.FC =  () => {
     }
   }, [isSuccess, data?.blogHeadline, data?.blogDescription]);
 
-  let content ;
-  if(isLoading) {
-    console.log('hello fetching')
-    content =  <LoadingPage/>
-  }
-  else if(isSuccess) {
-   (async () => await refetch())()
-   const {blogHeadline,blogDescription} = data
-   content = ( <div data-testid="single-blog-details">
+  if(isLoading) return <LoadingPage/>
+  else if(isSuccess){
+  const {blogHeadline,blogDescription} = data
+  return ( <div data-testid="single-blog-details">
   <RootContainer>
     <BasicGrid>
 
-    {(<BlogViewContent blogHeadline={blogHeadline} blogDescription={blogDescription} author={data.author} id={id} />)} 
+      <BlogViewContent blogHeadline={blogHeadline} blogDescription={blogDescription} author={data.author} id={id} />
 
       {currentUser === data.author && <BlogViewDelete id={id} />} 
       
@@ -56,8 +52,5 @@ export const BlogView: React.FC =  () => {
     </BasicGrid>
   </RootContainer>
 </div>) }
-
-  return (
-    <>{content}</>
-   );
+else return <ErrorPage message='Error Fetching Data'/>
 }

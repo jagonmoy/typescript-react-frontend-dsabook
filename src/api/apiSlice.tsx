@@ -4,10 +4,9 @@ import { AddNewUserRequest} from '../models/userModel'
 import { SignInRequest,SignInResponse,CreateBlogRequest,AccessTokenRequest,AccessTokenResponse } from '../models/userModel'
 import { EditBlogRequest,DeleteBlogRequest } from '../models/blogModel'
 
-
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: `https://dsabook.onrender.com/api` }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BACKEND_TEST_URL}),
   tagTypes: ['Blogs'],
   endpoints: builder => ({
   
@@ -18,23 +17,7 @@ export const apiSlice = createApi({
     getBlog: builder.query<GetBlogResponse,string | undefined>({
       query: (id) => ({
         url: `/blogs/${id}`,
-        invalidatesTags: ['Blogs']
-      })
-    }),
-   
-    addNewUser: builder.mutation<void,AddNewUserRequest>({
-      query: (newUser) => ({
-          url: '/auth/sign-up' ,
-          method: 'POST' ,
-          body: newUser
-      }),
-    }),
-    authUser: builder.mutation<SignInResponse,SignInRequest >({
-      query: ({token,username,password}) => ({
-          url: '/auth/sign-in' ,
-          method: 'POST' ,
-          body: {username,password},
-          headers: {Authorization : `Bearer ${token}`},
+        providesTags: ['Blogs']
       })
     }),
     createBlog: builder.mutation<void,CreateBlogRequest>({
@@ -64,11 +47,20 @@ export const apiSlice = createApi({
     }),
     invalidatesTags: ['Blogs']
     }),
-    generateAccessToken: builder.mutation<AccessTokenResponse,AccessTokenRequest>({
-      query: (refreshToken)=> ({
-        url: `/auth/access-token-renewal`,
-        method:'POST',
-        body:{refreshToken}
+    
+    addNewUser: builder.mutation<void,AddNewUserRequest>({
+      query: (newUser) => ({
+          url: '/auth/sign-up' ,
+          method: 'POST' ,
+          body: newUser
+      }),
+    }),
+    authUser: builder.mutation<SignInResponse,SignInRequest >({
+      query: ({token,username,password}) => ({
+          url: '/auth/sign-in' ,
+          method: 'POST' ,
+          body: {username,password},
+          headers: {Authorization : `Bearer ${token}`},
       })
     }),
     signOut: builder.mutation<void,AccessTokenRequest>({
@@ -77,9 +69,15 @@ export const apiSlice = createApi({
         method:'POST',
         body:{refreshToken}
       })
+    }),
+    generateAccessToken: builder.mutation<AccessTokenResponse,AccessTokenRequest>({
+      query: (refreshToken)=> ({
+        url: `/auth/access-token-renewal`,
+        method:'POST',
+        body:{refreshToken}
+      })
     })
-  }),
-  
+  })
 })
 
 export const { 

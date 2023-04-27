@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import { Blog } from '../../../models/blogModel';
 
 export const BlogViewContent: React.FC<Blog> = ({blogHeadline,blogDescription,author}) => {
+  
   return (
     <div data-testid ='blog-view-content-testid'>
           <Typography

@@ -9,6 +9,7 @@ import { SignUp } from './components/auth/SignUp/SignUp';
 import { ThemeProvider } from '@mui/material/styles';
 import { Navbar } from './components/layout/Navbar/Navbar';
 import { CssBaseline } from '@mui/material';
+import { ErrorPage } from './components/generic/ErrorPage';
 import theme from './theme';
 
 const App: FC = () => {

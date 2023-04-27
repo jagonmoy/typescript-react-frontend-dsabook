@@ -18,7 +18,7 @@ import { ErrorAlert } from '../../generic/ErrorAlert';
 export const SignIn: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [authUser, { isLoading}] = useAuthUserMutation()
+  const [authUser, { isLoading }] = useAuthUserMutation()
   const token = useAppSelector(selectUserToken)
 
   const [username, setUsername] = useState<string>('');
@@ -40,18 +40,18 @@ export const SignIn: FC = () => {
   }
 
   const handleError = (error: any) => {
+    console.log(error)
     setError('');
-    if (error.status === 422) {
-      setError('Invalid Username or Password')
-    }
+    if (error.status === 422) setError('Invalid Username or Password !')
+    if (error.status === "FETCH_ERROR") setError('Error Fetching Data !')
   }
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-       await handleAuth(token,username,password)
+      await handleAuth(token, username, password)
     } catch (error: any) {
-       handleError(error);
+      handleError(error);
     }
   };
   return (

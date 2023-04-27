@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { BlogEdit } from '../../../models/blogModel';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { useEditBlogMutation } from '../../../api/apiSlice';
+import { useEditBlogMutation, useGetBlogQuery } from '../../../api/apiSlice';
 import { selectUserToken, selectUsername } from '../../../slices/userSlice';
 import { useGenerateAccessTokenMutation } from '../../../api/apiSlice';
 import { userAuth } from '../../../slices/userSlice';
@@ -19,19 +19,18 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
 
   const [open, setOpen] = useState<boolean>(false);
   const [editBlog, { isLoading}] = useEditBlogMutation();
+  const {refetch} = useGetBlogQuery(id);
   const token = useAppSelector(selectUserToken);
   const username = useAppSelector(selectUsername)
   const [generateAccessToken] = useGenerateAccessTokenMutation()
   const dispatch = useAppDispatch()
-
-  const navigate = useNavigate()
 
   const updateAndClose = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
     const request = { id, blogHeadline, blogDescription, token }
     try {
       await editBlog(request).unwrap();
-      navigate(`/blogs/${id}`);
+      await refetch()
       setOpen(false);
     } catch (error: any) {
       if (error.status === 401 && username.length) {
@@ -44,7 +43,7 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
         const request = { id, blogHeadline, blogDescription, token: newAccessToken }
         try {
           await editBlog(request).unwrap();
-          navigate(`/blogs/${id}`);
+          await refetch()
           setOpen(false);
         } catch (error) {
         }
@@ -95,7 +94,7 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
             <LoadingButton
               size="small"
               onClick={updateAndClose}
-              loading={isLoading && token}
+              loading={isLoading && (token !== '')}
               variant="contained"
             >
               <span>Edit</span>

@@ -4,10 +4,10 @@ import type { RenderOptions } from '@testing-library/react'
 import type { PreloadedState } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import { setupListeners } from '@reduxjs/toolkit/dist/query'
 
 import { setupStore } from '../app/store'
 import type { AppStore, RootState } from '../app/store'
-import { MemoryRouter } from 'react-router-dom'
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -25,6 +25,9 @@ export function renderWithProviders(
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
+
+  setupListeners(store.dispatch)
+
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return <BrowserRouter><Provider store={store}>{children}</Provider></BrowserRouter>
   }

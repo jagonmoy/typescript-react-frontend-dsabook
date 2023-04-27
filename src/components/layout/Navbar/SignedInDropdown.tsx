@@ -24,10 +24,10 @@ export const SignedInDropdown: FC = () => {
       username:'',
       accessToken: ''
     }))
+    navigate(`/sign-in`);
     localStorage.setItem('username','');
     localStorage.setItem('refreshToken','');
     await signOut({refreshToken : refreshToken}).unwrap()
-    navigate(`/sign-in`);
   };
  
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

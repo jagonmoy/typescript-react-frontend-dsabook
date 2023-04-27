@@ -23,34 +23,28 @@ export const SignUp: FC = () => {
   const [addNewUser, { isLoading}] = useAddNewUserMutation();
 
 
-  // const signUpActions = async (name: string, email: string, password: string, confirmPassword: string, username: string) => {
-  //   await addNewUser({ name, email, password, confirmPassword, username }).unwrap();
-  //   setEmail('')
-  //   setUsername('')
-  //   setName('')
-  //   setPassword('')
-  //   setConfirmPassword('')
-  //   navigate('/sign-in');
-  // }
+  const handleRegistration = async (name: string, email: string, password: string, confirmPassword: string, username: string) => {
+    await addNewUser({ name, email, password, confirmPassword, username }).unwrap();
+    setEmail('')
+    setUsername('')
+    setName('')
+    setPassword('')
+    setConfirmPassword('')
+    navigate('/sign-in');
+  }
 
-  // const setErrorMessage = async (error: any) => {
-  //   setError('');
-  //   if (error.status === 422) setError(error.data[0])
-  // }
+  const handleError = async (error: any) => {
+    setError('');
+    if (error.status === 422) setError(error.data[0])
+    if (error.status === "FETCH_ERROR") setError('Error Fetching Data !')
+  }
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await addNewUser({ name, email, password, confirmPassword, username }).unwrap();
-      setEmail('')
-      setUsername('')
-      setName('')
-      setPassword('')
-      setConfirmPassword('')
-      navigate('/sign-in');
+       await handleRegistration(name, email, password, confirmPassword, username);
     } catch (error: any) {
-      setError('');
-      if (error.status === 422) setError(error.data[0])
+      handleError(error)
     }
   };
 
