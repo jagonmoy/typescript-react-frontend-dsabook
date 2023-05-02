@@ -5,14 +5,11 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import { BlogEdit } from '../../../models/blogModel';
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { useEditBlogMutation, useGetBlogQuery } from '../../../api/apiSlice';
-import { selectUserToken, selectUsername } from '../../../slices/userSlice';
-import { useGenerateAccessTokenMutation } from '../../../api/apiSlice';
-import { userAuth } from '../../../slices/userSlice';
+import { useAppSelector} from '../../../app/hooks';
+import { useEditBlogMutation, useGetBlogQuery } from '../../../slices/apiSlice';
+import { selectUserToken} from '../../../slices/userSlice';
 import { LoadingButton } from '@mui/lab';
 
 export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescription, author, setBlogHeadline, setBlogDescription }) => {
@@ -21,9 +18,6 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
   const [editBlog, { isLoading}] = useEditBlogMutation();
   const {refetch} = useGetBlogQuery(id);
   const token = useAppSelector(selectUserToken);
-  const username = useAppSelector(selectUsername)
-  const [generateAccessToken] = useGenerateAccessTokenMutation()
-  const dispatch = useAppDispatch()
 
   const updateAndClose = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
@@ -33,21 +27,7 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
       await refetch()
       setOpen(false);
     } catch (error: any) {
-      if (error.status === 401 && username.length) {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const { accessToken: newAccessToken } = await generateAccessToken({ refreshToken }).unwrap();
-        dispatch(userAuth({
-          username: username,
-          accessToken: newAccessToken
-        }))
-        const request = { id, blogHeadline, blogDescription, token: newAccessToken }
-        try {
-          await editBlog(request).unwrap();
-          await refetch()
-          setOpen(false);
-        } catch (error) {
-        }
-      }
+      
     }
   };
 

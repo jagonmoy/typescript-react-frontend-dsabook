@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector,useAppDispatch } from '../../../app/hooks';
 import { userAuth } from '../../../slices/userSlice';
 import { selectUsername } from '../../../slices/userSlice';
-import { useSignOutMutation } from '../../../api/apiSlice';
+import { useSignOutMutation } from '../../../slices/apiSlice';
 
 
 export const SignedInDropdown: FC = () => {

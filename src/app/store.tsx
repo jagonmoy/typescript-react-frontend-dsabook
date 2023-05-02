@@ -1,6 +1,6 @@
 import { configureStore,combineReducers,PreloadedState } from '@reduxjs/toolkit'
 import userReducer from  '../slices/userSlice'
-import { apiSlice } from '../api/apiSlice'
+import { apiSlice } from '../slices/apiSlice'
 
 const rootReducer : any = combineReducers({
   user: userReducer,

@@ -5,7 +5,7 @@ import { RootContainer, BasicGrid } from './BlogView.style';
 import { BlogViewContent } from './BlogViewContent';
 import { BlogViewDelete } from './BlogViewDelete';
 import { BlogViewEdit } from './BlogViewEdit';
-import { useGetBlogQuery } from '../../../api/apiSlice';
+import { useGetBlogQuery } from '../../../slices/apiSlice';
 import { selectUsername } from '../../../slices/userSlice';
 import { useAppSelector } from '../../../app/hooks';
 import { LoadingPage } from '../../generic/LoadingPage';

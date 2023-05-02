@@ -6,11 +6,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { BlogID } from '../../../models/blogModel';
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { useDeleteBlogMutation, useGenerateAccessTokenMutation } from '../../../api/apiSlice';
+import { useAppSelector} from '../../../app/hooks';
+import { useDeleteBlogMutation} from '../../../slices/apiSlice';
 import { selectUser } from '../../../slices/userSlice';
 import { UserState } from '../../../models/userModel';
-import { userAuth } from '../../../slices/userSlice';
 import { LoadingButton } from '@mui/lab';
 
 
@@ -18,9 +17,7 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [deleteBlog,{isLoading}] = useDeleteBlogMutation()
   const currentUser: UserState = useAppSelector(selectUser)
-  const { accessToken: token, username } = currentUser;
-  const [generateAccessToken] = useGenerateAccessTokenMutation()
-  const dispatch = useAppDispatch();
+  const { accessToken: token} = currentUser;
 
   const navigate = useNavigate()
   const deleteAndClose = async (event: React.MouseEvent<HTMLElement>) => {
@@ -34,25 +31,6 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
       navigate(`/blogs`);
       setOpen(false);
     } catch (error: any) {
-      if (error.status === 401 && username.length) {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const { accessToken: newAccessToken } = await generateAccessToken({ refreshToken }).unwrap();
-        dispatch(userAuth({
-          username: username,
-          accessToken: newAccessToken
-        }))
-        let request = {
-          token : newAccessToken,
-          id
-        }
-        try {
-          console.log('asdasd')
-          await deleteBlog(request).unwrap()
-          navigate(`/blogs`);
-          setOpen(false);
-        } catch (error) {
-        }
-      }
     }
   };
 
@@ -72,9 +50,6 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
           <Button onClick={() => setOpen(false)} color="primary">
             No
           </Button>
-          {/* <Button onClick={deleteAndClose} color="primary" autoFocus>
-            Yes
-          </Button> */}
           <LoadingButton
               onClick={deleteAndClose}
               loading={isLoading && (token !== '')}

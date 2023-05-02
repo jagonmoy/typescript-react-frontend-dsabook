@@ -1,12 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { GetBlogResponse} from '../models/blogModel'
 import { AddNewUserRequest} from '../models/userModel'
-import { SignInRequest,SignInResponse,CreateBlogRequest,AccessTokenRequest,AccessTokenResponse } from '../models/userModel'
+import { SignInRequest,SignInResponse,CreateBlogRequest,AccessTokenRequest } from '../models/userModel'
 import { EditBlogRequest,DeleteBlogRequest } from '../models/blogModel'
+
+import {baseQueryWithReauth} from './customBaseQuery'
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BACKEND_TEST_URL}),
+  baseQuery: baseQueryWithReauth,
   tagTypes: ['Blogs'],
   endpoints: builder => ({
   
@@ -25,7 +27,6 @@ export const apiSlice = createApi({
         url: '/blogs' ,
         method: 'POST' ,
         body: {blogHeadline,blogDescription},
-        headers: {Authorization : `Bearer ${token}`},
     }),
     invalidatesTags: ['Blogs']
     }),
@@ -34,7 +35,6 @@ export const apiSlice = createApi({
         url: `/blogs/${id}` ,
         method: 'PATCH' ,
         body: {blogHeadline,blogDescription},
-        headers: {Authorization : `Bearer ${token}`},
     }),
     invalidatesTags: ['Blogs']
     }),
@@ -43,7 +43,6 @@ export const apiSlice = createApi({
         url: `/blogs/${id}` ,
         method: 'DELETE' ,
         body: {},
-        headers: {Authorization : `Bearer ${token}`},
     }),
     invalidatesTags: ['Blogs']
     }),
@@ -60,7 +59,6 @@ export const apiSlice = createApi({
           url: '/auth/sign-in' ,
           method: 'POST' ,
           body: {username,password},
-          headers: {Authorization : `Bearer ${token}`},
       })
     }),
     signOut: builder.mutation<void,AccessTokenRequest>({
@@ -70,13 +68,13 @@ export const apiSlice = createApi({
         body:{refreshToken}
       })
     }),
-    generateAccessToken: builder.mutation<AccessTokenResponse,AccessTokenRequest>({
-      query: (refreshToken)=> ({
-        url: `/auth/access-token-renewal`,
-        method:'POST',
-        body:{refreshToken}
-      })
-    })
+    // generateAccessToken: builder.mutation<AccessTokenResponse,AccessTokenRequest>({
+    //   query: (refreshToken)=> ({
+    //     url: `/auth/access-token-renewal`,
+    //     method:'POST',
+    //     body:{refreshToken}
+    //   })
+    // })
   })
 })
 
@@ -88,7 +86,7 @@ export const {
   useCreateBlogMutation,
   useEditBlogMutation,
   useDeleteBlogMutation,
-  useGenerateAccessTokenMutation,
+  // useGenerateAccessTokenMutation,
   useSignOutMutation
   } 
   = apiSlice

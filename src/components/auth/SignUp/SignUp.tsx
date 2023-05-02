@@ -8,8 +8,10 @@ import { FormField } from '../../generic/form/FormField';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { AvatarWrapper } from '../../generic/form/form.style'
-import { useAddNewUserMutation } from '../../../api/apiSlice';
+import { useAddNewUserMutation } from '../../../slices/apiSlice';
 import { ErrorAlert } from '../../generic/ErrorAlert';
+import { Home } from '../../blogs/Home/Home';
+import { displayError } from '../../../utils/errorHandler';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -33,22 +35,16 @@ export const SignUp: FC = () => {
     navigate('/sign-in');
   }
 
-  const handleError = async (error: any) => {
-    setError('');
-    if (error.status === 422) setError(error.data[0])
-    if (error.status === "FETCH_ERROR") setError('Error Fetching Data !')
-  }
-
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
        await handleRegistration(name, email, password, confirmPassword, username);
     } catch (error: any) {
-      handleError(error)
+      displayError(error.status,setError,error.data)
     }
   };
-
-  return (
+  if(localStorage.getItem('username') !== '' ) return <Home/> 
+  else return (
     <div data-testid="sign-up-details">
       <Container component="main" maxWidth="xs">
         <Paper>

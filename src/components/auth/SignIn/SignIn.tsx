@@ -11,9 +11,22 @@ import { FormButton } from '../../generic/form/FormButton';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { AvatarWrapper } from '../../generic/form/form.style';
-import { useAuthUserMutation } from '../../../api/apiSlice';
+import { useAuthUserMutation } from '../../../slices/apiSlice';
 import { ErrorAlert } from '../../generic/ErrorAlert';
+import { displayError } from '../../../utils/errorHandler';
 
+const HeaderAndIcon = () => {
+  return (
+    <>   
+    <AvatarWrapper>
+      <LockOutlinedIcon />
+    </AvatarWrapper>
+    <Typography component="h1" variant="h5">
+        Sign in
+    </Typography>
+    </>
+  )
+}
 
 export const SignIn: FC = () => {
   const navigate = useNavigate();
@@ -24,47 +37,32 @@ export const SignIn: FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [Error, setError] = useState<string>('')
-
-
-  const handleAuth = async (token: string, username: string, password: string) => {
-    const response = await authUser({ token, username, password }).unwrap();
-    setUsername('')
-    setPassword('')
-    dispatch(userAuth({
-      username: username,
-      accessToken: response.accessToken
-    }))
-    localStorage.setItem('refreshToken', response.refreshToken);
-    localStorage.setItem('username', username)
-    navigate('/');
-  }
-
-  const handleError = (error: any) => {
-    console.log(error)
-    setError('');
-    if (error.status === 422) setError('Invalid Username or Password !')
-    if (error.status === "FETCH_ERROR") setError('Error Fetching Data !')
-  }
-
+  
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log('Sign in SubmitHandler')
     try {
-      await handleAuth(token, username, password)
-    } catch (error: any) {
-      handleError(error);
+      const response = await authUser({ token, username, password }).unwrap();
+      setUsername('')
+      setPassword('')
+      dispatch(userAuth({
+        username: username,
+        accessToken: response.accessToken
+      }))
+      // console.log(response.accessToken)
+      localStorage.setItem('refreshToken', response.refreshToken);
+      localStorage.setItem('username', username)
+      navigate('/');
+    } catch (error: any) {displayError(error.status, setError, error.data)
+      
     }
   };
+ 
   return (
     <div data-testid="sign-in-details">
       <Container component="main" maxWidth="xs">
         <Paper>
-          <AvatarWrapper>
-            <LockOutlinedIcon />
-          </AvatarWrapper>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-
+          <HeaderAndIcon/>
           <Form noValidate onSubmit={submitHandler} data-testid="sign-in-form" aria-label='Sign In'>
 
             <FormField value={username} onSetFieldChanged={(e) => setUsername(e.target.value)} label='Username' field='username' type='text' />
