@@ -68,13 +68,6 @@ export const apiSlice = createApi({
         body:{refreshToken}
       })
     }),
-    // generateAccessToken: builder.mutation<AccessTokenResponse,AccessTokenRequest>({
-    //   query: (refreshToken)=> ({
-    //     url: `/auth/access-token-renewal`,
-    //     method:'POST',
-    //     body:{refreshToken}
-    //   })
-    // })
   })
 })
 
@@ -86,7 +79,6 @@ export const {
   useCreateBlogMutation,
   useEditBlogMutation,
   useDeleteBlogMutation,
-  // useGenerateAccessTokenMutation,
   useSignOutMutation
   } 
   = apiSlice
