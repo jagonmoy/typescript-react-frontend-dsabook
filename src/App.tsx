@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { Home } from './components/blogs/Home/Home';
 import { BlogView } from './components/blogs/BlogView/BlogView';
 import { CreateBlog } from './components/blogs/CreateBlog/CreateBlog';
-import { NotFound } from './components/miscellaneous/NotFound/NotFound';
 import { SignIn } from './components/auth/SignIn/SignIn';
 import { SignUp } from './components/auth/SignUp/SignUp';
 import { ThemeProvider } from '@mui/material/styles';
@@ -12,6 +11,7 @@ import { CssBaseline } from '@mui/material';
 import theme from './theme';
 import { selectUsername } from './slices/userSlice';
 import { useAppSelector } from './app/hooks';
+import { ErrorPage } from './components/generic/ErrorPage';
 
 const App: FC = () => {
   const username = useAppSelector(selectUsername)
@@ -28,7 +28,7 @@ const App: FC = () => {
           <Route path="/sign-up" element={ username? <Navigate to='/' /> : <SignUp/>} />
           <Route path="/blog/create" element={ username? <CreateBlog/> : <Navigate to='/' />} />
           <Route path="/blogs/:id"element={<BlogView/>} />
-          <Route path='*'element={<NotFound/>}></Route>
+          <Route path='*'element={<ErrorPage message='404 Not Found'/>}></Route>
         </Routes>
       </Router>
     </ThemeProvider>

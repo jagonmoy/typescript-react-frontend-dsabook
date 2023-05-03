@@ -19,18 +19,18 @@ export interface GetBlogResponse {
     id?: string
 }
 export interface GetBlogRequest {
-    id: string | undefined
+    id?: string
 }
 
 export type BlogID = {
-    id ?: string | undefined;
+    id ?: string;
 };
 
 export interface BlogEdit {
     author: string
     id?: string,
-    blogHeadline: string | undefined,
-    blogDescription: string | undefined,
+    blogHeadline?: string,
+    blogDescription?: string,
     setBlogHeadline: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
     setBlogDescription: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 }
@@ -60,14 +60,14 @@ export interface BlogContent {
 }
 
 export interface EditBlogRequest {
-    id: string | undefined,
-    blogHeadline: string | undefined,
-    blogDescription: string | undefined,
+    id?: string,
+    blogHeadline?: string,
+    blogDescription?: string,
     token: string
 }
 
 export interface DeleteBlogRequest {
-    id: string | undefined
+    id?: string
     token: string
 }
 

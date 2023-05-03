@@ -9,8 +9,7 @@ import { ErrorPage } from '../../generic/ErrorPage';
 
 export const Home: FC = () => {
   const { data = [], isLoading,isError } = useGetAllBlogsQuery();
-  const username = useAppSelector(selectUsername)
-  console.log(isError);
+  const username = useAppSelector(selectUsername);
   if(isError) return <ErrorPage message={'Error Fetching Data !'}/>
   if (isLoading) return <LoadingPage />;
   return (
