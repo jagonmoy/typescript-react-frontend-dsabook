@@ -15,7 +15,7 @@ export const BlogCreateButton : React.FC = () => {
       alignItems: 'center',
     }}
   >
-    <Button variant="outlined" startIcon={<AddCircleIcon />} size='large' onClick={()=>navigate("/create-blog")}>
+    <Button variant="outlined" startIcon={<AddCircleIcon />} size='large' onClick={()=>navigate("/blog/create")}>
         Want to Create a Blog ?
     </Button>
     </Box>

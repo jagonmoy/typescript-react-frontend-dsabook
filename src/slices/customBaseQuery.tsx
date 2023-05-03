@@ -11,7 +11,7 @@ import { RootState } from "../app/store";
 // create a new mutex
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BACKEND_URL,
+    baseUrl: process.env.REACT_APP_BACKEND_TEST_URL,
     mode: "cors",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).user.accessToken;

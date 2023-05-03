@@ -26,7 +26,7 @@ const App: FC = () => {
           <Route path="/blogs"element={<Home/>} />
           <Route path="/sign-in" element={ username? <Navigate to='/' /> : <SignIn/>}  />
           <Route path="/sign-up" element={ username? <Navigate to='/' /> : <SignUp/>} />
-          <Route path="/create-blog" element={ username? <CreateBlog/> : <Navigate to='/' />} />
+          <Route path="/blog/create" element={ username? <CreateBlog/> : <Navigate to='/' />} />
           <Route path="/blogs/:id"element={<BlogView/>} />
           <Route path='*'element={<NotFound/>}></Route>
         </Routes>

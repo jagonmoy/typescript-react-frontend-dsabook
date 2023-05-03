@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../app/hooks';
 import { selectUsername} from '../../../slices/userSlice';
 import { TextButton } from './TextButton';
-import { SignedInDropdown } from './SignedInDropdown';
+import { SignOut } from './SignOut';
 import IconButton from '@mui/material/IconButton';
 
 
@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
           </IconButton>
           <div style={{ flexGrow: 1 }} />
           {!username && <TextButton path='/sign-in' text='Sign In'/>}
-          {username && <SignedInDropdown/>}
+          {username && <SignOut/>}
         </Toolbar>
       </AppBar>
     </div>

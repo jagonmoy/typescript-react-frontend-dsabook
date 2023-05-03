@@ -1,8 +1,10 @@
 export interface Blog {
     id?: string;
     blogHeadline: string;
+    blogDescription: string,
     author: string;
-    blogDescription: string;
+    createdAt: string,
+    updatedAt: string,
 }
 export interface BlogCardListProps {
     data: Blog[];
@@ -53,6 +55,8 @@ export interface BlogContent {
     author: string ,
     blogHeadline: string,
     blogDescription: string
+    createdAt: string,
+    updatedAt: string,
 }
 
 export interface EditBlogRequest {

@@ -11,6 +11,8 @@ import { useAppSelector} from '../../../app/hooks';
 import { useEditBlogMutation, useGetBlogQuery } from '../../../slices/apiSlice';
 import { selectUserToken} from '../../../slices/userSlice';
 import { LoadingButton } from '@mui/lab';
+import { displayError } from '../../../utils/errorHandler';
+import { ErrorAlert } from '../../generic/ErrorAlert';
 
 export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescription, author, setBlogHeadline, setBlogDescription }) => {
 
@@ -18,6 +20,7 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
   const [editBlog, { isLoading}] = useEditBlogMutation();
   const {refetch} = useGetBlogQuery(id);
   const token = useAppSelector(selectUserToken);
+  const [error,setError] = useState('');
 
   const updateAndClose = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
@@ -27,7 +30,7 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
       await refetch()
       setOpen(false);
     } catch (error: any) {
-      
+      displayError(error.status,setError,error.data)
     }
   };
 
@@ -80,6 +83,7 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
               <span>Edit</span>
             </LoadingButton>
           </DialogActions>
+          {error && <ErrorAlert error={error}/>}
         </DialogContent>
       </Dialog>
     </>

@@ -10,6 +10,7 @@ import { selectUsername } from '../../../slices/userSlice';
 import { useAppSelector } from '../../../app/hooks';
 import { LoadingPage } from '../../generic/LoadingPage';
 import { ErrorPage } from '../../generic/ErrorPage';
+import {convertToReadableTime} from '../../../utils/convertTime'
 
 export const BlogView: React.FC =  () => {
   const { id }  = useParams<BlogID>();
@@ -29,12 +30,15 @@ export const BlogView: React.FC =  () => {
 
   if(isLoading) return <LoadingPage/>
   else if(isSuccess){
+ 
   const {blogHeadline,blogDescription} = data
+  const creationTime = convertToReadableTime(data.createdAt);
+  const updatedTime = convertToReadableTime(data.updatedAt);
   return ( <div data-testid="single-blog-details">
   <RootContainer>
     <BasicGrid>
 
-      <BlogViewContent blogHeadline={blogHeadline} blogDescription={blogDescription} author={data.author} id={id} />
+      <BlogViewContent blogHeadline={blogHeadline} blogDescription={blogDescription} author={data.author} id={id} createdAt={creationTime} updatedAt={updatedTime}/>
 
       {currentUser === data.author && <BlogViewDelete id={id} />} 
       

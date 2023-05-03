@@ -1,5 +1,5 @@
 import { screen,fireEvent} from '@testing-library/react';
-import { SignedInDropdown } from '../../../components/layout/Navbar/SignedInDropdown';
+import { SignedInDropdown } from '../../../components/layout/Navbar/SignOut';
 import { renderWithProviders } from '../../../utils/test-utils';
 
 describe('<SignedOutDropdown />', () => {

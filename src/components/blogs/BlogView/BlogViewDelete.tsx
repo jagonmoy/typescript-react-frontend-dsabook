@@ -11,6 +11,7 @@ import { useDeleteBlogMutation} from '../../../slices/apiSlice';
 import { selectUser } from '../../../slices/userSlice';
 import { UserState } from '../../../models/userModel';
 import { LoadingButton } from '@mui/lab';
+import { displayError } from '../../../utils/errorHandler';
 
 
 export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
@@ -18,6 +19,7 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
   const [deleteBlog,{isLoading}] = useDeleteBlogMutation()
   const currentUser: UserState = useAppSelector(selectUser)
   const { accessToken: token} = currentUser;
+  const [error,setError] = useState('');
 
   const navigate = useNavigate()
   const deleteAndClose = async (event: React.MouseEvent<HTMLElement>) => {
@@ -31,6 +33,7 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
       navigate(`/blogs`);
       setOpen(false);
     } catch (error: any) {
+      displayError(error.status,setError,error.data)
     }
   };
 
