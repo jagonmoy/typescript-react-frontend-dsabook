@@ -8,8 +8,8 @@ export const BlogCardList: FC<BlogCardListProps> = ({ data }) => {
     const Blogs = [...data]
     Blogs.sort((a, b) => new Date(b.updatedAt.toString()).getTime() - new Date(a.updatedAt.toString()).getTime());
     return (
-      <Box sx={{ width: '100%' }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+      <Box sx={{ width: '100%' , marginBottom: '40px' }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
           {Blogs.map((blog: Blog) => (
             <BlogCard key={blog.id} {...blog} />
           ))}

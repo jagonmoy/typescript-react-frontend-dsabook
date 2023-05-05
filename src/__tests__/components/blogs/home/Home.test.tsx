@@ -5,8 +5,8 @@ import {rest} from 'msw'
 import { screen, waitFor } from '@testing-library/react';
 
 const apiData = [
-  {blogHeadline: "Mark Zuckerberg", blogDescription: "asdasdasdasd", author: 'xasas', id: 'hasdhajshdkajsd' },
-  {blogHeadline: "Elon Musk", blogDescription: "asdasdasdasd" , author: 'yasdasd', id: 'asdasdasdasd'}
+  {blogHeadline: "Mark Zuckerberg", blogDescription: "asdasdasdasd", author: 'xasas', id: 'hasdhajshdkajsd', createdAt: '2021-11-29T12:25:38.567+00:00', updatedAt: '2021-11-29T12:25:38.567+00:00' },
+  {blogHeadline: "Elon Musk", blogDescription: "asdasdasdasd" , author: 'yasdasd', id: 'asdasdasdasd', createdAt: '2021-11-29T12:27:05.608+00:00', updatedAt: '2021-12-08T19:46:46.505+00:00'}
 ]
 
 describe('Home', () => {

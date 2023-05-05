@@ -7,14 +7,19 @@ import { useAppSelector } from '../../../app/hooks';
 import { selectUsername } from '../../../slices/userSlice';
 import { ErrorPage } from '../../generic/ErrorPage';
 
+
 export const Home: FC = () => {
-  const { data = [], isLoading,isError } = useGetAllBlogsQuery();
+  const { data = [], isLoading,isError,error } = useGetAllBlogsQuery();
+  console.log(data)
   const username = useAppSelector(selectUsername);
-  if(isError) return <ErrorPage message={'Error Fetching Data !'}/>
+  if(isError) {
+    console.log(data)
+    return <ErrorPage message={'Error Fetching Data !'}/>
+  }
   if (isLoading) return <LoadingPage />;
   return (
     <div>
       {username && <BlogCreateButton />}
-      <BlogCardList data={data} />
+      <BlogCardList data={data}/>
     </div>);
 };
