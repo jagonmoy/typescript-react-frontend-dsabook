@@ -49,12 +49,10 @@ export const SignIn: FC = () => {
         username: username,
         accessToken: response.accessToken
       }))
-      // console.log(response.accessToken)
       localStorage.setItem('refreshToken', response.refreshToken);
       localStorage.setItem('username', username)
       navigate('/');
     } catch (error: any) {displayError(error.status, setError, error.data)
-      
     }
   };
  

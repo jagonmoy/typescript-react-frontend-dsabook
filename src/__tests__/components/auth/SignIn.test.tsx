@@ -12,14 +12,12 @@ const apiData = {
 
 describe('<SignIn />', () => {
 
-
-    //   server.use(
-    //     rest.post('http://localhost:3010/api/blogs', (req, res, ctx) => {
-    //         return res(ctx.json(apiData))         
-    //       }
-    //     ) 
-    //     );
-
+    server.use(
+        rest.post('http://localhost:3010/api/auth/sign-in',  (req, res, ctx) => {
+            return res(ctx.json(apiData))         
+        }
+    )    
+    );
 
     const setup = () => renderWithProviders(<SignIn />)
     it('should initially render', () => {
@@ -56,39 +54,15 @@ describe('<SignIn />', () => {
         const spy = jest.spyOn(console, 'log');
 
         const username: any = screen.getByLabelText('Username *');
-        fireEvent.change(username, { target: { value: 'testing' } });
+        fireEvent.change(username, { target: { value: 'jagonmoy' } });
 
         const password: any = screen.getByLabelText('Password *');
-        fireEvent.change(password, { target: { value: '12345' } });
+        fireEvent.change(password, { target: { value: '12345678' } });
 
         fireEvent.submit(screen.getByTestId('sign-in-form'));
         expect(spy).toHaveBeenCalledTimes(1);
 
     })
-    // it('Check initial state before submitting and states after submit', () => {
-    //     const {store} = renderWithProviders(<SignIn/>)
-    //     const dispatch = jest.spyOn(store,'dispatch')
-
-    //     const username : any = screen.getByLabelText('Username *');
-    //     const password : any = screen.getByLabelText('Password *');
-
-    //     expect(store.getState().user).toEqual({ username: '', status: false })
-
-    //     fireEvent.change(username, { target: { value: 'testuser' }});
-    //     fireEvent.change(password, { target: { value: '' }});
-
-    //     fireEvent.submit(screen.getByTestId('sign-in-form'));
-    //     expect(dispatch).not.toHaveBeenCalledWith(userAuth({ username: 'testuser', status: true }));
-    //     expect(store.getState().user).toEqual({username: '', status: false})
-
-    //     fireEvent.change(password, { target: { value: '12345' }});
-
-    //     fireEvent.submit(screen.getByTestId('sign-in-form'));
-    //     expect(dispatch).toHaveBeenCalledWith(userAuth({ username: 'testuser', status: true }));
-    //     expect(store.getState().user).toEqual({username: 'testuser', status: true})
-    //     expect(window.location.pathname).toBe('/home')
-
-    // })
     it("should trigger route change when (Don't have an account? Sign Up) text is clicked", () => {
         setup();
         const DSABooktext = screen.getByText("Don't have an account? Sign Up");
@@ -96,5 +70,4 @@ describe('<SignIn />', () => {
         expect(window.location.pathname).toBe('/sign-up');
     });
     
-
 });

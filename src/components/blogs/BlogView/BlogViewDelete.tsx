@@ -39,7 +39,7 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={() => setOpen(true)} >
+      <Button variant="contained" color="primary" onClick={() => setOpen(true)} data-testid='delete-button'>
         <DeleteIcon />
       </Button>
       <Dialog
@@ -47,15 +47,17 @@ export const BlogViewDelete: React.FC<BlogID> = ({ id }) => {
         onClose={() => setOpen(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+        data-testid='dialog-actions'
       >
-        <DialogTitle id="alert-dialog-title">{"Are you sure you want to delete this?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title" data-testid='dialog-actions-title'>{"Are you sure you want to delete this?"}</DialogTitle>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} color="primary">
+          <Button onClick={() => setOpen(false)} color="primary" data-testid='no-button'>
             No
           </Button>
           <LoadingButton
               onClick={deleteAndClose}
               loading={isLoading && (token !== '')}
+              data-testid='yes-button'
             >
               <span>Yes</span>
           </LoadingButton>

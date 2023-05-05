@@ -52,7 +52,7 @@ export const SignUp: FC = () => {
             <LockOutlinedIcon />
           </AvatarWrapper>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign Up
           </Typography>
           <Form noValidate onSubmit={submitHandler} data-testid="sign-up-form" aria-label="Sign Up">
 

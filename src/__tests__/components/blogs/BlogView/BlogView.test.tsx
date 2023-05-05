@@ -1,125 +1,190 @@
-import React from 'react';
-import { Blog } from '../../../../models/blogModel';
-import Router from "react-router-dom";
-import { renderWithProviders } from '../../../../utils/test-utils';
 import { BlogView } from '../../../../components/blogs/BlogView/BlogView';
-import { screen,fireEvent } from '@testing-library/react';
-import { BlogViewContent } from '../../../../components/blogs/BlogView/BlogViewContent';
-import { BlogViewEdit } from '../../../../components/blogs/BlogView/BlogViewEdit';
-import { BlogViewDelete } from '../../../../components/blogs/BlogView/BlogViewDelete';
+import { renderWithProviders } from '../../../../utils/test-utils';
+import { server } from '../../../../mock/api/server'
+import { rest } from 'msw'
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import Router from "react-router-dom";
 
+
+const apiData = { blogHeadline: "Elon Musk", blogDescription: "asdasdasdasd", author: 'xyz', id: 'asdasdasdasd', createdAt: '2021-11-29T12:27:05.608+00:00', updatedAt: '2021-12-08T19:46:46.505+00:00' }
 
 jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
     useParams: jest.fn(),
 }));
 
-
-jest.mock('../../../../components/blogs/BlogView/BlogViewContent', () => ({
-   BlogViewContent: jest.fn()
-}));
-// jest.mock('../../../../components/blogs/BlogView/BlogViewEdit', () => ({
-//     BlogViewEdit: jest.fn(),
-// }));
-jest.mock('../../../../components/blogs/BlogView/BlogViewDelete', () => ({
-    BlogViewDelete: jest.fn(),
-}));
-
-
-describe('<Home />', () => {
-    const mockBlogs: Blog[] = [
-        {
-            id: "1",
-            blogHeadline: 'Blog 1',
-            author: 'John Doe',
-            blogDescription: 'Description 1'
-        },
-        {
-            id: "2",
-            blogHeadline: 'Blog 2',
-            author: 'Jane Doe',
-            blogDescription: 'Description 2'
-        }
-    ];
+describe('Home', () => {
     afterEach(() => {
-        jest.restoreAllMocks();
-    });
-    it('check something',()=> {
-        
+        jest.clearAllMocks()
     })
 
-    // it('should render BlogView Component', () => {
-    //     jest.spyOn(Router, 'useParams').mockReturnValue({ id: '1' })
-    //     renderWithProviders(<BlogView />, {
-    //         preloadedState: {
-    //             user: {
-    //                 username: 'John Doe',
-    //                 status: true
-    //             },
-    //             blogs: {
-    //                 blogs: mockBlogs
-    //             }
-    //         }
-    //     })
-        
-    // })
-    // it('should have BlogViewContent Component', () => {
-    //     jest.spyOn(Router, 'useParams').mockReturnValue({ id: '1' })
-    //     const { store } = renderWithProviders(<BlogView />, {
-    //         preloadedState: {
-    //             user: {
-    //                 username: 'John Doe',
-    //                 status: true
-    //             },
-    //             blogs: {
-    //                 blogs: mockBlogs
-    //             }
-    //         }
-    //     })
-    //     expect(BlogViewContent).toBeCalledWith({
-    //         blogHeadline: mockBlogs[0].blogHeadline,
-    //         blogDescription: mockBlogs[0].blogDescription,
-    //         id: mockBlogs[0].id,
-    //         author: store.getState().user.username
-    //     },{}
-    //     )
-    //     // expect(BlogViewDelete).toBeCalledWith({
-    //     //     id: mockBlogs[0].id,
-    //     // }, {}
-    //     // )
-    // })
-    // it('should have BlogViewEdit Component', () => {
-    //     const mockSetBlogHeadline = jest.fn();
-    //     const mockSetBlogDescription = jest.fn();
-    //     renderWithProviders(<BlogViewEdit
-    //         blogHeadline="Blog 1"
-    //         blogDescription="Description 1"
-    //         setBlogHeadline={mockSetBlogHeadline}
-    //         setBlogDescription={mockSetBlogDescription}
-    //         id="1"
-    //         author="John Doe"
-    //     />);
-    //     expect(mockSetBlogHeadline).toHaveBeenCalledTimes(0);
-    //     expect(mockSetBlogDescription).toHaveBeenCalledTimes(0);
-    //     fireEvent.click(screen.getByTestId('edit-button'))
-    //     // fireEvent.change(screen.getByTestId('blog-headline-input'), { target: { value: 'New Blog Headline' }});
-    //     fireEvent.change(screen.getByTestId('blog-description-input'), { target: { value: 'New Blog Description' }});
+    it('renders loading button', async () => {
+        jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
+        server.use(
+            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+                return res(ctx.json(apiData))
+            }
+            )
+        );
+        renderWithProviders(<BlogView />)
+        expect(screen.getByTestId('loading-page')).toBeInTheDocument()
 
-        
+    });
+    it('renders  BlogViewContent component', async () => {
+        jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
+        server.use(
+            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+                return res(ctx.json(apiData))
+            }
+            )
+        );
+        renderWithProviders(<BlogView />)
+        expect(screen.getByTestId('loading-page')).toBeInTheDocument()
 
-    //     // expect(BlogViewEdit).toBeCalledWith({
-    //     //     blogHeadline: mockBlogs[0].blogHeadline,
-    //     //     blogDescription: mockBlogs[0].blogDescription,
-    //     //     id: mockBlogs[0].id,
-    //     //     author: store.getState().user.username,
-    //     //     setBlogHeadline: setHeadline,
-    //     //     // setBlogDescription: setStateBlogDescription
-    //     // }, {}
-    //     // )
-    //     // expect(BlogViewDelete).toBeCalledWith({
-    //     //     id: mockBlogs[0].id,
-    //     // }, {}
-    //     // )
-    // })
+        await waitFor(()=> {
+            expect(screen.getByTestId('blog-view-content-testid')).toBeInTheDocument()
+        })
+
+    });
+    it('renders error page if there is error', async () => {
+        jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
+        server.use(
+            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+                return res(ctx.status(500))
+            }
+            )
+        );
+    
+        renderWithProviders(<BlogView />)
+        await waitFor(() => {
+          expect(screen.getByText('Error Fetching Data !')).toBeInTheDocument()
+        })
+        
+      });
+      it('If logged in user and blog author is same then BlogViewContent and BlogViewDelete component is rendered', async () => {
+        jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
+        server.use(
+            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+                return res(ctx.json(apiData))
+            }
+            )
+        );
+        renderWithProviders(<BlogView/>,{
+            preloadedState: {
+                user: {
+                    username: 'xyz',
+                    accessToken: 'xtz'
+                }
+            }
+      })
+        expect(screen.getByTestId('loading-page')).toBeInTheDocument()
+
+        await waitFor(()=> {
+            expect(screen.getByTestId('edit-delete-action')).toBeInTheDocument()
+        })
+
+    });
+    it('should open a dialog after clicking delete icon', async () => {
+        jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
+        server.use(
+            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+                return res(ctx.json(apiData))
+            }
+            )
+        );
+        renderWithProviders(<BlogView/>,{
+            preloadedState: {
+                user: {
+                    username: 'xyz',
+                    accessToken: 'xtz'
+                }
+            }
+      })
+        expect(screen.getByTestId('loading-page')).toBeInTheDocument()
+
+       
+        await waitFor(()=> {
+            const deleteButton = screen.getByTestId('delete-button')
+            expect(deleteButton).toBeInTheDocument();
+            fireEvent.click(deleteButton);
+            expect(screen.getByTestId('dialog-actions')).toBeInTheDocument();
+            expect(screen.getByTestId('dialog-actions-title')).toBeInTheDocument()
+            expect(screen.getByTestId('yes-button')).toBeInTheDocument()
+            expect(screen.getByTestId('no-button')).toBeInTheDocument()
+            
+        })
+
+    });
+    it('should open a dialog after clicking delete icon', async () => {
+        jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
+        server.use(
+            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+                return res(ctx.json(apiData))
+            }
+            )
+        );
+        renderWithProviders(<BlogView/>,{
+            preloadedState: {
+                user: {
+                    username: 'xyz',
+                    accessToken: 'xtz'
+                }
+            }
+      })
+        expect(screen.getByTestId('loading-page')).toBeInTheDocument()
+
+       
+        await waitFor(()=> {
+            const editButton = screen.getByTestId('edit-button')
+            expect(editButton).toBeInTheDocument();
+            fireEvent.click(editButton);
+            expect(screen.getByTestId('dialog-edit')).toBeInTheDocument();
+            expect(screen.getByTestId('dialog-edit-title')).toBeInTheDocument()
+            expect(screen.getByTestId('headline-description-fields')).toBeInTheDocument()
+            expect(screen.getByTestId('dialog-actions-edit')).toBeInTheDocument()
+            
+        })
+    });
+    //   it('renders error page if there is error', async () => {
+    //     server.use(
+    //       rest.get('*', (_req, res, ctx) =>
+    //         res.once(ctx.status(500))
+    //       )
+    //     );
+
+    //     renderWithProviders(<Home />)
+    //     await waitFor(() => {
+    //       expect(screen.getByText('Error Fetching Data !')).toBeInTheDocument()
+    //     })
+
+    //   });
+
+    //   it('renders create blog button only if a user is logged in and cliking it takes to create blog page', async () => {
+
+    //     server.use(
+    //       rest.get('http://localhost:3010/api/blogs', (req, res, ctx) => {
+    //         return res(ctx.json(apiData))
+    //       }
+    //       )
+    //     );
+    //     renderWithProviders(<Home/>,{
+    //           preloadedState: {
+    //               user: {
+    //                   username: 'xyz',
+    //                   accessToken: 'xtz'
+    //               }
+    //           }
+    //     })
+    //     let createBlogText;
+    //     await waitFor(() => {
+
+    //       createBlogText = screen.getByText('Want to Create a Blog ?')
+    //       expect(createBlogText).toBeInTheDocument();
+    //       fireEvent.click(createBlogText);
+    //       expect(window.location.pathname).toBe('/blog/create');
+
+    //     })
+
+    //   });
 
 });

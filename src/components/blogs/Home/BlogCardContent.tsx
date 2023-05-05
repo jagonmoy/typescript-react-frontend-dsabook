@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography';
 import { BlogContent } from '../../../models/blogModel';
 
 export const BlogCardContent : React.FC<BlogContent> = ({blogHeadline,author,blogDescription,createdAt,updatedAt}) => {
-  console.log(blogHeadline.length)
   return (
     <div >
       <CardContent data-testid="card-content-testid">

@@ -4,7 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 export const LoadingPage : React.FC = () => {
   return (
-    <Box
+    <Box data-testid='loading-page'
       sx={{
         display: 'flex',
         justifyContent: 'center',

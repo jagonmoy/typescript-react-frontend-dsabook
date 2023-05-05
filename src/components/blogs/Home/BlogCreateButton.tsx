@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export const BlogCreateButton : React.FC = () => {
   const navigate = useNavigate();
   return (
-    <Box
+    <Box data-test-id='blog-create-button'
     sx={{
       marginTop: '20px',
       display: 'flex',

@@ -44,11 +44,11 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
         style={{ width: '100%' }}
         onClose={() => setOpen(false)}
         aria-labelledby="form-dialog-title"
-
+        data-testid='dialog-edit'
       >
-        <DialogTitle id="form-dialog-title">EDIT BLOG</DialogTitle >
+        <DialogTitle id="form-dialog-title" data-testid = 'dialog-edit-title'>EDIT BLOG</DialogTitle >
         <br />
-        <DialogContent>
+        <DialogContent data-testid='headline-description-fields'>
           <TextareaAutosize
             id="outlined-multiline-static"
             label="Blog Headline"
@@ -70,7 +70,7 @@ export const BlogViewEdit: React.FC<BlogEdit> = ({ id, blogHeadline, blogDescrip
             value={blogDescription}
             onChange={setBlogDescription}
           />
-          <DialogActions>
+          <DialogActions data-testid='dialog-actions-edit'>
             <Button onClick={() => setOpen(false)} color="primary">
               Cancel
             </Button>
