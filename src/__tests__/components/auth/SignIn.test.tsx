@@ -65,8 +65,8 @@ describe('<SignIn />', () => {
     })
     it("should trigger route change when (Don't have an account? Sign Up) text is clicked", () => {
         setup();
-        const DSABooktext = screen.getByText("Don't have an account? Sign Up");
-        fireEvent.click(DSABooktext);
+        const text = screen.getByText("Don't have an account? Sign Up");
+        fireEvent.click(text);
         expect(window.location.pathname).toBe('/sign-up');
     });
     

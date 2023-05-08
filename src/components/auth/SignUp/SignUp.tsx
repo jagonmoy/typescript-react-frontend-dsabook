@@ -12,6 +12,8 @@ import { useAddNewUserMutation } from '../../../slices/apiSlice';
 import { ErrorAlert } from '../../generic/ErrorAlert';
 import { Home } from '../../blogs/Home/Home';
 import { displayError } from '../../../utils/errorHandler';
+import { useAppSelector } from '../../../app/hooks';
+import { selectUsername } from '../../../slices/userSlice';
 
 export const SignUp: FC = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ export const SignUp: FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [Error, setError] = useState<string>('')
   const [addNewUser, { isLoading}] = useAddNewUserMutation();
+  const currentUser = useAppSelector(selectUsername);
 
 
   const handleRegistration = async (name: string, email: string, password: string, confirmPassword: string, username: string) => {
@@ -34,7 +37,6 @@ export const SignUp: FC = () => {
     setConfirmPassword('')
     navigate('/sign-in');
   }
-
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -43,7 +45,7 @@ export const SignUp: FC = () => {
       displayError(error.status,setError,error.data)
     }
   };
-  if(localStorage.getItem('username') !== '' ) return <Home/> 
+  if(currentUser !== '' ) return <Home/> 
   else return (
     <div data-testid="sign-up-details">
       <Container component="main" maxWidth="xs">
