@@ -19,7 +19,7 @@ export const Navbar: React.FC = () => {
       <AppBar position="static" color='primary'>
         <Toolbar>
           <IconButton onClick={() => navigate(`/`)}>
-            <Typography variant="h6" style={{ color: 'white' }}>
+            <Typography variant="h6" style={{ color: 'white' }} data-testid='DSABOOK'>
               DSABOOK
             </Typography>
           </IconButton>
