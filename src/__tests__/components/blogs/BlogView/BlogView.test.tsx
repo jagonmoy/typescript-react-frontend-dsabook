@@ -13,7 +13,7 @@ jest.mock("react-router-dom", () => ({
     useParams: jest.fn(),
 }));
 
-describe('Home', () => {
+describe('BlogView', () => {
     afterEach(() => {
         jest.clearAllMocks()
     })
@@ -21,7 +21,7 @@ describe('Home', () => {
     it('renders loading button', async () => {
         jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
         server.use(
-            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+            rest.get('*', (req, res, ctx) => {
                 return res(ctx.json(apiData))
             }
             )
@@ -33,7 +33,7 @@ describe('Home', () => {
     it('renders  BlogViewContent component', async () => {
         jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
         server.use(
-            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+            rest.get('*', (req, res, ctx) => {
                 return res(ctx.json(apiData))
             }
             )
@@ -49,7 +49,7 @@ describe('Home', () => {
     it('renders error page if there is error', async () => {
         jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
         server.use(
-            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+            rest.get('*', (req, res, ctx) => {
                 return res(ctx.status(500))
             }
             )
@@ -64,7 +64,7 @@ describe('Home', () => {
       it('If logged in user and blog author is same then BlogViewContent and BlogViewDelete component is rendered', async () => {
         jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
         server.use(
-            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+            rest.get('*', (req, res, ctx) => {
                 return res(ctx.json(apiData))
             }
             )
@@ -87,7 +87,7 @@ describe('Home', () => {
     it('should open a dialog after clicking delete icon', async () => {
         jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
         server.use(
-            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+            rest.get('*', (req, res, ctx) => {
                 return res(ctx.json(apiData))
             }
             )
@@ -118,7 +118,7 @@ describe('Home', () => {
     it('should open a dialog after clicking delete icon', async () => {
         jest.spyOn(Router, 'useParams').mockReturnValue({ id: '123' })
         server.use(
-            rest.get('http://localhost:3010/api/blogs/123', (req, res, ctx) => {
+            rest.get('*', (req, res, ctx) => {
                 return res(ctx.json(apiData))
             }
             )
@@ -145,46 +145,5 @@ describe('Home', () => {
             
         })
     });
-    //   it('renders error page if there is error', async () => {
-    //     server.use(
-    //       rest.get('*', (_req, res, ctx) =>
-    //         res.once(ctx.status(500))
-    //       )
-    //     );
-
-    //     renderWithProviders(<Home />)
-    //     await waitFor(() => {
-    //       expect(screen.getByText('Error Fetching Data !')).toBeInTheDocument()
-    //     })
-
-    //   });
-
-    //   it('renders create blog button only if a user is logged in and cliking it takes to create blog page', async () => {
-
-    //     server.use(
-    //       rest.get('http://localhost:3010/api/blogs', (req, res, ctx) => {
-    //         return res(ctx.json(apiData))
-    //       }
-    //       )
-    //     );
-    //     renderWithProviders(<Home/>,{
-    //           preloadedState: {
-    //               user: {
-    //                   username: 'xyz',
-    //                   accessToken: 'xtz'
-    //               }
-    //           }
-    //     })
-    //     let createBlogText;
-    //     await waitFor(() => {
-
-    //       createBlogText = screen.getByText('Want to Create a Blog ?')
-    //       expect(createBlogText).toBeInTheDocument();
-    //       fireEvent.click(createBlogText);
-    //       expect(window.location.pathname).toBe('/blog/create');
-
-    //     })
-
-    //   });
-
+  
 });

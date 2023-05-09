@@ -10,8 +10,13 @@ import { RootState } from "../app/store";
 
 // create a new mutex
 const mutex = new Mutex()
+let backendBaseUrl ;
+
+if(process.env.REACT_APP_ENV === 'production') backendBaseUrl = process.env.REACT_APP_BACKEND_URL;
+else backendBaseUrl = process.env.REACT_APP_BACKEND_TEST_URL;
+
 const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BACKEND_TEST_URL,
+    baseUrl: process.env.backendBaseUrl,
     mode: "cors",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).user.accessToken;

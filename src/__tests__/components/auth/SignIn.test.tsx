@@ -13,7 +13,7 @@ const apiData = {
 describe('<SignIn />', () => {
 
     server.use(
-        rest.post('http://localhost:3010/api/auth/sign-in',  (req, res, ctx) => {
+        rest.post('*',  (req, res, ctx) => {
             return res(ctx.json(apiData))         
         }
     )    

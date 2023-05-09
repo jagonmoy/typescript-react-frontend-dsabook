@@ -19,7 +19,7 @@ describe('Home', () => {
   
   it('renders loading button', async () => {
     server.use(
-      rest.get('http://localhost:3010/api/blogs', (req, res, ctx) => {
+      rest.get('*', (req, res, ctx) => {
         return res(ctx.json(apiData))
       }
       )
@@ -30,7 +30,7 @@ describe('Home', () => {
   });
   it('renders blogs after loading button', async () => {
     server.use(
-      rest.get('http://localhost:3010/api/blogs', (req, res, ctx) => {
+      rest.get('*', (req, res, ctx) => {
         return res(ctx.json(apiData))
       }
       )
@@ -59,7 +59,7 @@ describe('Home', () => {
   it('renders create blog button only if a user is logged in and cliking it takes to create blog page', async () => {
 
     server.use(
-      rest.get('http://localhost:3010/api/blogs', (req, res, ctx) => {
+      rest.get('*', (req, res, ctx) => {
         return res(ctx.json(apiData))
       }
       )

@@ -8,7 +8,7 @@ import { rest } from 'msw'
 describe('<SignUp />', () => {
 
     server.use(
-        rest.post('http://localhost:3010/api/auth/sign-up', (req, res, ctx) => {
+        rest.post('*', (req, res, ctx) => {
             return res(ctx.json({}))
         }
         )
