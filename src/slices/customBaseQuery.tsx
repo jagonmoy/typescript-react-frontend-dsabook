@@ -16,7 +16,7 @@ if(process.env.REACT_APP_ENV === 'production') backendBaseUrl = process.env.REAC
 else backendBaseUrl = process.env.REACT_APP_BACKEND_TEST_URL;
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.backendBaseUrl,
+    baseUrl: backendBaseUrl,
     mode: "cors",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).user.accessToken;

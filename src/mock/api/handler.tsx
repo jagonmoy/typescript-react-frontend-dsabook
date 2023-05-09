@@ -3,6 +3,7 @@ import { rest } from 'msw'
 let backendBaseUrl ;
 if(process.env.REACT_APP_ENV === 'production') backendBaseUrl = process.env.REACT_APP_BACKEND_URL;
 else backendBaseUrl = process.env.REACT_APP_BACKEND_TEST_URL;
+console.log(backendBaseUrl);
 
 export const handlers = [
   rest.get(`${backendBaseUrl}`, (req, res, ctx) => {
