@@ -15,8 +15,8 @@ export const BlogCard : FC<Blog> = (blog) => {
   const creationTime = convertToReadableTime(createdAt);
   const updatedTime = convertToReadableTime(updatedAt)
   return (
-    <Grid item xs={6} data-testid ="blog-card-testid">
-      <Card sx={{ width: 700, height: 250, marginTop: 8, marginLeft: 3 }}>
+    <Grid item xs={12} sm={10} md={16} lg={6} data-testid ="blog-card-testid">
+      <Card sx={{ width: '95%', height: '100%', marginTop: 8, marginLeft: 3 }}>
         <BlogCardContent author={author} blogDescription={blogDescription} blogHeadline={blogHeadline} createdAt={creationTime} updatedAt={updatedTime}/>
         <CardActions>
           <Button size="small" onClick={() => navigate(`/blogs/${id}`)}>See More</Button>
